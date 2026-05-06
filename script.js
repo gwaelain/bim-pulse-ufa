@@ -12,5 +12,32 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if (!target) return;
     event.preventDefault();
     target.scrollIntoView({ behavior: "smooth" });
+    const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+
+  const updateCounter = () => {
+
+    const target = +counter.getAttribute("data-target");
+
+    const current = +counter.innerText;
+
+    const increment = target / 60;
+
+    if (current < target) {
+
+      counter.innerText =
+        Math.ceil(current + increment);
+
+      setTimeout(updateCounter, 30);
+
+    } else {
+
+      counter.innerText = target;
+    }
+  };
+
+  updateCounter();
+});
   });
 });
