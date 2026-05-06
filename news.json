@@ -23,4 +23,12 @@
     "url": "https://t.me/bim_pulse_ufa",
     "tag": "Coordination"
   }
+  {
+    "date": "2026-05-06",
+    "title": "Заголовок новости",
+    "summary": "Краткое описание",
+    "source": "Источник",
+    "url": "https://...",
+    "tag": "BIM"
+  }
 ]
