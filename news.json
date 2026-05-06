@@ -7,6 +7,7 @@
     "url": "https://t.me/bim_pulse_ufa",
     "tag": "BIM"
   },
+
   {
     "date": "2026-05-06",
     "title": "Revit + Dynamo: где быстрее всего получить эффект",
@@ -15,6 +16,7 @@
     "url": "https://t.me/bim_pulse_ufa",
     "tag": "Dynamo"
   },
+
   {
     "date": "2026-05-06",
     "title": "Зачем проверять коллизии до выхода на стройку",
@@ -22,13 +24,5 @@
     "source": "BIM Pulse Ufa",
     "url": "https://t.me/bim_pulse_ufa",
     "tag": "Coordination"
-  }
-  {
-    "date": "2026-05-06",
-    "title": "Заголовок новости",
-    "summary": "Краткое описание",
-    "source": "Источник",
-    "url": "https://...",
-    "tag": "BIM"
   }
 ]
