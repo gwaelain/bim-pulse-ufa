@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="BIM Pulse Ufa — BIM, AI, Revit, Dynamo, PostgreSQL, Docker, плагины и цифровая координация." />
+  <title>BIM Pulse Ufa — BIM + AI без лишней теории</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-noise"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa logo" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav" aria-label="Основная навигация">
+      <a href="#services">Услуги</a>
+      <a href="#stack">Стек</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#media">Медиа</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="header-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="hero-grid">
+        <div class="hero-content reveal">
+          <p class="eyebrow">BIM / AI / Revit / Dynamo / LLM</p>
+          <h1>Внедрение BIM и ИИ без лишней теории</h1>
+          <p class="lead">Помогаем строительным и проектным командам навести порядок в моделях, данных, координации и автоматизации. Подключаем LLM, базы данных, плагины и backend-инфраструктуру.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacts">Обсудить проект</a>
+            <a class="btn btn-secondary" href="#services">Что делаем</a>
+          </div>
+          <div class="chips" aria-label="Темы">
+            <span>Revit Plugins</span>
+            <span>Dynamo Scripts</span>
+            <span>LLM Assistants</span>
+            <span>PostgreSQL</span>
+            <span>Docker</span>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal delay-1" aria-label="BIM AI dashboard preview">
+          <div class="panel-top"><span></span><span></span><span></span></div>
+          <div class="panel-title">
+            <p>AI MODEL HEALTH</p>
+            <strong>Clean</strong>
+          </div>
+          <div class="panel-grid">
+            <div><small>LOD</small><b>300+</b></div>
+            <div><small>Clash</small><b>Check</b></div>
+            <div><small>LLM</small><b>Assist</b></div>
+          </div>
+          <div class="panel-bars">
+            <span style="--w:92%"></span>
+            <span style="--w:78%"></span>
+            <span style="--w:86%"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics section reveal delay-2" aria-label="Ключевые показатели">
+      <article class="metric-card"><span>BIM-проектов</span><strong data-count="120" data-suffix="+">0</strong><p>опыт внедрения и сопровождения</p></article>
+      <article class="metric-card"><span>Снижение коллизий</span><strong data-count="35" data-prefix="-" data-suffix="%">0</strong><p>за счёт системной координации</p></article>
+      <article class="metric-card"><span>Автоматизация</span><strong data-count="8" data-prefix="x">0</strong><p>ускорение типовых BIM-процессов</p></article>
+      <article class="metric-card"><span>AI + данные</span><strong>LLM</strong><p>ассистенты, отчёты, базы, API</p></article>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-head reveal">
+        <p class="eyebrow">Услуги</p>
+        <h2>Что закрываем для команды</h2>
+      </div>
+      <div class="service-grid service-grid-4">
+        <article class="glass-card reveal"><span>01</span><h3>BIM-аудит</h3><p>Проверка процессов, моделей, шаблонов, регламентов и качества данных. Анализ цифровой зрелости и готовности к автоматизации.</p></article>
+        <article class="glass-card reveal delay-1"><span>02</span><h3>Координация</h3><p>Clash detection, отчёты по коллизиям, контроль смежников, статусов и прозрачности проектирования.</p></article>
+        <article class="glass-card reveal delay-2"><span>03</span><h3>Автоматизация</h3><p>Dynamo-скрипты, параметризация, спецификации, проверки, выгрузки и интеграции BIM с внешними системами.</p></article>
+        <article class="glass-card glass-card-accent reveal delay-3"><span>04 <em>AI</em></span><h3>ИИ и инфраструктура</h3><p>Подключение больших языковых моделей, BIM-ассистенты, PostgreSQL, Docker, API, плагины Revit и системы контроля качества моделей.</p></article>
+      </div>
+    </section>
+
+    <section class="section stack-section" id="stack">
+      <div class="section-head reveal">
+        <p class="eyebrow">Технологии</p>
+        <h2>BIM + AI + backend</h2>
+      </div>
+      <div class="stack-grid reveal">
+        <div class="stack-item"><span>LLM</span><p>ChatGPT и локальные модели для анализа, отчётов и ассистентов</p></div>
+        <div class="stack-item"><span>PostgreSQL</span><p>хранение BIM-данных, параметров, статусов и проверок</p></div>
+        <div class="stack-item"><span>Docker</span><p>быстрое развёртывание сервисов и окружений</p></div>
+        <div class="stack-item"><span>Plugins</span><p>плагины Revit, API-интеграции и внутренние инструменты</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="cases">
+      <div class="section-head reveal">
+        <p class="eyebrow">Кейсы</p>
+        <h2>Практика вместо обещаний</h2>
+      </div>
+      <div class="case-grid">
+        <article class="case-card reveal">
+          <img src="bim-case-1.jpg" alt="BIM coordination case" loading="lazy">
+          <div><span>Coordination</span><h3>Координация разделов до стройки</h3><p>Поиск пересечений, приоритизация ошибок и прозрачный отчёт для команды.</p></div>
+        </article>
+        <article class="case-card reveal delay-1">
+          <img src="bim-case-2.jpg" alt="BIM automation case" loading="lazy">
+          <div><span>Automation + AI</span><h3>Автоматизация проверок и отчётов</h3><p>Скрипты, базы данных и LLM помогают быстрее проверять модели и готовить выводы.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="media">
+      <div class="section-head reveal">
+        <p class="eyebrow">Медиа</p>
+        <h2>Свежие BIM-новости и разборы</h2>
+      </div>
+      <div class="media-grid" id="newsList"></div>
+    </section>
+
+    <section class="cta section reveal" id="contacts">
+      <div>
+        <p class="eyebrow">Контакты</p>
+        <h2>Нужен порядок в BIM и данных?</h2>
+        <p>Напишите в Telegram или на почту — быстро определим, с чего начать: аудит, координация, шаблоны, автоматизация, ИИ или backend-инфраструктура.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="btn btn-secondary" href="mailto:im@laingawe.ru">im@laingawe.ru</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 BIM Pulse Ufa</span>
+    <span>Revit • Dynamo • LLM • PostgreSQL • Docker • Plugins</span>
+  </footer>
+
+  <script src="news.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
