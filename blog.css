@@ -23,9 +23,12 @@
 
 .blog-card h2 {
   margin: 0 0 22px;
-  font-size: 34px;
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  max-width: 100%;
+  font-size: 28px;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .blog-card p {
