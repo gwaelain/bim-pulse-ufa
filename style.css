@@ -34,14 +34,12 @@
   object-fit: contain;
   border-radius: 18px;
   padding: 7px;
-  background:
-     linear-gradient(
-       145deg,
-       rgba(255,255,255,0.12),
-       rgba(255,255,255,0.04)
-     );
-   backdrop-filter: blur(12px);
-      
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.04)
+  );
+  backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow:
     0 14px 42px rgba(0,0,0,0.45),
