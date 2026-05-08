@@ -66,11 +66,29 @@
 }
 
 .article-note {
-  margin: 36px 0;
+  margin: 34px 0;
   padding: 24px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.1);
+  .article-note{
+  margin:34px 0;
+  padding:24px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,0.1);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(118,183,255,0.08),
+      rgba(255,255,255,0.03)
+    );
+}
+
+.article-note p{
+  margin:0;
+  font-size:18px;
+  line-height:1.7;
+  
 }
 
 .article-links {
