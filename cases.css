@@ -1,0 +1,55 @@
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.case-item {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+}
+
+.case-item img {
+  width: 100%;
+  height: 260px;
+  display: block;
+  object-fit: cover;
+}
+
+.case-content {
+  padding: 30px;
+}
+
+.case-content h2 {
+  margin: 0 0 18px;
+  font-size: 34px;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.case-content p {
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .cases-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-item img {
+    height: 220px;
+  }
+
+  .case-content h2 {
+    font-size: 28px;
+  }
+}
