@@ -25,5 +25,9 @@
     <loc>https://bim-pulse.ru/contacts.html</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://bim-pulse.ru/revit-automation.html</loc>
+    <priority>0.8</priority>
+  </url>
 
 </urlset>
