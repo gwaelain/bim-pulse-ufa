@@ -119,8 +119,11 @@
     font-size: 38px;
   }
 
-  .article-lead {
-    font-size: 18px;
+  .article-lead{
+    margin:22px 0 34px;
+    font-size:22px;
+    line-height:1.6;
+    color:rgba(255,255,255,0.72);
   }
 
   .article-content h2 {
