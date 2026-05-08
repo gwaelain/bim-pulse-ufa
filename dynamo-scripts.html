@@ -1,1 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Dynamo-скрипты для Revit — BIM Pulse Ufa</title>
+  <meta name="description" content="5 полезных Dynamo-скриптов для Revit: параметры, проверки, спецификации, выгрузки и автоматизация BIM-рутины.">
+  <meta name="keywords" content="Dynamo скрипты, Dynamo Revit, скрипты Revit, BIM автоматизация, Revit автоматизация, BIM Pulse Ufa">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://bim-pulse.ru/dynamo-scripts.html">
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Dynamo-скрипты для Revit">
+  <meta property="og:description" content="Какие Dynamo-скрипты быстрее всего дают эффект BIM-команде.">
+  <meta property="og:url" content="https://bim-pulse.ru/dynamo-scripts.html">
+  <meta property="og:image" content="https://bim-pulse.ru/bim-model-2.png">
+  <meta property="og:site_name" content="BIM Pulse Ufa">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dynamo-скрипты для Revit">
+  <meta name="twitter:description" content="5 полезных Dynamo-скриптов для BIM-команд.">
+  <meta name="twitter:image" content="https://bim-pulse.ru/bim-model-2.png">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="article.css">
+
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {
+              if (document.scripts[j].src === r) { return; }
+          }
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460', 'ym');
+
+      ym(109103460, 'init', {
+          webvisor:true,
+          clickmap:true,
+          trackLinks:true,
+          accurateTrackBounce:true
+      });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute; left:-9999px;" alt=""></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+
+<header class="site-header">
+  <a href="/" class="logo-link">
+    <img src="logo.png" alt="BIM Pulse Ufa" class="logo">
+    <span>BIM Pulse Ufa</span>
+  </a>
+
+  <nav>
+    <a href="/">Главная</a>
+    <a href="services.html">Услуги</a>
+    <a href="cases.html">Кейсы</a>
+    <a href="blog.html">Блог</a>
+    <a href="contacts.html">Контакты</a>
+  </nav>
+</header>
+
+<main class="article-layout">
+
+  <section class="article-hero">
+    <p class="eyebrow">DYNAMO + REVIT</p>
+
+    <h1>Dynamo-скрипты для Revit</h1>
+
+    <p class="article-lead">
+      Dynamo-скрипты помогают BIM-командам быстро убирать рутину:
+      проверять параметры, готовить спецификации, контролировать модели,
+      выгружать данные и ускорять повторяющиеся операции в Revit.
+    </p>
+
+    <img src="bim-model-2.png" alt="Dynamo-скрипты для Revit и BIM-автоматизации" class="article-cover">
+  </section>
+
+  <article class="article-content">
+
+    <h2>Зачем нужны Dynamo-скрипты</h2>
+
+    <p>
+      В Revit много задач, которые повторяются каждый день. Специалисты проверяют
+      параметры, переименовывают виды, собирают спецификации, выгружают таблицы,
+      контролируют семейства и ищут ошибки в модели.
+    </p>
+
+    <p>
+      Dynamo позволяет превратить такие действия в повторяемые сценарии.
+      Это снижает зависимость от ручной проверки и делает работу BIM-команды
+      быстрее и стабильнее.
+    </p>
+
+    <div class="article-note">
+      <p>
+        Хороший Dynamo-скрипт решает конкретную задачу: экономит время,
+        снижает ошибки или делает контроль модели прозрачнее.
+      </p>
+    </div>
+
+    <h2>1. Скрипт проверки параметров</h2>
+
+    <p>
+      Один из самых полезных сценариев — проверка обязательных параметров.
+      Скрипт проходит по элементам модели и показывает, где данные не заполнены
+      или заполнены некорректно.
+    </p>
+
+    <p>
+      Такой подход особенно полезен перед выдачей модели или передачей данных
+      смежникам.
+    </p>
+
+    <h3>Что проверять</h3>
+
+    <ul>
+      <li>код элемента;</li>
+      <li>уровень;</li>
+      <li>зону или корпус;</li>
+      <li>тип системы;</li>
+      <li>стадию проекта;</li>
+      <li>принадлежность к разделу;</li>
+      <li>заполненность пользовательских параметров.</li>
+    </ul>
+
+    <h2>2. Скрипт массового заполнения данных</h2>
+
+    <p>
+      Если в модели сотни или тысячи элементов, ручное заполнение параметров
+      становится рискованным. Dynamo может массово заполнить значения по правилам:
+      по уровню, виду, категории, имени семейства или другим условиям.
+    </p>
+
+    <p>
+      Это помогает стандартизировать данные и быстрее готовить модель к проверке,
+      спецификациям или экспорту.
+    </p>
+
+    <h2>3. Скрипт переименования видов и листов</h2>
+
+    <p>
+      Единое именование видов и листов важно для координации и выпуска
+      документации. Скрипт может автоматически формировать имена по шаблону:
+      раздел, этаж, зона, тип вида, номер листа или стадия.
+    </p>
+
+    <p>
+      Это снижает хаос в проекте и помогает поддерживать единый BIM-стандарт.
+    </p>
+
+    <h2>4. Скрипт выгрузки спецификаций</h2>
+
+    <p>
+      Dynamo можно использовать для выгрузки данных из Revit в Excel, CSV
+      или дальнейшую обработку. Это полезно для BIM-дашбордов, отчётов,
+      проверки объёмов и контроля проектных данных.
+    </p>
+
+    <p>
+      На следующем уровне такие выгрузки можно связать с PostgreSQL,
+      чтобы хранить историю проверок и строить аналитику по проектам.
+    </p>
+
+    <h2>5. Скрипт контроля качества модели</h2>
+
+    <p>
+      Скрипт контроля качества может объединять несколько проверок:
+      параметры, категории, семейства, уровни, пустые значения и структуру модели.
+    </p>
+
+    <p>
+      В результате BIM-координатор получает не набор ручных замечаний,
+      а понятный список проблемных зон и элементов.
+    </p>
+
+    <div class="article-note">
+      <p>
+        Самый сильный эффект появляется, когда проверки выполняются регулярно:
+        не в конце проекта, а на каждом важном этапе.
+      </p>
+    </div>
+
+    <h2>Как выбрать первый Dynamo-скрипт</h2>
+
+    <p>
+      Начинать лучше не с самого сложного сценария, а с задачи,
+      которая повторяется чаще всего. Если действие делается каждый день
+      и занимает много времени — это хороший кандидат для автоматизации.
+    </p>
+
+    <ul>
+      <li>задача повторяется регулярно;</li>
+      <li>есть понятные правила;</li>
+      <li>результат можно проверить;</li>
+      <li>ошибки дорого обходятся;</li>
+      <li>скрипт экономит время нескольким людям.</li>
+    </ul>
+
+    <h2>Типичные ошибки при создании Dynamo-скриптов</h2>
+
+    <h3>Слишком сложный старт</h3>
+    <p>
+      Не стоит начинать с огромного универсального скрипта. Лучше собрать
+      простой инструмент, который решает одну задачу, и постепенно развивать его.
+    </p>
+
+    <h3>Нет стандарта данных</h3>
+    <p>
+      Если в компании нет единых параметров, правил именования и структуры модели,
+      автоматизация будет нестабильной. Сначала нужно договориться о данных.
+    </p>
+
+    <h3>Нет поддержки команды</h3>
+    <p>
+      Скрипт должен быть понятен тем, кто им пользуется. Иначе он останется
+      инструментом одного специалиста и не станет частью процесса.
+    </p>
+
+    <h2>Вывод</h2>
+
+    <p>
+      Dynamo-скрипты — быстрый способ ускорить работу BIM-команды.
+      Начинать стоит с проверок параметров, массовых операций, выгрузок
+      и контроля качества модели.
+    </p>
+
+    <p>
+      Когда базовая автоматизация работает стабильно, её можно развивать дальше:
+      подключать Revit API, базы данных, AI-ассистентов и внутренние плагины.
+    </p>
+
+    <div class="article-links">
+      <p>
+        Читайте также:
+        <a href="revit-automation.html">автоматизацию Revit через Dynamo</a>,
+        <a href="ai-in-bim.html">AI в BIM-процессах</a>,
+        <a href="bim-coordination.html">BIM-координацию</a>.
+      </p>
+    </div>
+
+  </article>
+
+  <section class="article-cta">
+    <h2>Нужны Dynamo-скрипты под ваши задачи?</h2>
+    <p>
+      Разберём ваши процессы в Revit и предложим, какие проверки,
+      выгрузки и сценарии можно автоматизировать в первую очередь.
+    </p>
+
+    <a class="btn"
+       href="https://t.me/bim_pulse_ufa"
+       target="_blank"
+       rel="noopener"
+       onclick="ym(109103460,'reachGoal','telegram_click')">
+      Обсудить автоматизацию
+    </a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© BIM Pulse Ufa</p>
+  <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
+</footer>
+
+</body>
+</html>
