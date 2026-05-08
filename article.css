@@ -131,4 +131,40 @@
   .article-content li {
     font-size: 16px;
   }
+    .article-toc {
+    margin: 40px 0;
+    padding: 28px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .article-toc p {
+    margin: 0 0 18px;
+    color: #fff;
+    font-weight: 900;
+  }
+  
+  .article-toc a {
+    display: block;
+    margin: 10px 0;
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  
+  .article-toc a:hover {
+    color: #fff;
+  }
+  
+  .article-links {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  
+  .article-links a {
+    color: #fff;
+    font-weight: 900;
+  }
 }
