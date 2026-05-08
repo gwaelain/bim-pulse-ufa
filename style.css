@@ -244,4 +244,29 @@
   border-radius: 28px;
   border: 1px solid rgba(255,255,255,0.08);
   }
+  /* Blog page fixes */
+  .cards-grid {
+    align-items: stretch;
+  }
+  
+  .card {
+    overflow: hidden;
+  }
+  
+  .card h2 {
+    max-width: 100%;
+    font-size: clamp(28px, 2.6vw, 42px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  
+  .card p {
+    max-width: 100%;
+  }
+  
+  .card .btn {
+    margin-top: 28px;
+  }
 }
