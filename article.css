@@ -147,14 +147,16 @@
   
   .article-toc a {
     display: block;
-    margin: 10px 0;
-    color: rgba(255,255,255,0.72);
+    margin: 12px 0;
+    color: rgba(255,255,255,0.76);
     text-decoration: none;
     font-weight: 700;
+    transition:.2s ease;
   }
   
   .article-toc a:hover {
     color: #fff;
+    transform:translateX(4px);
   }
   
   .article-links {
