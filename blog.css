@@ -2,6 +2,12 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.blog-card {
+  min-width: 0;
 }
 
 .blog-card {
