@@ -20,7 +20,7 @@
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   color: #fff;
   text-decoration: none;
   font-weight: 900;
@@ -35,8 +35,14 @@
   border-radius: 18px;
   padding: 7px;
   background:
-    radial-gradient(circle at 30% 20%, rgba(118,183,255,0.28), transparent 45%),
-    rgba(255,255,255,0.08);
+     linear-gradient(
+       145deg,
+       rgba(255,255,255,0.12),
+       rgba(255,255,255,0.04)
+     );
+   backdrop-filter: blur(12px);
+      .brand img,
+      .logo
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow:
     0 14px 42px rgba(0,0,0,0.45),
@@ -54,7 +60,7 @@
 
 .brand span,
 .logo-link span {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 900;
   letter-spacing: -0.035em;
   color: #fff;
