@@ -1,0 +1,134 @@
+.article-layout {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 120px 24px 80px;
+}
+
+.article-hero {
+  margin-bottom: 48px;
+}
+
+.article-hero h1 {
+  margin: 16px 0 24px;
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.article-lead {
+  max-width: 760px;
+  color: rgba(255,255,255,0.72);
+  font-size: 22px;
+  line-height: 1.55;
+}
+
+.article-cover {
+  width: 100%;
+  margin: 42px 0;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+}
+
+.article-content {
+  padding: 42px;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+}
+
+.article-content h2 {
+  margin: 56px 0 20px;
+  font-size: 34px;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.article-content h2:first-child {
+  margin-top: 0;
+}
+
+.article-content h3 {
+  margin: 34px 0 14px;
+  font-size: 24px;
+}
+
+.article-content p,
+.article-content li {
+  color: rgba(255,255,255,0.74);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.article-content ul {
+  padding-left: 22px;
+}
+
+.article-note {
+  margin: 36px 0;
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.article-links {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.article-links a {
+  color: #fff;
+  font-weight: 800;
+}
+
+.article-cta {
+  margin-top: 42px;
+  padding: 36px;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(118,183,255,0.16), rgba(255,255,255,0.055));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+}
+
+.article-cta h2 {
+  margin: 0 0 16px;
+  font-size: 36px;
+}
+
+.article-cta p {
+  color: rgba(255,255,255,0.72);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .article-layout {
+    padding: 80px 16px 56px;
+  }
+
+  .article-content,
+  .article-cta {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .article-hero h1 {
+    font-size: 38px;
+  }
+
+  .article-lead {
+    font-size: 18px;
+  }
+
+  .article-content h2 {
+    font-size: 28px;
+  }
+
+  .article-content p,
+  .article-content li {
+    font-size: 16px;
+  }
+}
