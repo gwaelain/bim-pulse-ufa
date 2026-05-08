@@ -266,4 +266,61 @@
   .card .btn {
     margin-top: 28px;
   }
+  /* FINAL BLOG FIX */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.card {
+  min-height: 430px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card .eyebrow {
+  margin-bottom: 22px;
+}
+
+.card h2 {
+  margin: 0 0 22px;
+  max-width: 100%;
+  font-size: clamp(28px, 2.2vw, 38px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.card p {
+  max-width: 100%;
+  margin: 0 0 28px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.72);
+}
+
+.card .btn {
+  margin-top: auto;
+  width: fit-content;
+}
+
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: auto;
+  }
+
+  .card h2 {
+    font-size: 30px;
+  }
+
 }
