@@ -1,0 +1,55 @@
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.blog-card {
+  min-height: 430px;
+  padding: 32px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card .eyebrow {
+  margin-bottom: 22px;
+  font-size: 12px;
+}
+
+.blog-card h2 {
+  margin: 0 0 22px;
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.blog-card p {
+  margin: 0 0 28px;
+  color: rgba(255,255,255,0.72);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.blog-card .btn {
+  margin-top: auto;
+  width: fit-content;
+}
+
+@media (max-width: 900px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-card {
+    min-height: auto;
+  }
+
+  .blog-card h2 {
+    font-size: 30px;
+  }
+}
