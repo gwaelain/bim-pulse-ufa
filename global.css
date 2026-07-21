@@ -151,3 +151,78 @@ h1 {
     font-size: 15px;
   }
 }
+
+/* ================= VISUAL ENHANCEMENTS ================= */
+
+/* Общая плавность интерактивных элементов */
+.news-card, .service-card, .case-card, .btn, .nav-cta, .brand img, .news-card img {
+  transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease,
+              border-color .3s ease, background .3s ease, color .25s ease;
+}
+
+/* Карточки: подъём + свечение акцентом + подсветка рамки */
+.news-card:hover, .service-card:hover, .case-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 60px rgba(0,0,0,.5),
+              0 0 0 1px rgba(118,183,255,.35),
+              0 0 34px rgba(118,183,255,.18);
+  border-color: rgba(118,183,255,.45);
+}
+
+/* Зум обложки внутри новостной карточки */
+.news-card { overflow: hidden; }
+.news-card img { display: block; }
+.news-card:hover img { transform: scale(1.06); }
+
+/* Навигация: анимированное акцентное подчёркивание */
+.nav a { position: relative; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; bottom: -4px;
+  width: 100%; height: 2px; border-radius: 2px;
+  background: var(--accent, #76b7ff);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .35s ease;
+}
+.nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* Кнопки: подъём, свечение и мягкий блик */
+.btn { position: relative; overflow: hidden; }
+.btn:hover { transform: translateY(-2px); }
+.btn.primary:hover { box-shadow: 0 10px 30px rgba(118,183,255,.38); }
+.btn::before {
+  content: ""; position: absolute; top: 0; left: -130%;
+  width: 60%; height: 100%; transform: skewX(-18deg);
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent);
+  transition: left .6s ease;
+}
+.btn:hover::before { left: 150%; }
+
+/* Акцентная точка у надписи-eyebrow */
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; }
+.eyebrow::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent, #76b7ff);
+  box-shadow: 0 0 12px rgba(118,183,255,.9);
+}
+
+/* Логотип слегка «оживает» при наведении на бренд */
+.brand:hover img { transform: rotate(-4deg) scale(1.05); }
+
+/* Плавающее свечение у hero-панели */
+.hero-panel { position: relative; }
+.hero-panel::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(160px 160px at 18% 0%, rgba(118,183,255,.16), transparent 62%);
+}
+
+/* Доступный фокус */
+a:focus-visible, .btn:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent, #76b7ff); outline-offset: 3px; border-radius: 8px;
+}
+
+/* Уважение к настройке уменьшения анимации */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

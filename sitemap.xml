@@ -43,6 +43,22 @@
   </url>
   <!-- articles:auto -->
   <url>
+    <loc>https://bim-pulse.ru/ai-review-comments.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/cde-single-source.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/coordination-federated-model.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/dynamo-python-scenarios.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://bim-pulse.ru/bim-implementation-start.html</loc>
     <priority>0.7</priority>
   </url>
