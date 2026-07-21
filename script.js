@@ -44,12 +44,83 @@ function initFilters() {
   });
 }
 
+const RU_MONTHS = {
+  "января": "01", "февраля": "02", "марта": "03", "апреля": "04",
+  "мая": "05", "июня": "06", "июля": "07", "августа": "08",
+  "сентября": "09", "октября": "10", "ноября": "11", "декабря": "12"
+};
+
+function ruDateToIso(date) {
+  const m = String(date).match(/(\d{1,2})\s+([а-яё]+)\s+(\d{4})/i);
+  if (!m || !RU_MONTHS[m[2].toLowerCase()]) return null;
+  return `${m[3]}-${RU_MONTHS[m[2].toLowerCase()]}-${m[1].padStart(2, "0")}`;
+}
+
+function setMeta(attr, key, content) {
+  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+  if (!el) { el = document.createElement("meta"); el.setAttribute(attr, key); document.head.appendChild(el); }
+  el.setAttribute("content", content);
+}
+
+function setCanonical(href) {
+  let el = document.head.querySelector('link[rel="canonical"]');
+  if (!el) { el = document.createElement("link"); el.rel = "canonical"; document.head.appendChild(el); }
+  el.setAttribute("href", href);
+}
+
+function setJsonLd(obj) {
+  let el = document.getElementById("article-jsonld");
+  if (!el) { el = document.createElement("script"); el.type = "application/ld+json"; el.id = "article-jsonld"; document.head.appendChild(el); }
+  el.textContent = JSON.stringify(obj);
+}
+
+// Per-article SEO: заголовок, description, canonical, OG/Twitter и JSON-LD
+// проставляются из данных статьи (news.js). Google рендерит JS и читает их;
+// для соц-скрейперов без JS остаётся статический брендовый fallback в <head>.
+function updateArticleMeta(item) {
+  const OG = "https://bim-pulse.ru/og-image.jpg";
+  const url = `https://bim-pulse.ru/article.html?slug=${item.slug}`;
+  const title = `${item.title} — BIM Pulse Ufa`;
+  const desc = item.excerpt;
+  const iso = ruDateToIso(item.date);
+
+  document.title = title;
+  setMeta("name", "description", desc);
+  setCanonical(url);
+  setMeta("property", "og:type", "article");
+  setMeta("property", "og:title", title);
+  setMeta("property", "og:description", desc);
+  setMeta("property", "og:url", url);
+  setMeta("property", "og:image", OG);
+  setMeta("property", "og:site_name", "BIM Pulse Ufa");
+  setMeta("name", "twitter:card", "summary_large_image");
+  setMeta("name", "twitter:title", title);
+  setMeta("name", "twitter:description", desc);
+  setMeta("name", "twitter:image", OG);
+
+  setJsonLd({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": item.title,
+    "description": desc,
+    "image": `https://bim-pulse.ru/${item.image}`,
+    "author": { "@type": "Organization", "name": "BIM Pulse Ufa" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "BIM Pulse Ufa",
+      "logo": { "@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png" }
+    },
+    ...(iso ? { "datePublished": iso, "dateModified": iso } : {}),
+    "mainEntityOfPage": { "@type": "WebPage", "@id": url }
+  });
+}
+
 function renderArticle() {
   const target = $("#articleFull");
   if (!target || !window.NEWS) return;
   const slug = new URLSearchParams(window.location.search).get("slug");
   const item = window.NEWS.find(article => article.slug === slug) || window.NEWS[0];
-  document.title = `${item.title} — BIM Pulse Ufa`;
+  updateArticleMeta(item);
   target.innerHTML = `
     <div class="meta"><span>${item.category}</span><span>${item.date}</span></div>
     <h1>${item.title}</h1>
