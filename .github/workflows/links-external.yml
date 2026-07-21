@@ -1,0 +1,21 @@
+name: External links
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # еженедельно, пн 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Проверка внешних ссылок (lychee)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --max-retries 2 --timeout 20
+            --exclude-mail
+            --accept 200,204,206,301,302,307,308,403,429
+            "./*.html"
+          fail: true
