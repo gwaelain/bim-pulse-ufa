@@ -70,6 +70,7 @@ def page(a):
   <meta name="twitter:description" content="{e(desc)}" />
   <meta name="twitter:image" content="https://bim-pulse.ru/og-image.jpg" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="global.css" />
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="apple-touch-icon" href="logo.png" />
   <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
