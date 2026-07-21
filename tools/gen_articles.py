@@ -14,6 +14,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+HEADER = (ROOT / "tools/partials/header.html").read_text(encoding="utf-8").strip()
+FOOTER = (ROOT / "tools/partials/footer.html").read_text(encoding="utf-8").strip()
 RU_MONTHS = {"января":"01","февраля":"02","марта":"03","апреля":"04","мая":"05",
     "июня":"06","июля":"07","августа":"08","сентября":"09","октября":"10",
     "ноября":"11","декабря":"12"}
@@ -78,11 +80,7 @@ def page(a):
 </head>
 <body>
   <div class="noise"></div>
-  <header class="site-header">
-    <a class="brand" href="index.html"><img src="logo.png" alt="BIM Pulse Ufa" /><span>BIM Pulse Ufa</span></a>
-    <nav class="nav"><a href="index.html#services">Услуги</a><a href="index.html#cases">Кейсы</a><a href="index.html#media">Медиа</a><a href="index.html#contacts">Контакты</a></nav>
-    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Telegram</a>
-  </header>
+  {HEADER}
   <main class="article-page section">
     <a class="text-link" href="index.html#media">← Назад к медиа</a>
     <article class="article-full">
@@ -99,7 +97,7 @@ def page(a):
     </div>
     </article>
   </main>
-  <footer class="footer"><span>© BIM Pulse Ufa</span><span>im@laingawe.ru</span></footer>
+  {FOOTER}
 </body>
 </html>
 """
