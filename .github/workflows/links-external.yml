@@ -15,7 +15,6 @@ jobs:
         with:
           args: >-
             --no-progress --max-retries 3 --retry-wait-time 5 --timeout 30
-            --exclude-mail
             --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
             --exclude "mc\.yandex\.ru"
             --accept 200,204,206,301,302,307,308,403,429
