@@ -41,4 +41,54 @@
     <loc>https://bim-pulse.ru/bim-coordination.html</loc>
     <priority>0.8</priority>
   </url>
+  <!-- articles:auto -->
+  <url>
+    <loc>https://bim-pulse.ru/bim-implementation-start.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/ai-in-bim-practice.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/postgresql-bim-data.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/docker-for-bim-services.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/revit-plugin-vs-dynamo.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/bim-audit-checklist.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/llm-assistant-for-bim-coordinator.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/clash-detection-workflow.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/ifc-data-quality.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/bim-dashboard.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/ai-bim-roadmap.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://bim-pulse.ru/bim-templates-automation.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <!-- /articles:auto -->
 </urlset>

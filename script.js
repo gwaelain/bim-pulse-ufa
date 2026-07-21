@@ -16,7 +16,7 @@ function renderNewsGrid() {
   const grid = $("#newsGrid");
   if (!grid || !window.NEWS) return;
   grid.innerHTML = window.NEWS.map(item => `
-    <a class="news-card" href="article.html?slug=${escapeHtml(item.slug)}" data-category="${escapeHtml(item.category)}">
+    <a class="news-card" href="${escapeHtml(item.slug)}.html" data-category="${escapeHtml(item.category)}">
       <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='bim-model-1.webp'" />
       <div>
         <div class="meta"><span>${escapeHtml(item.category)}</span><span>${escapeHtml(item.date)}</span></div>
@@ -79,7 +79,7 @@ function setJsonLd(obj) {
 // для соц-скрейперов без JS остаётся статический брендовый fallback в <head>.
 function updateArticleMeta(item) {
   const OG = "https://bim-pulse.ru/og-image.jpg";
-  const url = `https://bim-pulse.ru/article.html?slug=${item.slug}`;
+  const url = `https://bim-pulse.ru/${item.slug}.html`;
   const title = `${item.title} — BIM Pulse Ufa`;
   const desc = item.excerpt;
   const iso = ruDateToIso(item.date);
