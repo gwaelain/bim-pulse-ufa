@@ -17,7 +17,7 @@ function renderNewsGrid() {
   if (!grid || !window.NEWS) return;
   grid.innerHTML = window.NEWS.map(item => `
     <a class="news-card" href="article.html?slug=${escapeHtml(item.slug)}" data-category="${escapeHtml(item.category)}">
-      <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='bim-model-1.png'" />
+      <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='bim-model-1.webp'" />
       <div>
         <div class="meta"><span>${escapeHtml(item.category)}</span><span>${escapeHtml(item.date)}</span></div>
         <h3>${escapeHtml(item.title)}</h3>
@@ -54,7 +54,7 @@ function renderArticle() {
     <div class="meta"><span>${item.category}</span><span>${item.date}</span></div>
     <h1>${item.title}</h1>
     <p class="lead">${item.excerpt}</p>
-    <img class="article-cover" src="${item.image}" alt="${item.title}" onerror="this.src='bim-model-1.png'" />
+    <img class="article-cover" src="${item.image}" alt="${item.title}" onerror="this.src='bim-model-1.webp'" />
     ${item.content.map(p => `<p>${p}</p>`).join("")}
     <div class="article-cta">
       <h3>Нужен похожий BIM/AI процесс?</h3>
