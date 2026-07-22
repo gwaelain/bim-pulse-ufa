@@ -147,6 +147,32 @@
 }
 .article-toc a:hover { color: var(--accent, #76b7ff); transform: translateX(4px); }
 
+/* Блок «Другие статьи»: карточки-ссылки .card наследовали дефолтно-синий
+   цвет и подчёркивание (в style.css у .card нет сброса, в отличие от .news-card),
+   а min-height:360px делал их огромными и пустыми. */
+.related-articles { margin-top: 64px; }
+.related-articles > h2 { margin: 0 0 28px; }
+.related-articles .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.related-articles .card {
+  display: block;
+  min-height: auto;
+  color: #fff;
+  text-decoration: none;
+}
+.related-articles .card h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  line-height: 1.15;
+  color: #fff;
+  text-decoration: none;
+}
+.related-articles .card p {
+  margin: 0;
+  color: rgba(255,255,255,0.66);
+  text-decoration: none;
+}
+.related-articles .card:hover h3 { color: var(--accent, #76b7ff); }
+
 @media (max-width: 700px) {
   .article-layout {
     padding: 80px 16px 56px;
