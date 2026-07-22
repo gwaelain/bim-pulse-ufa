@@ -70,12 +70,6 @@
   padding: 24px;
   border-radius: 22px;
   border: 1px solid rgba(255,255,255,0.1);
-  .article-note{
-  margin:34px 0;
-  padding:24px;
-  border-radius:22px;
-  border:1px solid rgba(255,255,255,0.1);
-
   background:
     linear-gradient(
       145deg,
@@ -121,6 +115,34 @@
   font-size: 18px;
   line-height: 1.6;
 }
+
+/* Базовые (десктоп) стили контента статьи. Раньше жили только внутри
+   @media(max-width:700px), из-за чего на десктопе ссылки «Содержания»
+   оставались дефолтно-синими и плохо читались на тёмном фоне. */
+.article-toc {
+  margin: 44px 0;
+  padding: 28px 32px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.article-toc p { margin: 0 0 18px; color: #fff; font-weight: 900; }
+.article-toc a {
+  display: block;
+  margin: 12px 0;
+  color: rgba(255,255,255,0.78);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color .2s ease, transform .2s ease;
+}
+.article-toc a:hover { color: var(--accent, #76b7ff); transform: translateX(4px); }
+
+/* Защита от дефолтно-синих ссылок в теле статьи на тёмном фоне */
+.article-content a, .article-full a, .article-body a {
+  color: var(--accent, #76b7ff);
+  text-decoration: none;
+}
+.article-content a:hover, .article-full a:hover, .article-body a:hover { text-decoration: underline; }
 
 @media (max-width: 700px) {
   .article-layout {
