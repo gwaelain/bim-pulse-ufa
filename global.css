@@ -280,3 +280,89 @@ html { scroll-behavior: smooth; }
   .hero-panel::before { animation: none !important; }
   .news-grid > *, .service-list > * { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* ============ AMBIENT BACKGROUND (чертёжная сетка + aurora) ============ */
+
+/* Тонкая «чертёжная» сетка — в тему BIM. Фиксирована за контентом. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(118,183,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(118,183,255,.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  /* к краям сетка тает, чтобы не «давила» */
+  -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
+          mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
+}
+
+/* Дрейфующие акцентные свечения — «живой» глубокий фон. */
+@keyframes auroraDrift {
+  0%   { transform: translate3d(-4%, -2%, 0) scale(1); }
+  50%  { transform: translate3d(4%, 3%, 0) scale(1.08); }
+  100% { transform: translate3d(-4%, -2%, 0) scale(1); }
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(38vw 38vw at 18% 12%, rgba(118,183,255,.16), transparent 60%),
+    radial-gradient(42vw 42vw at 85% 22%, rgba(90,140,255,.12), transparent 62%),
+    radial-gradient(46vw 46vw at 60% 95%, rgba(118,183,255,.10), transparent 64%);
+  filter: blur(30px);
+  animation: auroraDrift 26s ease-in-out infinite;
+}
+
+/* ============ CURSOR FX (световое пятно + spotlight-карточки) ============ */
+
+/* Мягкий «фонарик», плавно следующий за курсором (позиция — из JS). */
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 520px; height: 520px;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+  background: radial-gradient(circle, rgba(118,183,255,.14), rgba(118,183,255,.05) 38%, transparent 66%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.cursor-glow.is-on { opacity: 1; }
+
+/* Подсветка-«прожектор» в точке курсора на карточках/панелях. */
+.news-card, .service-card, .case-card, .hero-panel, .article-cta { position: relative; }
+.news-card::after, .service-card::after, .case-card::after,
+.article-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity .35s ease;
+  background: radial-gradient(220px 220px at var(--mx, 50%) var(--my, 50%),
+              rgba(118,183,255,.18), transparent 60%);
+}
+.news-card:hover::after, .service-card:hover::after, .case-card:hover::after,
+.article-cta:hover::after { opacity: 1; }
+/* содержимое news-card должно быть над подсветкой */
+.news-card > * { position: relative; z-index: 3; }
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { animation: none !important; }
+}
+
+/* На тач-устройствах курсорные эффекты не нужны. */
+@media (hover: none) {
+  .cursor-glow { display: none; }
+  .news-card::after, .service-card::after, .case-card::after, .article-cta::after { display: none; }
+}
