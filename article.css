@@ -127,22 +127,25 @@
   border: 1px solid rgba(255,255,255,0.1);
 }
 .article-toc p { margin: 0 0 18px; color: #fff; font-weight: 900; }
-.article-toc a {
-  display: block;
-  margin: 12px 0;
-  color: rgba(255,255,255,0.78);
-  text-decoration: none;
-  font-weight: 700;
-  transition: color .2s ease, transform .2s ease;
-}
-.article-toc a:hover { color: var(--accent, #76b7ff); transform: translateX(4px); }
 
-/* Защита от дефолтно-синих ссылок в теле статьи на тёмном фоне */
+/* Защита от дефолтно-синих ссылок в теле статьи на тёмном фоне.
+   Идёт ДО .article-toc a, чтобы ссылки «Содержания» побеждали и были белыми. */
 .article-content a, .article-full a, .article-body a {
   color: var(--accent, #76b7ff);
   text-decoration: none;
 }
 .article-content a:hover, .article-full a:hover, .article-body a:hover { text-decoration: underline; }
+
+/* Ссылки «Содержания» — белые (не синие), акцент только при наведении. */
+.article-toc a {
+  display: block;
+  margin: 12px 0;
+  color: rgba(255,255,255,0.86);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color .2s ease, transform .2s ease;
+}
+.article-toc a:hover { color: var(--accent, #76b7ff); transform: translateX(4px); }
 
 @media (max-width: 700px) {
   .article-layout {
