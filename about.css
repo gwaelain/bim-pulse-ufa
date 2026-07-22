@@ -1,0 +1,96 @@
+/* ===== Страница «О компании» ===== */
+
+.about-intro { max-width: 1180px; margin: 0 auto; }
+
+.about-panel {
+  padding: 44px;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+}
+
+.about-panel h2 { margin: 0 0 18px; font-size: 40px; line-height: 1.05; }
+
+.about-panel p {
+  color: rgba(255,255,255,0.72);
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 820px;
+}
+.about-panel p + p { margin-top: 16px; }
+
+.section-head { margin-bottom: 34px; }
+
+/* Принципы */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.value-card {
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(118,183,255,0.4);
+}
+
+.value-card h3 { margin: 0 0 12px; font-size: 22px; line-height: 1.15; }
+.value-card p { margin: 0; color: rgba(255,255,255,0.68); font-size: 16px; line-height: 1.6; }
+
+/* Экспертиза — «чипы» */
+.stack-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.stack-chip {
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.85);
+  font-weight: 700;
+  font-size: 15px;
+  transition: border-color .25s ease, background .25s ease, color .25s ease;
+}
+
+.stack-chip:hover {
+  border-color: rgba(118,183,255,0.5);
+  background: rgba(118,183,255,0.12);
+  color: #fff;
+}
+
+/* CTA */
+.about-cta { max-width: 1180px; margin: 0 auto; }
+
+.about-cta-card {
+  padding: 48px;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(118,183,255,0.16), rgba(255,255,255,0.045));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+  text-align: center;
+}
+
+.about-cta-card h2 { margin: 0 0 12px; font-size: 36px; }
+.about-cta-card p { margin: 0 0 26px; color: rgba(255,255,255,0.72); font-size: 18px; }
+
+.about-cta-card .contact-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 800px) {
+  .value-grid { grid-template-columns: 1fr; }
+  .about-panel { padding: 28px; }
+  .about-panel h2 { font-size: 30px; }
+  .about-cta-card { padding: 30px; }
+  .about-cta-card h2 { font-size: 28px; }
+}

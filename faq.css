@@ -1,0 +1,108 @@
+.faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025));
+  overflow: hidden;
+  transition: border-color .25s ease, background .25s ease;
+}
+
+.faq-item[open] {
+  border-color: rgba(118,183,255,0.35);
+  background: linear-gradient(145deg, rgba(118,183,255,0.09), rgba(255,255,255,0.03));
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+
+/* значок «+», поворачивается в «×» при открытии */
+.faq-item summary::after {
+  content: "+";
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--accent, #76b7ff);
+  transition: transform .3s ease, background .25s ease;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+  background: rgba(118,183,255,0.16);
+}
+
+.faq-item summary:hover { color: var(--accent, #76b7ff); }
+
+.faq-body {
+  padding: 0 26px 24px;
+}
+
+.faq-body p {
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* плавное появление содержимого */
+.faq-item[open] .faq-body {
+  animation: faqReveal .3s ease both;
+}
+@keyframes faqReveal {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* CTA-блок внизу */
+.faq-cta { max-width: 900px; margin: 0 auto; }
+
+.faq-cta-card {
+  padding: 44px;
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(145deg, rgba(118,183,255,0.16), rgba(255,255,255,0.045));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.38);
+}
+
+.faq-cta-card h2 { margin: 0 0 12px; font-size: 34px; }
+.faq-cta-card p { margin: 0 0 26px; color: rgba(255,255,255,0.72); font-size: 18px; }
+
+.faq-cta-card .contact-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  .faq-item summary { font-size: 17px; padding: 18px 20px; }
+  .faq-body { padding: 0 20px 20px; }
+  .faq-cta-card { padding: 28px; }
+  .faq-cta-card h2 { font-size: 27px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item[open] .faq-body { animation: none; }
+}
