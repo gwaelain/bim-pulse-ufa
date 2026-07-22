@@ -211,9 +211,52 @@ function initPointerFX() {
   });
 }
 
+// Форма заявки: отправка через FormSubmit.co AJAX без перезагрузки страницы.
+// Прогрессивное улучшение — без JS форма работает обычным POST + redirect.
+function initLeadForm() {
+  const form = $("#leadForm");
+  const success = $("#leadSuccess");
+
+  // Возврат после no-JS отправки (?sent=1) — показать «спасибо».
+  if (success && new URLSearchParams(location.search).get("sent") === "1") {
+    if (form) form.hidden = true;
+    success.hidden = false;
+  }
+
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    // honeypot заполнен → это бот, тихо игнорируем
+    if (form.querySelector(".lead-honey")?.value) { e.preventDefault(); return; }
+
+    if (!("fetch" in window)) return; // старый браузер → обычный POST/redirect
+    e.preventDefault();
+
+    const btn = form.querySelector("button[type=submit]");
+    const original = btn ? btn.textContent : "";
+    if (btn) { btn.disabled = true; btn.textContent = "Отправляем…"; }
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/im@laingawe.ru", {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form)
+      });
+      if (!res.ok) throw new Error("bad status " + res.status);
+      if (typeof ym === "function") ym(109103460, "reachGoal", "lead_form_submit");
+      form.hidden = true;
+      if (success) success.hidden = false;
+    } catch (err) {
+      if (btn) { btn.disabled = false; btn.textContent = original; }
+      alert("Не удалось отправить. Напишите, пожалуйста, в Telegram или на email.");
+    }
+  });
+}
+
 renderNewsGrid();
 initFilters();
 renderArticle();
 initReveal();
 initModals();
 initPointerFX();
+initLeadForm();

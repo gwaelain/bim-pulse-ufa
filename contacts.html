@@ -71,16 +71,60 @@
           AI-ассистентов, PostgreSQL/Docker-инфраструктуру,
           плагины и систему контроля качества BIM-данных.
         </p>
-  
+
+        <!-- Рабочая форма заявки: POST на FormSubmit.co (без сервера).
+             Без JS работает через redirect (_next → ?sent=1);
+             с JS — отправка через fetch и инлайн-«спасибо» (см. script.js). -->
+        <form class="lead-form" id="leadForm"
+              action="https://formsubmit.co/im@laingawe.ru" method="POST">
+          <input type="hidden" name="_subject" value="Новая заявка с bim-pulse.ru">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://bim-pulse.ru/contacts.html?sent=1">
+          <!-- honeypot: боты заполняют скрытое поле → отсекаем -->
+          <input type="text" name="_honey" class="lead-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="field">
+            <label for="lf-name">Имя</label>
+            <input id="lf-name" type="text" name="name" required
+                   autocomplete="name" placeholder="Как к вам обращаться">
+          </div>
+
+          <div class="field">
+            <label for="lf-contact">Email или Telegram</label>
+            <input id="lf-contact" type="text" name="contact" required
+                   placeholder="you@mail.ru или @username">
+          </div>
+
+          <div class="field">
+            <label for="lf-message">Задача</label>
+            <textarea id="lf-message" name="message" rows="4" required
+                      placeholder="Коротко опишите проект или вопрос"></textarea>
+          </div>
+
+          <button class="btn" type="submit">Отправить заявку</button>
+          <p class="lead-note">
+            Ответим в течение рабочего дня. Нажимая «Отправить», вы соглашаетесь
+            на обработку данных для ответа на заявку.
+          </p>
+        </form>
+
+        <div class="lead-success" id="leadSuccess" hidden>
+          <h3>Заявка отправлена ✓</h3>
+          <p>Спасибо! Свяжемся с вами по указанному контакту.</p>
+        </div>
+
+        <p class="contact-or">или напрямую</p>
+
         <div class="contact-actions">
-          <a class="btn"
+          <a class="btn btn-secondary"
              href="https://t.me/bim_pulse_ufa"
              target="_blank"
              rel="noopener"
              onclick="ym(109103460,'reachGoal','telegram_click')">
             Написать в Telegram
           </a>
-  
+
           <a class="btn btn-secondary"
              href="mailto:im@laingawe.ru"
              onclick="ym(109103460,'reachGoal','email_click')">
@@ -117,5 +161,7 @@
     <span>© BIM Pulse Ufa</span>
     <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
