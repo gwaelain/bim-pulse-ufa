@@ -74,7 +74,7 @@ body::before {
   color: #fff;
   text-decoration: none;
   font-weight: 900;
-  min-width: max-content;
+  min-width: 0;
 }
 
 .brand img,
@@ -423,7 +423,7 @@ h2 {
 
 .service-list {
   display: grid;
-  gap: 0;
+  gap: 16px;
 }
 
 .service-card {
