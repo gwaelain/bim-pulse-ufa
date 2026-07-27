@@ -216,7 +216,7 @@ h2 {
 /* HERO */
 
 .hero {
-  min-height: 680px;
+  min-height: 560px;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   align-items: center;

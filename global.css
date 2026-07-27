@@ -48,7 +48,8 @@ a:hover { text-decoration: underline; }
   padding: 7px;
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.16);
-  box-shadow: 0 0 34px rgba(118,183,255,.22);
+  /* исходный лого-файл — чёрные линии на прозрачном фоне, невидимые на тёмном сайте */
+  filter: invert(1);
 }
 
 .brand span,
@@ -194,17 +195,9 @@ h1 {
 }
 .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 
-/* Кнопки: подъём, свечение и мягкий блик */
-.btn { position: relative; overflow: hidden; }
+/* Кнопки: лёгкий подъём при наведении */
 .btn:hover { transform: translateY(-2px); }
 .btn.primary:hover { box-shadow: 0 10px 30px rgba(118,183,255,.38); }
-.btn::before {
-  content: ""; position: absolute; top: 0; left: -130%;
-  width: 60%; height: 100%; transform: skewX(-18deg);
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent);
-  transition: left .6s ease;
-}
-.btn:hover::before { left: 150%; }
 
 /* Акцентная точка у надписи-eyebrow */
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; }
@@ -217,7 +210,7 @@ h1 {
 /* Логотип слегка «оживает» при наведении на бренд */
 .brand:hover img { transform: rotate(-4deg) scale(1.05); }
 
-/* Плавающее свечение у hero-панели */
+/* Мягкое статичное свечение у hero-панели */
 .hero-panel { position: relative; }
 .hero-panel::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit;
@@ -241,21 +234,6 @@ a:focus-visible, .btn:focus-visible, button:focus-visible {
 /* Плавная прокрутка по якорям */
 html { scroll-behavior: smooth; }
 
-/* Живой акцентный градиент в hero-панели (очень мягкий) */
-@keyframes heroFlow {
-  0%, 100% { background-position: 0% 50%; }
-  50%      { background-position: 100% 50%; }
-}
-.hero-panel::before {
-  content: ""; position: absolute; inset: 0; border-radius: inherit;
-  pointer-events: none; z-index: 0;
-  background: linear-gradient(120deg,
-    rgba(118,183,255,.12), transparent 42%, rgba(118,183,255,.09));
-  background-size: 220% 220%;
-  animation: heroFlow 14s ease-in-out infinite;
-}
-.hero-panel > * { position: relative; z-index: 1; }
-
 /* Появление секций: мягкий подъём + лёгкий каскад карточек */
 .section, .news-section { position: relative; }
 .news-grid > *, .service-list > * { animation: riseIn .6s cubic-bezier(.2,.7,.2,1) both; }
@@ -274,9 +252,6 @@ html { scroll-behavior: smooth; }
 .article-cover { transition: transform .5s ease, box-shadow .5s ease; }
 .article-cover:hover { transform: translateY(-3px); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
 
-/* Метрики/цифры — акцентное свечение */
-.metrics b, .metrics strong { text-shadow: 0 0 22px rgba(118,183,255,.35); }
-
 /* Тонкая линия-акцент под заголовками секций */
 .section-head h2::after {
   content: ""; display: block; width: 54px; height: 3px; margin-top: 12px;
@@ -286,7 +261,6 @@ html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-panel::before { animation: none !important; }
   .news-grid > *, .service-list > * { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
@@ -306,72 +280,4 @@ body::before {
   /* к краям сетка тает, чтобы не «давила» */
   -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
           mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
-}
-
-/* Дрейфующие акцентные свечения — «живой» глубокий фон. */
-@keyframes auroraDrift {
-  0%   { transform: translate3d(-4%, -2%, 0) scale(1); }
-  50%  { transform: translate3d(4%, 3%, 0) scale(1.08); }
-  100% { transform: translate3d(-4%, -2%, 0) scale(1); }
-}
-body::after {
-  content: "";
-  position: fixed;
-  inset: -20%;
-  z-index: -3;
-  pointer-events: none;
-  background:
-    radial-gradient(38vw 38vw at 18% 12%, rgba(118,183,255,.16), transparent 60%),
-    radial-gradient(42vw 42vw at 85% 22%, rgba(90,140,255,.12), transparent 62%),
-    radial-gradient(46vw 46vw at 60% 95%, rgba(118,183,255,.10), transparent 64%);
-  filter: blur(30px);
-  animation: auroraDrift 26s ease-in-out infinite;
-}
-
-/* ============ CURSOR FX (световое пятно + spotlight-карточки) ============ */
-
-/* Мягкий «фонарик», плавно следующий за курсором (позиция — из JS). */
-.cursor-glow {
-  position: fixed;
-  top: 0; left: 0;
-  width: 520px; height: 520px;
-  border-radius: 50%;
-  z-index: 1;
-  pointer-events: none;
-  will-change: transform;
-  background: radial-gradient(circle, rgba(118,183,255,.14), rgba(118,183,255,.05) 38%, transparent 66%);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transition: opacity .4s ease;
-}
-.cursor-glow.is-on { opacity: 1; }
-
-/* Подсветка-«прожектор» в точке курсора на карточках/панелях. */
-.news-card, .service-card, .case-card, .hero-panel, .article-cta { position: relative; }
-.news-card::after, .service-card::after, .case-card::after,
-.article-cta::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0;
-  transition: opacity .35s ease;
-  background: radial-gradient(220px 220px at var(--mx, 50%) var(--my, 50%),
-              rgba(118,183,255,.18), transparent 60%);
-}
-.news-card:hover::after, .service-card:hover::after, .case-card:hover::after,
-.article-cta:hover::after { opacity: 1; }
-/* содержимое news-card должно быть над подсветкой */
-.news-card > * { position: relative; z-index: 3; }
-
-@media (prefers-reduced-motion: reduce) {
-  body::after { animation: none !important; }
-}
-
-/* На тач-устройствах курсорные эффекты не нужны. */
-@media (hover: none) {
-  .cursor-glow { display: none; }
-  .news-card::after, .service-card::after, .case-card::after, .article-cta::after { display: none; }
 }

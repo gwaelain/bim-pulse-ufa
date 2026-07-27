@@ -170,47 +170,6 @@ function initModals() {
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
 }
 
-// Курсорные эффекты: «фонарик» за мышью + spotlight-подсветка карточек.
-// Отключается при reduce-motion и на устройствах без точного указателя (тач).
-function initPointerFX() {
-  const fine = window.matchMedia("(pointer: fine)").matches;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!fine || reduce) return;
-
-  const glow = document.createElement("div");
-  glow.className = "cursor-glow";
-  document.body.appendChild(glow);
-
-  const half = 260; // половина размера .cursor-glow (520px)
-  let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
-  let cx = tx, cy = ty, on = false, raf = 0;
-
-  function loop() {
-    cx += (tx - cx) * 0.14;
-    cy += (ty - cy) * 0.14;
-    glow.style.transform = `translate3d(${cx - half}px, ${cy - half}px, 0)`;
-    raf = requestAnimationFrame(loop);
-  }
-
-  window.addEventListener("pointermove", (e) => {
-    tx = e.clientX; ty = e.clientY;
-    if (!on) { on = true; glow.classList.add("is-on"); }
-    if (!raf) raf = requestAnimationFrame(loop);
-  }, { passive: true });
-
-  document.addEventListener("mouseleave", () => { on = false; glow.classList.remove("is-on"); });
-
-  // Точка курсора внутри карточек → CSS-переменные для радиального «прожектора».
-  const spot = $$(".news-card, .service-card, .case-card, .article-cta");
-  spot.forEach((card) => {
-    card.addEventListener("pointermove", (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      card.style.setProperty("--my", `${e.clientY - r.top}px`);
-    }, { passive: true });
-  });
-}
-
 // Форма заявки: отправка через FormSubmit.co AJAX без перезагрузки страницы.
 // Прогрессивное улучшение — без JS форма работает обычным POST + redirect.
 function initLeadForm() {
@@ -258,5 +217,4 @@ initFilters();
 renderArticle();
 initReveal();
 initModals();
-initPointerFX();
 initLeadForm();
