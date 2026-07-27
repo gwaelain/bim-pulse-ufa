@@ -32,7 +32,7 @@
 **Добавить/изменить статью**
 1. Открой `news.js`, добавь/поменяй объект (`slug`, `title`, `excerpt`,
    `date`, `image`, `content`).
-2. Сгенерируй страницы: `bash tools/build.sh` (нужен macOS: osascript + python3).
+2. Сгенерируй страницы: `bash tools/build.sh` (нужен node + python3, кросс-платформенно).
    Перезапишет `<slug>.html`, обновит `sitemap.xml`.
 3. Проверь ссылки: `python3 tools/check_links.py`.
 

@@ -31,7 +31,7 @@
 
 **Добавить/изменить статью**
 1. Правь объект в `news.js` (`slug`, `title`, `excerpt`, `date`, `image`, `content`).
-2. Собери: `bash tools/build.sh` (macOS: osascript + python3) — перезапишет `<slug>.html`, обновит `sitemap.xml`.
+2. Собери: `bash tools/build.sh` (нужен node + python3, кросс-платформенно) — перезапишет `<slug>.html`, обновит `sitemap.xml`.
 3. Проверь ссылки: `python3 tools/check_links.py`.
 
 **Изменить шапку/подвал/аналитику** — правь `tools/partials/*`, затем `python3 tools/apply_shell.py`.
