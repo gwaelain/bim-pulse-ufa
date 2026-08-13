@@ -2,7 +2,9 @@
  "ai-bim-roadmap",
  "ai-in-bim-practice",
  "ai-review-comments",
+ "avtomatizaciya-proverki-modeley",
  "bim-audit-checklist",
+ "bim-avtomatizaciya-api",
  "bim-dashboard",
  "bim-implementation-start",
  "bim-templates-automation",
@@ -13,7 +15,9 @@
  "docker-for-bim-services",
  "dynamo-python-scenarios",
  "ifc-data-quality",
+ "ii-v-proektirovanii",
  "llm-assistant-for-bim-coordinator",
  "postgresql-bim-data",
+ "razrabotka-dynamo-i-plaginov",
  "revit-plugin-vs-dynamo"
 ]

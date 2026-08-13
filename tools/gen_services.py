@@ -53,6 +53,37 @@ def load() -> list[dict]:
     return items
 
 
+def published_slugs() -> set[str]:
+    """Слаги статей, которые уже вышли.
+
+    Страницы услуг ссылаются на статьи блога, а те публикуются по расписанию.
+    До выхода статьи ссылка вела бы в 404, поэтому её разметку снимаем.
+    """
+    today = date.today().isoformat()
+    live = set()
+    arts = ROOT / "content" / "articles"
+    if arts.exists():
+        for f in arts.glob("*.md"):
+            meta, _ = frontmatter(f.read_text(encoding="utf-8"))
+            if meta.get("publish_at", today) <= today:
+                live.add(meta.get("slug", f.stem))
+    return live
+
+
+def strip_unpublished_links(body_html: str, live: set[str]) -> str:
+    static = {"index", "blog", "services", "cases", "about", "faq", "contacts", "404",
+              "article", "ai-in-bim", "revit-automation", "dynamo-scripts", "bim-coordination"}
+
+    def repl(m: re.Match) -> str:
+        href, text = m.group(1), m.group(2)
+        slug = href[:-5]
+        if href.endswith(".html") and "/" not in href and slug not in live and slug not in static:
+            return text
+        return m.group(0)
+
+    return re.sub(r'<a href="([^"]+)">(.*?)</a>', repl, body_html, flags=re.S)
+
+
 def faq_schema(body_html: str) -> dict | None:
     pairs = re.findall(r"<p><strong>([^<]{10,180}\?)</strong>\s*(.{40,600}?)</p>", body_html, re.S)
     if len(pairs) < 2:
@@ -66,10 +97,12 @@ def faq_schema(body_html: str) -> dict | None:
     }
 
 
-def page(s: dict, others: list[dict]) -> str:
+def page(s: dict, others: list[dict], live: set[str] | None = None) -> str:
     e = html.escape
     url = f"{DOMAIN}/{s['slug']}.html"
-    body = md_to_html(s["_body"])
+    live = live if live is not None else published_slugs()
+    live = live | {o["slug"] for o in others}
+    body = strip_unpublished_links(md_to_html(s["_body"]), live)
     kws = s.get("keywords") or []
     kw_meta = f'\n  <meta name="keywords" content="{e(", ".join(kws))}" />' if kws else ""
 
