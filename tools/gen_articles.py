@@ -69,6 +69,27 @@ def load() -> list[dict]:
     return arts
 
 
+def faq_schema(body_html: str) -> dict | None:
+    """Собирает FAQPage из блоков «**Вопрос?** ответ».
+
+    Так копирайтеры оформляют мини-FAQ в конце статьи. Разметка FAQPage даёт
+    в поиске раскрывающиеся вопросы под сниппетом — заметно поднимает кликабельность.
+    """
+    pairs = re.findall(r"<p><strong>([^<]{10,180}\?)</strong>\s*(.{40,600}?)</p>", body_html, re.S)
+    if len(pairs) < 2:
+        return None
+    clean = lambda s: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", s)).strip()
+    return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": clean(q),
+             "acceptedAnswer": {"@type": "Answer", "text": clean(a)}}
+            for q, a in pairs[:8]
+        ],
+    }
+
+
 def strip_unpublished_links(body_html: str, live_slugs: set[str]) -> str:
     """Снимает ссылки на статьи, которые ещё не вышли.
 
@@ -132,6 +153,9 @@ def page(a: dict, arts: list[dict]) -> str:
     rel_html = "".join(
         f'<li><a href="{r["slug"]}.html">{e(r["title"])}</a></li>' for r in rel
     )
+    faq = faq_schema(body)
+    faq_ld = (f'\n  <script type="application/ld+json">{json.dumps(faq, ensure_ascii=False)}</script>'
+              if faq else "")
     kw_meta = f'\n  <meta name="keywords" content="{e(", ".join(kws))}" />' if kws else ""
 
     return f"""<!DOCTYPE html>
@@ -160,7 +184,7 @@ def page(a: dict, arts: list[dict]) -> str:
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
-  <script type="application/ld+json">{json.dumps(crumbs, ensure_ascii=False)}</script>
+  <script type="application/ld+json">{json.dumps(crumbs, ensure_ascii=False)}</script>{faq_ld}
 {YM}
 </head>
 <body>
@@ -227,6 +251,30 @@ def update_blog_html(arts: list[dict]) -> None:
     f.write_text(txt, encoding="utf-8")
 
 
+def update_index_html(arts: list[dict], k: int = 3) -> None:
+    """Свежие статьи на главной: ссылка с главной ускоряет обход новой страницы."""
+    f = ROOT / "index.html"
+    txt = f.read_text(encoding="utf-8")
+    if "<!-- latest:auto -->" not in txt:
+        return
+    cards = "".join(f'''
+        <a class="news-card" href="{a["slug"]}.html">
+          <img src="{a["image"]}" alt="{html.escape(a["title"])}" loading="lazy" onerror="this.src='bim-model-1.webp'">
+          <div>
+            <div class="meta"><span>{html.escape(a["category"])}</span><span>{ru_date(a["publish_at"])}</span></div>
+            <h3>{html.escape(a["title"])}</h3>
+            <p>{html.escape(a["description"])}</p>
+            <b>Читать →</b>
+          </div>
+        </a>''' for a in arts[:k])
+    block = ('      <!-- latest:auto -->\n'
+             '      <p class="eyebrow" style="margin-top:42px">Свежее в блоге</p>\n'
+             f'      <div class="news-grid">{cards}\n      </div>\n'
+             '      <!-- /latest:auto -->')
+    txt = re.sub(r"      <!-- latest:auto -->.*?<!-- /latest:auto -->", block, txt, flags=re.S)
+    f.write_text(txt, encoding="utf-8")
+
+
 def update_sitemap(arts: list[dict]) -> None:
     sm = ROOT / "sitemap.xml"
     txt = sm.read_text(encoding="utf-8")
@@ -262,6 +310,7 @@ def main() -> None:
 
     write_news_js(live)
     update_blog_html(live)
+    update_index_html(live)
     update_sitemap(live)
     (ROOT / "tools" / "indexnow-new.txt").write_text("\n".join(fresh), encoding="utf-8")
 

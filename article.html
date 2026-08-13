@@ -8,7 +8,9 @@
   <!-- Брендовый fallback для соц-скрейперов без JS; per-article мета
        (title/description/OG/JSON-LD) проставляет script.js из news.js. -->
   <meta name="description" content="Статьи о BIM, AI и автоматизации проектирования — BIM Pulse Ufa." />
-  <meta name="robots" content="index, follow" />
+  <!-- Технический шаблон (рендерит статью по ?slug=). Статьи давно статические,
+       эта страница в индексе не нужна — иначе получаем дубль каждой статьи. -->
+  <meta name="robots" content="noindex, follow" />
   <link rel="canonical" href="https://bim-pulse.ru/article.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="BIM Pulse Ufa" />
