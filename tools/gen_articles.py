@@ -275,10 +275,17 @@ def update_index_html(arts: list[dict], k: int = 3) -> None:
     f.write_text(txt, encoding="utf-8")
 
 
-def update_sitemap(arts: list[dict]) -> None:
+def update_sitemap(arts: list[dict], services: list[dict] | None = None) -> None:
     sm = ROOT / "sitemap.xml"
     txt = sm.read_text(encoding="utf-8")
-    block = "  <!-- articles:auto -->\n" + "".join(
+    today = date.today().isoformat()
+    # услуги важнее статей: это страницы, ради которых сайт вообще существует
+    svc = "".join(
+        f"  <url>\n    <loc>{DOMAIN}/{s['slug']}.html</loc>\n"
+        f"    <lastmod>{s.get('updated_at', today)}</lastmod>\n"
+        f"    <priority>0.9</priority>\n  </url>\n" for s in (services or [])
+    )
+    block = "  <!-- articles:auto -->\n" + svc + "".join(
         f"  <url>\n    <loc>{DOMAIN}/{a['slug']}.html</loc>\n"
         f"    <lastmod>{a.get('updated_at', a['publish_at'])}</lastmod>\n"
         f"    <priority>0.7</priority>\n  </url>\n" for a in arts
@@ -308,10 +315,23 @@ def main() -> None:
     seen_file.write_text(json.dumps(sorted(seen | {a["slug"] for a in live}),
                                     ensure_ascii=False, indent=1), encoding="utf-8")
 
+    # страницы услуг собираются тем же прогоном — иначе о них забудут при деплое
+    import gen_services
+    services = gen_services.load()
+    if services:
+        for s in services:
+            (ROOT / f"{s['slug']}.html").write_text(gen_services.page(s, services), encoding="utf-8")
+        gen_services.update_services_html(services)
+        for s in services:
+            if s["slug"] not in seen:
+                fresh.append(f"{DOMAIN}/{s['slug']}.html")
+                seen.add(s["slug"])
+        seen_file.write_text(json.dumps(sorted(seen), ensure_ascii=False, indent=1), encoding="utf-8")
+
     write_news_js(live)
     update_blog_html(live)
     update_index_html(live)
-    update_sitemap(live)
+    update_sitemap(live, services)
     (ROOT / "tools" / "indexnow-new.txt").write_text("\n".join(fresh), encoding="utf-8")
 
     waiting = len(arts) - len(live)

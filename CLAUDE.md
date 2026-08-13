@@ -56,6 +56,22 @@ updated_at: 2026-08-13      # необязательно, идёт в lastmod и
 Очередь публикаций заполняется из черновиков:
 `python e:\Project\_content\tools\zapolnit-ochered.py --projekt bim-pulse --start 2026-08-14`
 
+## Страницы услуг
+
+`content/services/<slug>.md` → `<slug>.html` в корне, собирает `tools/gen_services.py`
+(вызывается из `gen_articles.py`, отдельно запускать не нужно).
+
+Отличия от статей: приоритет 0.9 в sitemap, JSON-LD `Service` + `BreadcrumbList` + `FAQPage`,
+блок «Другие услуги», CTA на Telegram и форму. Ссылки на них вставляются в `services.html`
+между маркерами `<!-- services:auto -->`.
+
+Фронтматтер: `title` (до 60 знаков), `slug`, `description` (150–160), `h1`, `lead`,
+`keywords`, необязательные `service_type` и `updated_at`.
+
+Темы выбраны по разбору рынка `_content\_klyuchi\RYNOK-2026-08-14.md` — там же данные о том,
+по каким запросам сайт уже показывается (Google: «автоматизация проверки bim моделей»,
+«bim автоматизация api»; Яндекс: Dynamo и массовые операции в Revit).
+
 ## Что где лежит
 
 - Страницы, которые правятся руками: `index`, `services`, `cases`, `about`, `blog`,
