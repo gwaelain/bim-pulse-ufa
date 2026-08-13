@@ -9,19 +9,22 @@
   <link rel="canonical" href="https://bim-pulse.ru/postgresql-bim-data.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="BIM Pulse Ufa" />
-  <meta property="og:title" content="PostgreSQL для BIM-данных: зачем хранить параметры вне Revit — BIM Pulse Ufa" />
+  <meta property="og:title" content="PostgreSQL для BIM-данных: зачем хранить параметры вне Revit" />
   <meta property="og:description" content="База данных помогает отслеживать историю изменений, качество параметров, статусы проверок и аналитику по проектам." />
   <meta property="og:url" content="https://bim-pulse.ru/postgresql-bim-data.html" />
   <meta property="og:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <meta property="article:published_time" content="2026-05-07" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="PostgreSQL для BIM-данных: зачем хранить параметры вне Revit — BIM Pulse Ufa" />
+  <meta name="twitter:title" content="PostgreSQL для BIM-данных: зачем хранить параметры вне Revit" />
   <meta name="twitter:description" content="База данных помогает отслеживать историю изменений, качество параметров, статусы проверок и аналитику по проектам." />
   <meta name="twitter:image" content="https://bim-pulse.ru/og-image.jpg" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="article.css" />
   <link rel="stylesheet" href="global.css" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "PostgreSQL для BIM-данных: зачем хранить параметры вне Revit", "description": "База данных помогает отслеживать историю изменений, качество параметров, статусы проверок и аналитику по проектам.", "image": "https://bim-pulse.ru/Bim2.webp", "author": {"@type": "Organization", "name": "BIM Pulse Ufa"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/postgresql-bim-data.html"}, "datePublished": "2026-05-07", "dateModified": "2026-05-07"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "PostgreSQL для BIM-данных: зачем хранить параметры вне Revit", "description": "База данных помогает отслеживать историю изменений, качество параметров, статусы проверок и аналитику по проектам.", "image": "https://bim-pulse.ru/Bim2.webp", "datePublished": "2026-05-07", "dateModified": "2026-05-07", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/postgresql-bim-data.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "PostgreSQL для BIM-данных: зачем хранить параметры вне Revit", "item": "https://bim-pulse.ru/postgresql-bim-data.html"}]}</script>
 <!-- Yandex.Metrika counter -->
   <script type="text/javascript">
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -51,9 +54,11 @@
     <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ym(109103460,'reachGoal','telegram_click')">Telegram</a>
   </header>
   <main class="article-page section">
-    <a class="text-link" href="index.html#media">← Назад к медиа</a>
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a> · <a href="blog.html">Блог</a> · <span>Data</span>
+    </nav>
     <article class="article-full">
-    <div class="meta"><span>Data</span><span>07 мая 2026</span></div>
+    <div class="meta"><span>Data</span><span>07 мая 2026</span><span>55 слов</span></div>
     <h1>PostgreSQL для BIM-данных: зачем хранить параметры вне Revit</h1>
     <p class="lead">База данных помогает отслеживать историю изменений, качество параметров, статусы проверок и аналитику по проектам.</p>
     <img class="article-cover" src="Bim2.webp" alt="PostgreSQL для BIM-данных: зачем хранить параметры вне Revit" onerror="this.src='bim-model-1.webp'" />
@@ -64,8 +69,12 @@
       <h3>Нужен похожий BIM/AI процесс?</h3>
       <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
       <a class="btn primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Telegram</a>
-      <a class="btn secondary" href="mailto:im@laingawe.ru">Email</a>
+      <a class="btn secondary" href="contacts.html">Оставить заявку</a>
     </div>
+    <aside class="article-related">
+      <h3>Читайте дальше</h3>
+      <ul><li><a href="cde-sreda-obshchih-dannyh.html">CDE простыми словами: зачем она, если есть общая папка</a></li><li><a href="cde-single-source.html">Единая среда данных (CDE): порядок вместо хаоса файлов</a></li><li><a href="ifc-data-quality.html">IFC и качество данных: что проверять до передачи модели</a></li></ul>
+    </aside>
     </article>
   </main>
   <footer class="footer">

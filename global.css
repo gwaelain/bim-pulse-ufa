@@ -281,3 +281,67 @@ body::before {
   -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
           mask-image: radial-gradient(120% 90% at 50% 0%, #000 35%, transparent 78%);
 }
+
+/* ============ ТИПОГРАФИКА ЛОНГРИДА (генерируются tools/gen_articles.py) ============ */
+/* Статьи собираются из markdown: подзаголовки, списки, таблицы, код. Раньше в статьях
+   были только <p>, поэтому этих правил не существовало. */
+
+.article-page { max-width: 880px; margin: 0 auto; padding: 120px 24px 80px; }
+
+.breadcrumbs { font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 22px; }
+.breadcrumbs a { color: rgba(255,255,255,.72); text-decoration: none; }
+.breadcrumbs a:hover { color: var(--accent, #76b7ff); }
+
+.article-full h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -.03em; margin: 10px 0 20px; }
+.article-full .lead { font-size: 21px; line-height: 1.55; color: rgba(255,255,255,.78); }
+.article-full .meta { display: flex; gap: 16px; font-size: 14px; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .08em; }
+
+.article-full h2 { margin: 52px 0 18px; font-size: clamp(26px, 3.4vw, 34px); line-height: 1.12; letter-spacing: -.025em; }
+.article-full h3 { margin: 32px 0 12px; font-size: 22px; }
+.article-full p { font-size: 18px; line-height: 1.75; color: rgba(255,255,255,.76); margin: 0 0 18px; }
+.article-full ul, .article-full ol { margin: 0 0 22px; padding-left: 24px; }
+.article-full li { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,.76); margin-bottom: 10px; }
+.article-full strong { color: #fff; }
+.article-full hr { border: 0; height: 1px; background: rgba(255,255,255,.12); margin: 40px 0; }
+
+.article-full blockquote {
+  margin: 26px 0; padding: 18px 24px;
+  border-left: 3px solid var(--accent, #76b7ff);
+  background: rgba(118,183,255,.07);
+  border-radius: 0 16px 16px 0;
+}
+.article-full blockquote p { margin: 0; color: rgba(255,255,255,.85); }
+
+.article-full code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .92em; padding: 2px 6px; border-radius: 6px;
+  background: rgba(255,255,255,.08); color: #cfe4ff;
+}
+.article-full pre {
+  margin: 24px 0; padding: 20px 22px; overflow-x: auto;
+  border-radius: 18px; border: 1px solid rgba(255,255,255,.12);
+  background: rgba(8,12,20,.72);
+}
+.article-full pre code { background: none; padding: 0; font-size: 15px; line-height: 1.6; }
+
+/* Таблицы уезжают вбок на телефоне — скроллим контейнер, а не страницу */
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+.article-full table { width: 100%; border-collapse: collapse; font-size: 16px; }
+.article-full th, .article-full td {
+  padding: 12px 14px; text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.78);
+}
+.article-full th { color: #fff; font-weight: 600; white-space: nowrap; }
+
+.article-related { margin-top: 56px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.12); }
+.article-related h3 { font-size: 20px; margin: 0 0 14px; }
+.article-related ul { list-style: none; padding: 0; margin: 0; }
+.article-related li { margin-bottom: 10px; }
+.article-related a { color: rgba(255,255,255,.85); text-decoration: none; border-bottom: 1px solid rgba(118,183,255,.4); }
+.article-related a:hover { color: var(--accent, #76b7ff); }
+
+@media (max-width: 720px) {
+  .article-page { padding: 96px 18px 60px; }
+  .article-full p, .article-full li { font-size: 17px; }
+}

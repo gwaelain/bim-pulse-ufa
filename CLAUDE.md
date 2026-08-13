@@ -2,58 +2,93 @@
 
 Памятка для работы над сайтом **[bim-pulse.ru](https://bim-pulse.ru)**.
 Статический сайт про BIM, AI и автоматизацию проектирования. Чистый HTML/CSS/JS
-без фреймворков и сборщика. Хостинг — **GitHub Pages** (ветка `main`, папка `/root`,
-домен через `CNAME`). **Пуш в `main` = деплой** — пушить только по явной команде.
+без фреймворков и сборщика.
 
-## Структура
+## ⚠️ Где сайт живёт на самом деле (главное)
 
-**Страницы (правятся вручную)**
-- `index.html` + лендинги: `services`, `cases`, `blog`, `contacts`,
-  `ai-in-bim`, `revit-automation`, `dynamo-scripts`, `bim-coordination`.
-- `404.html` — страница ошибки. `article.html` — legacy-рендер статьи по `?slug=`.
+Домен **не** обслуживается GitHub Pages, хотя Pages в репозитории включён.
+DNS ведёт на **наш сервер 5.188.27.237** (NS у Cloudflare, A → 5.188.27.237),
+раздаёт **Caddy**: `bim-pulse.ru { root * /srv/bim-pulse-ufa }`,
+том `/opt/static:/srv:ro` — то есть файлы лежат в `/opt/static/bim-pulse-ufa`.
 
-**Статьи (генерируются, вручную НЕ править)**
-- `<slug>.html` собираются из `news.js`. Правишь `news.js` → пересобираешь.
+**Пуш в GitHub сайт НЕ обновляет.** Деплой — скриптом с локальной машины:
 
-**Единый источник — партиалы** `tools/partials/`
-- `header.html`, `footer.html`, `metrika.html` (Yandex.Metrika).
-- Меняешь навигацию/подвал/аналитику → правишь ОДИН партиал и запускаешь
-  `python3 tools/apply_shell.py` (проставит во все страницы).
+```powershell
+e:\Project\infra\scripts\deploy-bim-pulse.ps1        # залить + пересобрать
+e:\Project\infra\scripts\deploy-bim-pulse.ps1 -SkipDrip
+```
 
-**Стили** — грузятся во всех страницах в порядке: `style.css` → (точечный) → `global.css`.
-- `style.css` — основной; `global.css` грузится последним и побеждает в каскаде.
-- Точечные: `blog/cases/contacts/services.css` и `article.css` (для 4 лендингов-статей).
+(Раньше на сервере был cron `git pull` каждые 2 минуты — он падал с TLS-ошибкой,
+и сайт полтора месяца стоял на старой версии. Cron заменён на ежедневный `drip.sh`.)
 
-**Изображения** — WebP для контента, `og-image.jpg` для соц-превью,
-`favicon.png` (32), `apple-touch-icon.png` (180), `logo.png`.
+## Статьи: единственный источник — markdown
 
-## Частые задачи
+`content/articles/<slug>.md` — фронтматтер + текст. Всё остальное генерируется:
 
-**Добавить/изменить статью**
-1. Правь объект в `news.js` (`slug`, `title`, `excerpt`, `date`, `image`, `content`).
-2. Собери: `bash tools/build.sh` (нужен node + python3, кросс-платформенно) — перезапишет `<slug>.html`, обновит `sitemap.xml`.
-3. Проверь ссылки: `python3 tools/check_links.py`.
+```
+python tools/gen_articles.py        # страницы + news.js + blog.html + sitemap.xml
+python tools/gen_articles.py --all  # собрать и те, чья дата ещё не наступила
+python tools/check_links.py         # проверка внутренних ссылок
+```
 
-**Изменить шапку/подвал/аналитику** — правь `tools/partials/*`, затем `python3 tools/apply_shell.py`.
+Фронтматтер:
 
-## Проверять перед коммитом
+```yaml
+---
+title: до 65 знаков
+slug: имя-файла
+description: 150-160 знаков
+category: Dynamo | Revit | Coordination | Data | AI
+keywords: [5-7 ключей]
+publish_at: 2026-08-14      # до этой даты страницы не существует (капельная публикация)
+updated_at: 2026-08-13      # необязательно, идёт в lastmod и JSON-LD
+---
+```
 
-- **Баланс скобок в CSS** — раньше уже был баг: незакрытая `{` уводила весь хвост
-  правил на уровень глубже, и с нативным CSS-nesting Chrome молча игнорировал их.
-  Быстрая проверка: `python3 -c "s=open('article.css').read();print(s.count('{'),s.count('}'))"` — числа должны совпадать.
-- **Ссылки**: `python3 tools/check_links.py`.
-- **Визуально** через headless Chrome (стили ссылок/тёмный фон легко ломаются молча):
-  ```
-  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
-    --disable-gpu --window-size=1280,2400 --screenshot=out.png \
-    "file://$PWD/ai-in-bim.html"
-  ```
-  Для вычисленного стиля элемента — временная страница с `getComputedStyle` + скриншот.
+`news.js` теперь **генерируется** — руками не править, как и `<slug>.html`.
+
+**Капельная публикация:** на сервере крутится
+`5 7 * * * /opt/static/bim-pulse-ufa/tools/drip.sh` — раз в сутки пересобирает сайт,
+публикует статьи, у которых наступил `publish_at`, и пингует IndexNow.
+Поэтому сервер должен получать не только html, но и `content/` + `tools/`
+(deploy-скрипт это делает).
+
+Очередь публикаций заполняется из черновиков:
+`python e:\Project\_content\tools\zapolnit-ochered.py --projekt bim-pulse --start 2026-08-14`
+
+## Что где лежит
+
+- Страницы, которые правятся руками: `index`, `services`, `cases`, `about`, `blog`,
+  `faq`, `contacts`, плюс лендинги `ai-in-bim`, `revit-automation`, `dynamo-scripts`,
+  `bim-coordination`. `404.html`, `article.html` (legacy-рендер по `?slug=`).
+- Партиалы `tools/partials/` — `header.html`, `footer.html`, `metrika.html`.
+  Правишь один → `python tools/apply_shell.py` разносит по страницам,
+  затем `python tools/gen_articles.py` (статьи берут партиалы при сборке).
+- Стили: `style.css` → точечные (`article.css` и др.) → `global.css` (грузится
+  последним и побеждает; типографика лонгридов — в нём).
+- Картинки: WebP для контента, `og-image.jpg`, `favicon.png`, `apple-touch-icon.png`.
+
+## SEO-обвязка (сделано, не сломать)
+
+- Яндекс.Вебмастер: хост подтверждён мета-тегом `yandex-verification` в `index.html`
+  (аккаунт аналитики портфеля, `infra\scripts\yandex-webmaster.ps1`), sitemap отправлен.
+- Google Search Console: подтверждение файлом `googlebd1c94cea8b05eef.html` в корне,
+  скрипт `infra\gsc\verify_file.py`.
+- Яндекс.Метрика 109103460 — в партиале `tools/partials/metrika.html`.
+- IndexNow: ключ-файл `5ce63dcf399ad423cb6f435df02501d4.txt` в корне + `tools/indexnow.py`.
+- В каждой статье: JSON-LD `Article` + `BreadcrumbList`, canonical, OG, хлебные крошки,
+  блок «Читайте дальше» (перелинковка по категории).
+
+## Проверять перед деплоем
+
+- `python tools/check_links.py` — битые внутренние ссылки.
+- **Баланс скобок в CSS**: `python -c "s=open('global.css',encoding='utf-8').read();print(s.count('{'),s.count('}'))"`.
+  Незакрытая `{` из-за нативного CSS-nesting молча уводит весь хвост правил.
+- Тексты статей — через ворота `e:\Project\dzen-lab\engine\readability.py` и `mashinnost.py`
+  (правила живого текста: `e:\Project\_content\BRIEF-ZHIVOY-TEKST.md`).
 
 ## Правила
 
-- Все `.md` — на русском, кратко, для новичка, с инструкциями.
-- НЕ править сгенерированные `<slug>.html` вручную — только через `news.js` + `build.sh`.
-- НЕ коммитить сразу: сначала `git diff`, дождаться подтверждения. Коммитить только нужные файлы.
-- Пуш в `main` публикует сайт — только по явной команде.
-- НЕ коммитить секреты/ключи.
+- Все `.md` — на русском, кратко, с инструкциями.
+- Не править сгенерированное: `<slug>.html`, `news.js`, блоки между `<!-- articles:auto -->`.
+- Секреты не коммитить. Пароль сервера и токены — только из сейфа.
