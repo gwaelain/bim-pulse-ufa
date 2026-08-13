@@ -246,13 +246,19 @@ def main() -> None:
     arts = load()
     live = arts if show_all else [a for a in arts if a["publish_at"] <= today]
 
-    existing = {p.name for p in ROOT.glob("*.html")}
+    # что уже было опубликовано — помним списком, а не по наличию файла на диске:
+    # деплой заливает готовые страницы, и «файл существует» перестало значить «опубликовано»
+    seen_file = ROOT / "tools" / "published.json"
+    seen = set(json.loads(seen_file.read_text(encoding="utf-8"))) if seen_file.exists() else set()
+
     fresh = []
     for a in live:
         name = f"{a['slug']}.html"
-        if name not in existing:
+        if a["slug"] not in seen:
             fresh.append(f"{DOMAIN}/{name}")
         (ROOT / name).write_text(page(a, live), encoding="utf-8")
+    seen_file.write_text(json.dumps(sorted(seen | {a["slug"] for a in live}),
+                                    ensure_ascii=False, indent=1), encoding="utf-8")
 
     write_news_js(live)
     update_blog_html(live)
