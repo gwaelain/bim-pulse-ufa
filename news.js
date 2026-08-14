@@ -1,6 +1,14 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "dynamo-pervyy-skript",
+    "category": "Dynamo",
+    "date": "15 августа 2026",
+    "title": "Первый скрипт в Dynamo: нумерация помещений по шагам",
+    "excerpt": "Собираем первый рабочий граф в Dynamo на живой задаче: нумерация помещений. Ноды, порты, уровни списков и две ловушки, на которых спотыкаются все новички.",
+    "image": "Bim1.webp"
+  },
+  {
     "slug": "cde-sreda-obshchih-dannyh",
     "category": "Data",
     "date": "13 августа 2026",

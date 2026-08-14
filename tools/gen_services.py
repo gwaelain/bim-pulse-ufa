@@ -188,8 +188,12 @@ def page(s: dict, others: list[dict], live: set[str] | None = None) -> str:
 
 
 def update_services_html(items: list[dict]) -> None:
-    """Блок ссылок на страницы услуг внутри services.html."""
-    f = ROOT / "services.html"
+    """Блок ссылок на страницы услуг — в services.html и на главной."""
+    for name in ("services.html", "index.html"):
+        _insert_block(ROOT / name, items)
+
+
+def _insert_block(f: Path, items: list[dict]) -> None:
     if not f.exists():
         return
     txt = f.read_text(encoding="utf-8")
