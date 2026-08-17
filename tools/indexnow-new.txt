@@ -1,2 +1,3 @@
+https://bim-pulse.ru/ifc-export-iz-revit.html
 https://bim-pulse.ru/dynamo-player-dlya-komandy.html
 https://bim-pulse.ru/dynamo-pervyy-skript.html
