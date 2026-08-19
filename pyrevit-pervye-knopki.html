@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyRevit: ставим и делаем свои кнопки за вечер — BIM Pulse Ufa</title>
+  <meta name="description" content="Установка pyRevit, структура расширения из папок, первый скрипт на Python и раздача кнопок команде через сетевую папку или git. С граблями по дороге и без C#." />
+  <meta name="keywords" content="pyrevit установка, pyrevit первые кнопки, revit api на python, pyrevit расширение, автоматизация revit, plugin revit python" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bim-pulse.ru/pyrevit-pervye-knopki.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="BIM Pulse Ufa" />
+  <meta property="og:title" content="pyRevit: ставим и делаем свои кнопки за вечер" />
+  <meta property="og:description" content="Установка pyRevit, структура расширения из папок, первый скрипт на Python и раздача кнопок команде через сетевую папку или git. С граблями по дороге и без C#." />
+  <meta property="og:url" content="https://bim-pulse.ru/pyrevit-pervye-knopki.html" />
+  <meta property="og:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <meta property="article:published_time" content="2026-08-19" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="pyRevit: ставим и делаем свои кнопки за вечер" />
+  <meta name="twitter:description" content="Установка pyRevit, структура расширения из папок, первый скрипт на Python и раздача кнопок команде через сетевую папку или git. С граблями по дороге и без C#." />
+  <meta name="twitter:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="article.css" />
+  <link rel="stylesheet" href="global.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "pyRevit: ставим и делаем свои кнопки за вечер", "description": "Установка pyRevit, структура расширения из папок, первый скрипт на Python и раздача кнопок команде через сетевую папку или git. С граблями по дороге и без C#.", "image": "https://bim-pulse.ru/bim-model-1.webp", "datePublished": "2026-08-19", "dateModified": "2026-08-19", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/pyrevit-pervye-knopki.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "pyRevit: ставим и делаем свои кнопки за вечер", "item": "https://bim-pulse.ru/pyrevit-pervye-knopki.html"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Сколько стоит pyRevit?", "acceptedAnswer": {"@type": "Answer", "text": "Нисколько. Открытый исходный код, бесплатен и для коммерческой работы. Деньги в этой теме уходят только на ваше время и на разработку своих инструментов."}}, {"@type": "Question", "name": "Что скажет служба безопасности?", "acceptedAnswer": {"@type": "Answer", "text": "Обычно ничего, если прийти к ним заранее. Установщик подписан, код открыт и лежит на GitHub, расширения читаются с вашего же сетевого диска. Конфликт возникает там, где надстройку ставят молча, а потом её находит аудит."}}, {"@type": "Question", "name": "Можно ли запускать Dynamo-графы кнопкой pyRevit?", "acceptedAnswer": {"@type": "Answer", "text": "Технически можно через API Dynamo, но связка хрупкая и ломается при обновлениях. Проще переписать логику графа на python: то, что в Dynamo занимает 30 нод, обычно укладывается в 40 строк кода и работает быстрее."}}, {"@type": "Question", "name": "Что будет при переходе на новую версию Revit?", "acceptedAnswer": {"@type": "Answer", "text": "Прогоняете установщик заново, он подцепляет свежую версию. Дальше проверяете свои кнопки на тестовой модели: код на python версий не боится, а вот методы Revit API иногда меняются."}}, {"@type": "Question", "name": "Dynamo теперь не нужен?", "acceptedAnswer": {"@type": "Answer", "text": "Нужен. Геометрию и всё, что удобно смотреть глазами по шагам, быстрее собрать графом. pyRevit выигрывает на логике, интерфейсе и скорости запуска. В командах, где живут оба инструмента, графы обычно остаются у проектировщиков, а кнопки пишет один человек на весь отдел."}}]}</script>
+<!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460','ym');
+    ym(109103460,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(109103460,'hit',location.href);
+    // Второй счётчик — в аккаунте аналитики портфеля (kpi1t). Первый заведён в другом
+    // Яндекс-аккаунте, поэтому Вебмастер не давал привязать его к сайту, а данные не
+    // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
+    ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(111661242,'hit',location.href);
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav">
+      <a href="services.html">Услуги</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ym(109103460,'reachGoal','telegram_click')">Telegram</a>
+  </header>
+  <main class="article-page section">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a> · <a href="blog.html">Блог</a> · <span>Automation</span>
+    </nav>
+    <article class="article-full">
+    <div class="meta"><span>Automation</span><span>19 августа 2026</span><span>1553 слов</span></div>
+    <h1>pyRevit: ставим и делаем свои кнопки за вечер</h1>
+    <p class="lead">Установка pyRevit, структура расширения из папок, первый скрипт на Python и раздача кнопок команде через сетевую папку или git. С граблями по дороге и без C#.</p>
+    <img class="article-cover" src="bim-model-1.webp" alt="pyRevit: ставим и делаем свои кнопки за вечер" onerror="this.src='bim-model-1.webp'" />
+    <p>Скриптов в Dynamo набралось два десятка. Половину запускают через Player, половину не запускают вообще, потому что искать их дольше, чем сделать руками. Хочется кнопку на ленте: нажал, отработало, поехали дальше.</p>
+    <p>pyRevit ровно про это. Бесплатный, открытый, ставится за 10 минут, кнопки делаются папками и файлами. Компилировать ничего не нужно, Visual Studio не нужен, C# не нужен. Вечера хватает на установку, три рабочие кнопки и раздачу их команде.</p>
+    <h2>Установка</h2>
+    <p>Идём на github.com/pyrevitlabs/pyRevit, в разделе Releases берём подписанный установщик последней стабильной версии ветки 4.8. Он поддерживает Revit с 2019 по 2025, включая нужные нам 2022, 2023 и 2024.</p>
+    <p>Ставится в две минуты. Установщик сам находит установленные Revit и подцепляется к ним. Открываем Revit: на ленте появилась вкладка <strong>pyRevit</strong> с полусотней готовых инструментов от сообщества. Уже ради них стоит поставить: там и поиск элементов по id, и сравнение моделей, и массовое переименование видов.</p>
+    <p>Что проверить сразу:</p>
+    <ul><li>вкладка не появилась - смотрите «Надстройки» в настройках Revit, надстройка могла быть заблокирована политикой безопасности;</li><li>Revit LT в пролёте, у него нет API для надстроек, и это не лечится;</li><li>корпоративный антивирус иногда съедает файлы расширений на сетевом диске, договоритесь об исключении заранее;</li><li>после обновления Revit до новой версии установщик нужно прогнать снова, иначе кнопки не появятся.</li></ul>
+    <p>Ставить лучше «для текущего пользователя», без прав администратора. На машинах в организациях это обычно единственный способ поставить что-то самому.</p>
+    <h2>Как устроено расширение</h2>
+    <p>Вся структура интерфейса - это папки с говорящими окончаниями. Никакого XML, никакой регистрации.</p>
+    <pre><code>MyTools.extension\
+    Отдел.tab\
+        Проверки.panel\
+            Пустые номера.pushbutton\
+                script.py
+                icon.png
+            Дубли марок.pushbutton\
+                script.py
+                icon.png
+        Выгрузки.panel\
+            Ведомость дверей.pushbutton\
+                script.py</code></pre>
+    <p>Читается так: расширение → вкладка на ленте → панель внутри вкладки → кнопка внутри панели. Имя папки становится подписью, <code>script.py</code> - тем, что выполнится по нажатию, <code>icon.png</code> - картинкой (png 96 на 96, прозрачный фон).</p>
+    <p>Кроме <code>pushbutton</code> есть <code>pulldown</code> (выпадающий список кнопок), <code>splitbutton</code>, <code>stack</code> (три мелкие кнопки в столбик), <code>smartbutton</code>. На первом вечере они не нужны.</p>
+    <p>Папку расширения кладём куда-нибудь, где её не снесёт: <code>C:\pyRevitExt\</code> или сразу на сетевой диск. Дальше в Revit: вкладка pyRevit → Settings → Custom Extension Directories → добавляем путь. Reload, и ваша вкладка на ленте.</p>
+    <h2>Первый скрипт</h2>
+    <p>Классическая первая задача: найти помещения с пустым номером и показать их списком, по которому можно кликнуть.</p>
+    <pre><code class="language-python"># -*- coding: utf-8 -*-
+__title__ = &quot;Пустые\nномера&quot;
+__doc__ = &quot;Показывает помещения без заполненного номера. Модель не меняет.&quot;
+
+from pyrevit import revit, DB, script
+
+doc = revit.doc
+out = script.get_output()
+
+rooms = DB.FilteredElementCollector(doc) \
+    .OfCategory(DB.BuiltInCategory.OST_Rooms) \
+    .WhereElementIsNotElementType() \
+    .ToElements()
+
+pustye = []
+for r in rooms:
+    nomer = r.get_Parameter(DB.BuiltInParameter.ROOM_NUMBER).AsString()
+    if not nomer or not nomer.strip():
+        pustye.append(r)
+
+out.print_md(&quot;## Помещений без номера: {}&quot;.format(len(pustye)))
+for r in pustye:
+    imya = r.get_Parameter(DB.BuiltInParameter.ROOM_NAME).AsString()
+    out.print_md(&quot;- {} {}&quot;.format(imya, out.linkify(r.Id)))</code></pre>
+    <p>Сохранили, нажали Reload на вкладке pyRevit, нажали свою кнопку. В окне вывода список помещений, и <strong>каждая строка кликабельна</strong>: клик выделяет элемент в модели. Это <code>linkify</code>, одна из вещей, ради которых стоит писать на pyRevit, а не собирать граф.</p>
+    <p>Разбор по строчкам:</p>
+    <ul><li><code>__title__</code> с <code>\n</code> переносит подпись на две строки, иначе кнопка растянется на пол-панели;</li><li><code>__doc__</code> становится всплывающей подсказкой, туда пишите, меняет ли скрипт модель;</li><li><code>revit.doc</code> - текущий документ, не надо доставать его из uiapp вручную;</li><li><code>FilteredElementCollector</code> - штатный способ собрать элементы через Revit API, работает быстрее переборов;</li><li><code>script.get_output()</code> даёт окно с поддержкой markdown, таблиц и ссылок.</li></ul>
+    <p>Запись в модель оборачивается в транзакцию:</p>
+    <pre><code class="language-python">with revit.Transaction(&quot;Заполнить номера&quot;):
+    for r in pustye:
+        r.get_Parameter(DB.BuiltInParameter.ROOM_NUMBER).Set(&quot;б/н&quot;)</code></pre>
+    <p>Забыли транзакцию - Revit выбросит исключение о запрете модификации вне транзакции. Открыли и не закрыли - получите повисшую транзакцию и «залипшую» модель. Конструкция <code>with</code> закрывает её сама, в том числе при ошибке.</p>
+    <h2>Диалоги за две строки</h2>
+    <p>Модуль <code>forms</code> закрывает всё, ради чего в Dynamo приходится изворачиваться.</p>
+    <pre><code class="language-python">from pyrevit import forms
+
+variant = forms.SelectFromList.show(
+    [&quot;Все помещения&quot;, &quot;Только активный вид&quot;],
+    title=&quot;Что обрабатываем&quot;,
+    button_name=&quot;Поехали&quot;)
+
+if not variant:
+    script.exit()      # пользователь закрыл окно - выходим тихо</code></pre>
+    <p>Есть готовые окна выбора уровней, видов, семейств, файлов, прогресс-бар и <code>forms.alert</code> с кнопками. На такое в Dynamo Player рассчитывать нельзя, там сценарий линейный.</p>
+    <h2>Раздача команде</h2>
+    <p>Два маршрута, выбирайте по размеру команды.</p>
+    <p><strong>Сетевая папка.</strong> Кладёте <code>MyTools.extension</code> на <code>\\server\BIM\pyrevit\</code>, каждый добавляет путь в Settings. Пять минут на человека, обновления прилетают всем сразу при следующем Reload. Минус: Revit стартует медленнее, а при недоступной сети кнопки просто исчезают.</p>
+    <p><strong>Git-репозиторий.</strong> pyRevit умеет подключать расширение как клон репозитория и обновлять его кнопкой Update. Правки катятся коммитами, история видна, откат в одну команду. Настраивается дольше, но на команде от пяти человек окупается за месяц.</p>
+    <div class="table-wrap"><table><thead><tr><th>Сколько людей</th><th>Что выбрать</th><th>Почему</th></tr></thead><tbody><tr><td>1-3</td><td>локальная папка</td><td>обновлять некого</td></tr><tr><td>4-10</td><td>сетевая папка</td><td>скорость важнее истории</td></tr><tr><td>10+</td><td>git-репозиторий</td><td>нужны версии и откат</td></tr></tbody></table></div>
+    <p>Отдельно про доверие. Первую кнопку команде давайте такую, которая <strong>ничего не меняет в модели</strong>: проверка, поиск, отчёт. Человек нажимает, видит пользу, ничем не рискует. После двух-трёх таких кнопок к пишущим относятся спокойно. В обратном порядке это не работает: одна испорченная модель, и к вашей вкладке больше не подойдут.</p>
+    <h2>Грабли</h2>
+    <p><strong>IronPython против CPython.</strong> По умолчанию скрипты идут на IronPython 2.7. Кириллица в нём требует <code># -<em>- coding: utf-8 -</em>-</code> в первой строке, иначе получите ошибку при первом же русском тексте. Нужен Python 3 с его библиотеками (requests, pandas) - первой строкой пишется <code>#! python3</code>, и скрипт исполняется другим движком. Смешивать их в одном расширении можно, но помнить надо.</p>
+    <p><strong>Reload не всё подхватывает.</strong> Правки в <code>script.py</code> подхватываются сразу, а новые папки-кнопки и переименования - только после Reload. Иногда требуется перезапуск Revit.</p>
+    <p><strong>Ошибка в скрипте роняет не Revit, а окно вывода.</strong> Это хорошая новость. Трейсбек показывается прямо в окне, с номером строки. Отладка идёт быстрее, чем в Dynamo, где ошибка прячется внутри жёлтой ноды.</p>
+    <p><strong>Revit API не прощает версий.</strong> Метод, работавший в 2022, в 2024 может быть переименован или помечен устаревшим. Перед переходом на новую версию прогоните все свои кнопки на тестовой модели. У меня из восьми скриптов при переезде с 2021 на 2023 сломался один, и то из-за изменения в работе с единицами измерения.</p>
+    <h2>Где pyRevit не подойдёт</h2>
+    <p>Он не заменяет полноценный плагин на C#. Тяжёлые вычисления на десятках тысяч элементов на IronPython идут заметно медленнее. Своя оконная форма со сложным интерфейсом, лицензирование, продажа инструмента наружу - всё это территория обычной надстройки. Разница подробно разобрана в сравнении <a href="revit-plugin-vs-dynamo.html">плагина и Dynamo</a>.</p>
+    <p>Не подойдёт он и там, где IT-политика запрещает сторонние надстройки. Спорить бесполезно, лучше заранее показать службе безопасности открытый код и подписанный установщик.</p>
+    <p>И не ждите, что кнопки сами по себе поменяют процессы. Инструмент ускоряет то, что уже устроено разумно. Если в модели бардак с параметрами, кнопка будет быстро и красиво обрабатывать бардак.</p>
+    <h2>Три трейсбека первого вечера</h2>
+    <p>Окно вывода pyRevit показывает ошибку полностью, с номером строки. Это приятнее жёлтых нод Dynamo, но читать всё равно надо уметь.</p>
+    <p><strong>«Autodesk.Revit.Exceptions.InvalidOperationException: Starting a transaction from an external application running outside of API context is not allowed.»</strong></p>
+    <p>Длинно, а смысл простой: вы пытаетесь менять модель без транзакции. Оберните запись в <code>with revit.Transaction("Название"):</code>. Название попадёт в список отмены Revit, поэтому пишите его по-русски и понятно: пользователь увидит эту строку, когда нажмёт Ctrl+Z.</p>
+    <p><strong>«SyntaxError: Non-ASCII character '\xd0' in file script.py on line 3, but no encoding declared.»</strong></p>
+    <p>Привет от IronPython 2.7. Первой строкой файла ставится <code># -<em>- coding: utf-8 -</em>-</code>, и проблема исчезает. Сам файл при этом должен быть сохранён в UTF-8: Блокнот Windows любит записать в другой кодировке, и тогда кириллица в кнопках превращается в кашу. Пишите скрипты в VS Code, там кодировка видна в строке состояния.</p>
+    <p><strong>«AttributeError: 'NoneType' object has no attribute 'AsString'.»</strong></p>
+    <p>Параметра у элемента нет, <code>LookupParameter</code> вернул <code>None</code>, а вы сразу дёрнули метод. На разнородной выборке это происходит постоянно: у одного семейства параметр есть, у другого нет. Проверка на <code>None</code> перед обращением стоит одну строку и экономит вечер.</p>
+    <p>Отдельная история без всякого трейсбека: <strong>кнопка не появилась на ленте</strong>. Проверьте окончания папок (<code>.extension</code>, <code>.tab</code>, <code>.panel</code>, <code>.pushbutton</code>, точка обязательна), наличие <code>script.py</code> внутри и путь в Custom Extension Directories. Помогает нажатие Reload, иногда требуется перезапуск Revit.</p>
+    <h2>Чек-лист перед раздачей команде</h2>
+    <ul><li>Все кнопки прогнаны на трёх моделях разного размера, включая тяжёлую.</li><li>В <code>__doc__</code> каждой кнопки написано, меняет ли она модель. Это единственный текст, который пользователь прочитает, наведя курсор.</li><li>Иконки нарисованы. Кнопка без картинки выглядит сломанной, и её не нажимают.</li><li>Скрипты, меняющие модель, лежат на отдельной панели, визуально отделённой от проверок.</li><li>Проверено на чужой машине, а не только на вашей: пути, права на сетевую папку, версия Revit.</li><li>Есть человек номер два, который знает, где лежит расширение и как его откатить.</li><li>Расширение не грузится с диска, который отваливается при работе из дома через VPN.</li></ul>
+    <h2>Короткие ответы на частые вопросы</h2>
+    <p><strong>Сколько стоит pyRevit?</strong> Нисколько. Открытый исходный код, бесплатен и для коммерческой работы. Деньги в этой теме уходят только на ваше время и на разработку своих инструментов.</p>
+    <p><strong>Что скажет служба безопасности?</strong> Обычно ничего, если прийти к ним заранее. Установщик подписан, код открыт и лежит на GitHub, расширения читаются с вашего же сетевого диска. Конфликт возникает там, где надстройку ставят молча, а потом её находит аудит.</p>
+    <p><strong>Можно ли запускать Dynamo-графы кнопкой pyRevit?</strong> Технически можно через API Dynamo, но связка хрупкая и ломается при обновлениях. Проще переписать логику графа на python: то, что в Dynamo занимает 30 нод, обычно укладывается в 40 строк кода и работает быстрее.</p>
+    <p><strong>Что будет при переходе на новую версию Revit?</strong> Прогоняете установщик заново, он подцепляет свежую версию. Дальше проверяете свои кнопки на тестовой модели: код на python версий не боится, а вот методы Revit API иногда меняются.</p>
+    <p><strong>Dynamo теперь не нужен?</strong> Нужен. Геометрию и всё, что удобно смотреть глазами по шагам, быстрее собрать графом. pyRevit выигрывает на логике, интерфейсе и скорости запуска. В командах, где живут оба инструмента, графы обычно остаются у проектировщиков, а кнопки пишет один человек на весь отдел.</p>
+    <h2>Что сделать сегодня</h2>
+    <p>Поставьте pyRevit, создайте папку расширения с одной кнопкой-проверкой и скопируйте туда скрипт выше. Полчаса от нуля до работающей кнопки, из них 20 минут уйдёт на угадывание правильных имён папок.</p>
+    <p>Дальше по маршруту: если ещё не собирали графы, посмотрите <a href="dynamo-pervyy-skript.html">разбор первого скрипта в Dynamo</a> - логика та же, синтаксис проще. Хорошее содержимое для первых кнопок берётся из автозаполнения параметров и выгрузок в Excel. А про то, как вообще приживаются инструменты в команде, написано в статье про <a href="dynamo-player-dlya-komandy.html">Dynamo Player</a>.</p>
+    <p>Нужен набор кнопок под ваши регламенты, с проверками модели по вашему BIM-стандарту? Напишите в <a href="https://t.me/bim_pulse_ufa">Telegram</a> или через форму на <a href="contacts.html">странице контактов</a>, обсудим объём. Что мы делаем на таких задачах, коротко в <a href="services.html">услугах</a>.</p>
+    <div class="article-cta">
+      <h3>Нужен похожий BIM/AI процесс?</h3>
+      <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
+      <a class="btn primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Telegram</a>
+      <a class="btn secondary" href="contacts.html">Оставить заявку</a>
+    </div>
+    <aside class="article-related">
+      <h3>Читайте дальше</h3>
+      <ul><li><a href="dynamo-player-dlya-komandy.html">Dynamo Player: как отдать скрипт команде и не пожалеть</a></li><li><a href="dynamo-python-scenarios.html">Dynamo и Python: пять сценариев, которые экономят часы</a></li><li><a href="bim-templates-automation.html">Шаблон Revit: фундамент автоматизации и цена его отсутствия</a></li></ul>
+    </aside>
+    </article>
+  </main>
+  <footer class="footer">
+    <span>© BIM Pulse Ufa</span>
+    <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
+  </footer>
+</body>
+</html>
