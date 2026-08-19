@@ -6,7 +6,7 @@ window.NEWS = [
     "date": "19 августа 2026",
     "title": "pyRevit: ставим и делаем свои кнопки за вечер",
     "excerpt": "Установка pyRevit, структура расширения из папок, первый скрипт на Python и раздача кнопок команде через сетевую папку или git. С граблями по дороге и без C#.",
-    "image": "bim-model-1.webp"
+    "image": "bim-case-2.webp"
   },
   {
     "slug": "navisworks-proverka-kolliziy",
@@ -14,7 +14,7 @@ window.NEWS = [
     "date": "18 августа 2026",
     "title": "Проверка коллизий в Navisworks: от загрузки до отчёта",
     "excerpt": "Рабочий процесс по шагам: подготовка NWC, наборы поиска, правила Clash Detective, допуски, чистка ложных срабатываний, группировка и выгрузка отчёта смежникам.",
-    "image": "bim-case-1.webp"
+    "image": "bim-model-1.webp"
   },
   {
     "slug": "ifc-export-iz-revit",
@@ -46,7 +46,7 @@ window.NEWS = [
     "date": "13 августа 2026",
     "title": "CDE простыми словами: зачем она, если есть общая папка",
     "excerpt": "Среда общих данных без теории: статусы WIP, Shared, Published, права доступа, версии и счёт потерь от работы в обычной сетевой папке. Структура папок и права.",
-    "image": "Bim1.webp"
+    "image": "bim-model-2.webp"
   },
   {
     "slug": "ai-review-comments",
