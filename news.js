@@ -1,12 +1,20 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "revit-specifikacii-v-excel",
+    "category": "Revit",
+    "date": "22 августа 2026",
+    "title": "Спецификации из Revit в Excel и обратно: три способа",
+    "excerpt": "Встроенный экспорт, Dynamo и плагины: сравниваем по времени, деньгам и риску. Где теряются данные и как загрузить правки обратно в Revit, не сломав модель.",
+    "image": "bim-model-1.webp"
+  },
+  {
     "slug": "revit-avtozapolnenie-parametrov",
     "category": "Revit",
     "date": "21 августа 2026",
     "title": "Как автоматически заполнить параметры в Revit",
     "excerpt": "Общие, типовые и параметры экземпляра: чем отличаются при записи. Скрипт Dynamo для массового заполнения, проверка результата и список того, что записать нельзя.",
-    "image": "bim-model-1.webp"
+    "image": "bim-case-1.webp"
   },
   {
     "slug": "reglament-bim-koordinacii",
@@ -22,7 +30,7 @@ window.NEWS = [
     "date": "19 августа 2026",
     "title": "pyRevit: ставим и делаем свои кнопки за вечер",
     "excerpt": "Установка pyRevit, структура расширения из папок, первый скрипт на Python и раздача кнопок команде через сетевую папку или git. С граблями по дороге и без C#.",
-    "image": "bim-case-2.webp"
+    "image": "Bim2.webp"
   },
   {
     "slug": "navisworks-proverka-kolliziy",
@@ -30,7 +38,7 @@ window.NEWS = [
     "date": "18 августа 2026",
     "title": "Проверка коллизий в Navisworks: от загрузки до отчёта",
     "excerpt": "Рабочий процесс по шагам: подготовка NWC, наборы поиска, правила Clash Detective, допуски, чистка ложных срабатываний, группировка и выгрузка отчёта смежникам.",
-    "image": "bim-model-2.webp"
+    "image": "Bim.webp"
   },
   {
     "slug": "ifc-export-iz-revit",
@@ -46,7 +54,7 @@ window.NEWS = [
     "date": "16 августа 2026",
     "title": "Dynamo Player: как отдать скрипт команде и не пожалеть",
     "excerpt": "Готовим граф к передаче: входные параметры, папки на сервере, описание и иконка. Плюс список причин, по которым скрипты в командах не приживаются, и что делать.",
-    "image": "Bim1.webp"
+    "image": "Bim.webp"
   },
   {
     "slug": "dynamo-pervyy-skript",
@@ -62,7 +70,7 @@ window.NEWS = [
     "date": "13 августа 2026",
     "title": "CDE простыми словами: зачем она, если есть общая папка",
     "excerpt": "Среда общих данных без теории: статусы WIP, Shared, Published, права доступа, версии и счёт потерь от работы в обычной сетевой папке. Структура папок и права.",
-    "image": "bim-model-1.webp"
+    "image": "bim-case-2.webp"
   },
   {
     "slug": "ai-review-comments",
