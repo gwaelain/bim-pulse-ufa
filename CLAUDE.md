@@ -11,15 +11,31 @@ DNS ведёт на **наш сервер 5.188.27.237** (NS у Cloudflare, A �
 раздаёт **Caddy**: `bim-pulse.ru { root * /srv/bim-pulse-ufa }`,
 том `/opt/static:/srv:ro` — то есть файлы лежат в `/opt/static/bim-pulse-ufa`.
 
-**Пуш в GitHub сайт НЕ обновляет.** Деплой — скриптом с локальной машины:
+**Сайт обновляется из гита** (с 15.08.2026): на сервере лежит клон репозитория
+`/opt/drip/bim-pulse-ufa`, скрипт `/opt/drip/bimpulse-publish.sh` по cron (`5 7` ежедневно
+и `*/10` — подхват свежих пушей) делает `git fetch` → сборку → `rsync` в
+`/opt/static/bim-pulse-ufa` → IndexNow → коммит и пуш обратно. Доступ к приватному
+репозиторию — по deploy-ключу (`/root/.ssh/bimpulse_deploy`, SSH через `ssh.github.com:443`,
+алиас `github-bimpulse` в `/root/.ssh/config`).
 
-```powershell
-e:\Project\infra\scripts\deploy-bim-pulse.ps1        # залить + пересобрать
-e:\Project\infra\scripts\deploy-bim-pulse.ps1 -SkipDrip
-```
+Ручная заливка `infra\scripts\deploy-bim-pulse.ps1` (pscp) — запасной путь, если GitHub
+недоступен; после неё всё равно нужен пуш, иначе сервер затрёт правки своей версией.
 
-(Раньше на сервере был cron `git pull` каждые 2 минуты — он падал с TLS-ошибкой,
-и сайт полтора месяца стоял на старой версии. Cron заменён на ежедневный `drip.sh`.)
+## ⚠️ Правило: работаем только через git, и всегда сначала подтягиваем
+
+`origin/main` регулярно уходит вперёд твоей копии — сервер сам публикует статьи и пушит
+результат. Правка «вслепую» кончается конфликтом при пуше или работой со старыми данными
+(типичный симптом: в `published.json` статьи нет, а на сайте она уже открывается).
+
+**Перед любой правкой:** `infra\scripts\sync-saity.ps1` — подтянет оба сайта
+(репозиторий с незакоммиченными правками пропустит, чтобы ничего не потерять).
+Вручную: `git fetch origin && git reset --hard origin/main`.
+
+**Как выкатывать:** правишь исходники → коммит → `git push`. Через 10 минут сервер подхватит сам.
+
+**Руками не редактировать** (перезапишется при сборке): `<slug>.html`, `news.js`,
+`sitemap.xml`, `tools/published.json`, блоки между `<!-- articles:auto -->`,
+`<!-- services:auto -->`, `<!-- latest:auto -->`.
 
 ## Статьи: единственный источник — markdown
 
@@ -48,10 +64,8 @@ updated_at: 2026-08-13      # необязательно, идёт в lastmod и
 `news.js` теперь **генерируется** — руками не править, как и `<slug>.html`.
 
 **Капельная публикация:** на сервере крутится
-`5 7 * * * /opt/static/bim-pulse-ufa/tools/drip.sh` — раз в сутки пересобирает сайт,
-публикует статьи, у которых наступил `publish_at`, и пингует IndexNow.
-Поэтому сервер должен получать не только html, но и `content/` + `tools/`
-(deploy-скрипт это делает).
+`/opt/drip/bimpulse-publish.sh` — тянет свежий код из гита, публикует статьи,
+у которых наступил `publish_at`, раскладывает статику и пингует IndexNow.
 
 Очередь публикаций заполняется из черновиков:
 `python e:\Project\_content\tools\zapolnit-ochered.py --projekt bim-pulse --start 2026-08-14`
