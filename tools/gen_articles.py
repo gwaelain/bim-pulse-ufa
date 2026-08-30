@@ -20,6 +20,7 @@
 """
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 import re
@@ -63,7 +64,11 @@ def load() -> list[dict]:
         meta.setdefault("description", text[:157].rsplit(" ", 1)[0] + "…")
         meta["_body"] = body
         meta["_words"] = len(text.split())
-        meta.setdefault("image", COVERS[abs(hash(meta["slug"])) % len(COVERS)])
+        # hash() в Python рандомизируется при каждом запуске, поэтому обложка менялась
+        # на каждой сборке: сервер собирает раз в 10 минут, видел изменившиеся страницы,
+        # коммитил и пушил — сотня пустых коммитов в сутки. Берём устойчивый хеш.
+        digest = hashlib.md5(meta["slug"].encode("utf-8")).hexdigest()
+        meta.setdefault("image", COVERS[int(digest, 16) % len(COVERS)])
         arts.append(meta)
     arts.sort(key=lambda a: (a["publish_at"], a["slug"]), reverse=True)
     return arts
