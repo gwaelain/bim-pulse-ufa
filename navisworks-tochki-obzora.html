@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Точки обзора Navisworks: не теряем выделение коллизий — BIM Pulse Ufa</title>
+  <meta name="description" content="Почему при экспорте точек обзора из Clash Detective пропадает подсветка конфликтов, как сохранять состояние вида и передавать viewpoints смежникам." />
+  <meta name="keywords" content="точки обзора navisworks, viewpoints navisworks, экспорт точек обзора, пропадает выделение коллизий, clash detective viewpoints, сохранить вид в navisworks, передача коллизий смежникам, navisworks экспорт xml" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bim-pulse.ru/navisworks-tochki-obzora.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="BIM Pulse Ufa" />
+  <meta property="og:title" content="Точки обзора Navisworks: не теряем выделение коллизий" />
+  <meta property="og:description" content="Почему при экспорте точек обзора из Clash Detective пропадает подсветка конфликтов, как сохранять состояние вида и передавать viewpoints смежникам." />
+  <meta property="og:url" content="https://bim-pulse.ru/navisworks-tochki-obzora.html" />
+  <meta property="og:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <meta property="article:published_time" content="2026-08-30" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Точки обзора Navisworks: не теряем выделение коллизий" />
+  <meta name="twitter:description" content="Почему при экспорте точек обзора из Clash Detective пропадает подсветка конфликтов, как сохранять состояние вида и передавать viewpoints смежникам." />
+  <meta name="twitter:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="article.css" />
+  <link rel="stylesheet" href="global.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Точки обзора Navisworks: не теряем выделение коллизий", "description": "Почему при экспорте точек обзора из Clash Detective пропадает подсветка конфликтов, как сохранять состояние вида и передавать viewpoints смежникам.", "image": "https://bim-pulse.ru/bim-case-2.webp", "datePublished": "2026-08-30", "dateModified": "2026-08-30", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/navisworks-tochki-obzora.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Точки обзора Navisworks: не теряем выделение коллизий", "item": "https://bim-pulse.ru/navisworks-tochki-obzora.html"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Почему точка обзора открывается, а модель серая?", "acceptedAnswer": {"@type": "Answer", "text": "Скорее всего, у получателя NWF без исходных NWC. Проверяется мгновенно: если в дереве Selection Tree файлы помечены как недоступные, отправляйте NWD."}}, {"@type": "Question", "name": "Можно ли сохранить выделение элементов в Navisworks?", "acceptedAnswer": {"@type": "Answer", "text": "Как выделение — нет. Сохраните элементы в Selection Set или Search Set (Home → Sets), набор переживёт и перезапуск, и перевыгрузку моделей."}}, {"@type": "Question", "name": "Сколько точек обзора отдавать смежнику за раз?", "acceptedAnswer": {"@type": "Answer", "text": "Мы стараемся не выходить за 30-40 на письмо. Больше означает, что список не разобран и не сгруппирован, а вместо работы отправлена свалка."}}, {"@type": "Question", "name": "Как перенести точки в новый файл сборки?", "acceptedAnswer": {"@type": "Answer", "text": "Output → Export Data → Viewpoints в старом файле, Import Viewpoints в новом. Состав и порядок подключённых моделей должны совпадать, иначе скрытия встанут не на те элементы."}}, {"@type": "Question", "name": "Почему после Refresh точки показывают не то?", "acceptedAnswer": {"@type": "Answer", "text": "Модели обновились, идентификаторы элементов изменились. Проверьте, что в экспорте NWC включён Convert element Ids, и пересоздайте отчёт As Viewpoints."}}]}</script>
+<!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460','ym');
+    ym(109103460,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(109103460,'hit',location.href);
+    // Второй счётчик — в аккаунте аналитики портфеля (kpi1t). Первый заведён в другом
+    // Яндекс-аккаунте, поэтому Вебмастер не давал привязать его к сайту, а данные не
+    // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
+    ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(111661242,'hit',location.href);
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav">
+      <a href="services.html">Услуги</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ym(109103460,'reachGoal','telegram_click')">Telegram</a>
+  </header>
+  <main class="article-page section">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a> · <a href="blog.html">Блог</a> · <span>Coordination</span>
+    </nav>
+    <article class="article-full">
+    <div class="meta"><span>Coordination</span><span>30 августа 2026</span><span>1424 слов</span></div>
+    <h1>Точки обзора Navisworks: не теряем выделение коллизий</h1>
+    <p class="lead">Почему при экспорте точек обзора из Clash Detective пропадает подсветка конфликтов, как сохранять состояние вида и передавать viewpoints смежникам.</p>
+    <img class="article-cover" src="bim-case-2.webp" alt="Точки обзора Navisworks: не теряем выделение коллизий" onerror="this.src='bim-model-1.webp'" />
+    <p>Координатор отправил в раздел ОВ 34 точки обзора по коллизиям. Через час пришёл ответ: «Открыли, камера встаёт правильно, а смотреть на что? Всё серое». Красное и зелёное, что он видел у себя на экране, до получателя не доехало.</p>
+    <p>Это происходит на каждом втором объекте, и причина почти всегда одна из четырёх. Разберём, что Navisworks кладёт в точку обзора, чего не кладёт никогда, и какие две галочки закрывают вопрос за минуту.</p>
+    <h2>Точка обзора не хранит выделение</h2>
+    <p>Начнём с недоразумения, из которого растёт всё остальное. Viewpoint не запоминает выбранные элементы. Ни в 2022, ни в 2024, ни в одной версии до них. Выделение (Selection) существует только в текущей сессии и умирает при переключении на соседнюю точку.</p>
+    <p>Что точка обзора хранит на самом деле:</p>
+    <ul><li>положение камеры, угол поля зрения, тип проекции, режим навигации;</li><li>секущие плоскости, если включено Sectioning;</li><li>скрытые и «обязательные» элементы (Hide / Required) — но только если разрешено сохранять этот атрибут;</li><li>переопределение материала и толщины линий — тоже по разрешению;</li><li>редлайны, теги и комментарии, привязанные к этой точке;</li><li>настройки освещения и режима отображения.</li></ul>
+    <p>Отсюда правило, которое экономит часы: если получатель должен увидеть две конкретные трубы, их надо не выделять, а фиксировать. Цветом и скрытием остального.</p>
+    <h2>Две галочки в настройках</h2>
+    <p>File → Options → Interface → <strong>Viewpoint Defaults</strong>. Три чекбокса:</p>
+    <ul><li><strong>Save Hide/Required Attributes</strong> — сохранять, что было скрыто;</li><li><strong>Override Material</strong> — сохранять цветовое переопределение;</li><li><strong>Override Line Thickness</strong> — толщину линий, нужна редко.</li></ul>
+    <p>По умолчанию первые две выключены. Именно поэтому «у меня всё видно, а у смежника серо»: точка сохранила камеру и ничего больше.</p>
+    <p>Ловушка в слове Defaults. Настройки применяются к <strong>новым</strong> точкам, уже созданные они не чинят. Если у вас 34 точки без атрибутов, включение галочек ничего не изменит, придётся пересоздавать. Для одиночной точки есть быстрый путь: правой кнопкой по ней в окне Saved Viewpoints → Edit → блок Saved Attributes, там те же чекбоксы.</p>
+    <p>Настройки живут в профиле пользователя, а не в файле. Значит, у каждого в команде они свои. Внизу окна Options Editor есть кнопка Export: выгружаете .xml, кладёте в папку проекта, коллеги делают Import. Пять минут один раз за проект.</p>
+    <h2>Правильный маршрут из Clash Detective</h2>
+    <p>Порядок действий обратный тому, который кажется логичным. Сначала настраивается показ, и только потом пишется отчёт.</p>
+    <p><strong>Шаг 1.</strong> Clash Detective → вкладка Results → блок Display Settings. Highlighting: Item 1 красный, Item 2 зелёный, галка Highlight all clashes выключена. Isolation: для передачи наружу лучше Hide Other, а не Dim Other — на затемнённой модели половина мониторов не покажет разницы. Auto-reveal оставляем включённым, он убирает то, что заслоняет конфликт.</p>
+    <p><strong>Шаг 2.</strong> Прокликайте три-четыре результата и убедитесь, что картинка читается. Проверять надо именно сейчас, а не после экспорта.</p>
+    <p><strong>Шаг 3.</strong> Вкладка Report. Report Type — Current test или All tests. Report Format — <strong>As Viewpoints</strong>. Кнопка Write Report.</p>
+    <p>В окне Saved Viewpoints (View → Windows → Saved Viewpoints) появится папка с именем теста и по точке на каждый конфликт. Если результатов больше сотни, ставьте Include Clashes = Group headers only, иначе получите папку на 400 позиций, по которой никто не пройдёт.</p>
+    <p>Пересоздавать отчёт после смены настроек надо с удалением старой папки. Navisworks не перезаписывает точки, а добавляет вторую пачку с теми же именами.</p>
+    <p>Как выстроить сам процесс проверки до этого шага, разобрано отдельно: <a href="navisworks-proverka-kolliziy.html">проверка коллизий в Navisworks</a>.</p>
+    <h2>Четыре причины, по которым подсветка слетает</h2>
+    <p><strong>Галочки не стояли в момент создания.</strong> Самый частый случай, разобран выше. Лечение — включить и написать отчёт заново.</p>
+    <p><strong>В экспортёре Revit выключен Convert element Ids.</strong> Точки ссылаются на элементы по идентификаторам. Перевыгрузили раздел, идентификаторы поехали, привязка порвалась. Внешне это выглядит так: камера на месте, а модель показана целиком, без скрытий и цвета. Галка живёт в диалоге экспорта NWC («Надстройки» → External Tools → Navisworks → Navisworks Settings).</p>
+    <p><strong>Изменился состав NWF.</strong> Скрытые элементы хранятся ссылкой на путь в дереве модели. Вставили в сборку ещё один NWC не в конец, а в середину — пути сдвинулись на позицию, и точки начали прятать не то. Правило простое: новые файлы всегда добавляются в конец списка, порядок Append за проект не меняется.</p>
+    <p><strong>Отправили NWF вместо NWD.</strong> NWF — это ссылки на исходные NWC весом в килобайты. У получателя этих NWC нет, он открывает пустоту с идеально настроенными камерами. Наружу всегда уходит NWD: Output → Publish, там же ставится дата истечения и пароль, если нужно.</p>
+    <h2>Экспорт в XML и что отдавать смежникам</h2>
+    <p>Output → Export Data → <strong>Viewpoints</strong>. На выходе XML: камеры, имена, комментарии, редлайны, ссылки на скрытые элементы. Импорт — правой кнопкой по пустому месту в окне Saved Viewpoints → Import Viewpoints.</p>
+    <p>XML нужен в трёх ситуациях: перенос точек в другую сборку, передача коллеге, у которого своя NWF, и переезд между версиями Navisworks. Приятный побочный эффект — файл текстовый, и массовое переименование точек делается поиском с заменой за минуту вместо получаса кликов.</p>
+    <p>Что кому отдавать по опыту:</p>
+    <div class="table-wrap"><table><thead><tr><th>Получатель</th><th>Формат</th><th>Почему</th></tr></thead><tbody><tr><td>Руководитель проекта</td><td>NWD</td><td>открывается в бесплатном Freedom, ничего настраивать не надо</td></tr><tr><td>Координатор смежников</td><td>XML + NWD</td><td>точки ложатся в его сборку</td></tr><tr><td>Инженер в Revit</td><td>BCF (через плагин)</td><td>открывает пункт сразу в своей модели</td></tr><tr><td>Заказчик</td><td>HTML-отчёт</td><td>не будет ставить Navisworks, и не должен</td></tr></tbody></table></div>
+    <p>BCF из коробки Navisworks не умеет, нужен плагин вроде BCF Manager или BIMcollab. Если смежники сидят в Revit и ArchiCAD, этот плагин окупается за первую неделю: человек нажимает пункт в списке и оказывается в нужном месте своей модели, а не ищет ось 7 по описанию из письма.</p>
+    <h2>Перенос между версиями</h2>
+    <p>Navisworks не открывает файлы более новых версий. NWD, сохранённый в 2024, в 2022 не откроется, и обходного пути нет. Поэтому на проекте держат одну версию у всех, а не «у кого какая стоит».</p>
+    <p>Точки обзора этого ограничения не знают. XML читается и вперёд, и назад, и это единственный надёжный способ перетащить накопленную работу при переходе на новую версию. Перед обновлением всей команды выгрузите точки по каждому активному объекту, это займёт десять минут и однажды спасёт неделю.</p>
+    <p>Свойство Camera → Focal Length при переносе иногда съезжает, если в файле-приёмнике другой тип проекции. Проверяйте первые три точки после импорта, дальше можно доверять.</p>
+    <h2>Порядок, который работает</h2>
+    <ol><li>Включить Save Hide/Required Attributes и Override Material до создания первой точки.</li><li>Выгрузить настройки Options в .xml и раздать команде.</li><li>Настроить Display Settings в Results, проверить на трёх конфликтах глазами.</li><li>Написать отчёт As Viewpoints, сгруппировав результаты.</li><li>Опубликовать NWD, рядом положить XML точек.</li><li>В письме указать дату прогона и версии моделей.</li></ol>
+    <p>Шесть пунктов, минут пятнадцать. Без них переписка по коллизиям превращается в уточнение, что именно имел в виду отправитель.</p>
+    <h2>Чего от точек обзора ждать не надо</h2>
+    <p>Они не обновляются вместе с моделью. Геометрию подвинули, камера осталась смотреть в пустое место. Точки по закрытым конфликтам надо чистить, иначе к третьему прогону в папке будет вдвое больше мусора, чем дела.</p>
+    <p>Они не хранят выделение, и это не лечится настройками. Любой совет из интернета вида «сохрани выделение в viewpoint» описывает то, чего в программе нет. Работает связка: набор поиска для повторяемости, скрытие лишнего и цвет для наглядности.</p>
+    <p>Цвет привязан к элементам, а не к картинке. После перевыгрузки раздела с новыми идентификаторами он не вернётся сам, точки придётся пересоздать. На активной стадии проще принять это как данность и генерировать точки заново после каждого прогона, а не чинить старые.</p>
+    <p>Freedom показывает чужие точки, но сохранить свои в нём некуда: он просмотрщик. Если смежник должен отвечать точками, ему нужен Manage или маршрут через BCF.</p>
+    <h2>Что спрашивают чаще всего</h2>
+    <p><strong>Почему точка обзора открывается, а модель серая?</strong> Скорее всего, у получателя NWF без исходных NWC. Проверяется мгновенно: если в дереве Selection Tree файлы помечены как недоступные, отправляйте NWD.</p>
+    <p><strong>Можно ли сохранить выделение элементов в Navisworks?</strong> Как выделение — нет. Сохраните элементы в Selection Set или Search Set (Home → Sets), набор переживёт и перезапуск, и перевыгрузку моделей.</p>
+    <p><strong>Сколько точек обзора отдавать смежнику за раз?</strong> Мы стараемся не выходить за 30-40 на письмо. Больше означает, что список не разобран и не сгруппирован, а вместо работы отправлена свалка.</p>
+    <p><strong>Как перенести точки в новый файл сборки?</strong> Output → Export Data → Viewpoints в старом файле, Import Viewpoints в новом. Состав и порядок подключённых моделей должны совпадать, иначе скрытия встанут не на те элементы.</p>
+    <p><strong>Почему после Refresh точки показывают не то?</strong> Модели обновились, идентификаторы элементов изменились. Проверьте, что в экспорте NWC включён Convert element Ids, и пересоздайте отчёт As Viewpoints.</p>
+    <h2>С чего начать</h2>
+    <p>Откройте текущую сборку и загляните в Viewpoint Defaults. Если галочки выключены, вы уже неделями отправляете смежникам камеры без содержания.</p>
+    <p>Дальше по маршруту: наладить сам цикл разбора коллизий помогает <a href="clash-detection-workflow.html">рабочий процесс clash detection</a>, а поставить проверки на поток — автоматизация проверки моделей.</p>
+    <p>Если хочется, чтобы это настроил кто-то один раз и для всей команды, напишите в <a href="https://t.me/bim_pulse_ufa">Telegram</a> или через <a href="contacts.html">контакты</a>. Посмотрим вашу сборку и скажем, что чинится за день, а что требует правки регламента обмена.</p>
+    <div class="article-cta">
+      <h3>Нужен похожий BIM/AI процесс?</h3>
+      <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
+      <a class="btn primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Telegram</a>
+      <a class="btn secondary" href="contacts.html">Оставить заявку</a>
+    </div>
+    <aside class="article-related">
+      <h3>Читайте дальше</h3>
+      <ul><li><a href="reglament-bim-koordinacii.html">Регламент BIM-координации: чтобы встречи работали</a></li><li><a href="navisworks-proverka-kolliziy.html">Проверка коллизий в Navisworks: от загрузки до отчёта</a></li><li><a href="coordination-federated-model.html">Сводная модель: как собирать и кто за неё отвечает</a></li></ul>
+    </aside>
+    </article>
+  </main>
+  <footer class="footer">
+    <span>© BIM Pulse Ufa</span>
+    <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
+  </footer>
+</body>
+</html>
