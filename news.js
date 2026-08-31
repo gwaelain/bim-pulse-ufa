@@ -1,6 +1,14 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "navisworks-matrica-kolliziy",
+    "category": "Coordination",
+    "date": "31 августа 2026",
+    "title": "Матрица коллизий в Navisworks: настроить один раз",
+    "excerpt": "Как превратить матрицу пересечений разделов в наборы поиска и тесты Clash Detective: допуски по типам конфликтов, батч-прогон тестов и шаблон NWF.",
+    "image": "Bim2.webp"
+  },
+  {
     "slug": "navisworks-tochki-obzora",
     "category": "Coordination",
     "date": "30 августа 2026",
