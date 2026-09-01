@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamo и числа: AsDouble, футы и почему размеры не сходятся — BIM Pulse Ufa</title>
+  <meta name="description" content="AsDouble возвращает футы, AsValueString — строку по настройкам проекта. Разбираем внутренние единицы Revit, UnitTypeId, округление и выгрузку размеров в мм." />
+  <meta name="keywords" content="dynamo asdouble, asvaluestring revit, внутренние единицы revit, футы в revit api, unittypeid revit, конвертация в миллиметры dynamo, revit api python единицы, выгрузка размеров из revit" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bim-pulse.ru/dynamo-chisla-i-edinicy.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="BIM Pulse Ufa" />
+  <meta property="og:title" content="Dynamo и числа: AsDouble, футы и почему размеры не сходятся" />
+  <meta property="og:description" content="AsDouble возвращает футы, AsValueString — строку по настройкам проекта. Разбираем внутренние единицы Revit, UnitTypeId, округление и выгрузку размеров в мм." />
+  <meta property="og:url" content="https://bim-pulse.ru/dynamo-chisla-i-edinicy.html" />
+  <meta property="og:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <meta property="article:published_time" content="2026-09-01" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dynamo и числа: AsDouble, футы и почему размеры не сходятся" />
+  <meta name="twitter:description" content="AsDouble возвращает футы, AsValueString — строку по настройкам проекта. Разбираем внутренние единицы Revit, UnitTypeId, округление и выгрузку размеров в мм." />
+  <meta name="twitter:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="article.css" />
+  <link rel="stylesheet" href="global.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Dynamo и числа: AsDouble, футы и почему размеры не сходятся", "description": "AsDouble возвращает футы, AsValueString — строку по настройкам проекта. Разбираем внутренние единицы Revit, UnitTypeId, округление и выгрузку размеров в мм.", "image": "https://bim-pulse.ru/bim-case-2.webp", "datePublished": "2026-09-01", "dateModified": "2026-09-01", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/dynamo-chisla-i-edinicy.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Dynamo и числа: AsDouble, футы и почему размеры не сходятся", "item": "https://bim-pulse.ru/dynamo-chisla-i-edinicy.html"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Почему AsDouble возвращает 9.84 вместо 3000?", "acceptedAnswer": {"@type": "Answer", "text": "Потому что внутренние единицы Revit — футы. 3000 мм / 304.8 = 9.8425. Конвертируйте через UnitUtils.ConvertFromInternalUnits."}}, {"@type": "Question", "name": "Чем AsValueString отличается от AsDouble?", "acceptedAnswer": {"@type": "Answer", "text": "Первый отдаёт строку в единицах проекта и годится для показа человеку, второй — число во внутренних единицах и годится для расчётов."}}, {"@type": "Question", "name": "Как узнать, в каких единицах показан параметр?", "acceptedAnswer": {"@type": "Answer", "text": "doc.GetUnits().GetFormatOptions(SpecTypeId.Length).GetUnitTypeId() вернёт текущую настройку длины для документа."}}, {"@type": "Question", "name": "Работает ли старый код с DisplayUnitType?", "acceptedAnswer": {"@type": "Answer", "text": "В Revit 2020 и раньше да, начиная с 2022 нет. Заменяется на UnitTypeId без изменения остальной логики."}}, {"@type": "Question", "name": "Почему сумма длин не совпадает со спецификацией Revit?", "acceptedAnswer": {"@type": "Answer", "text": "Чаще всего из-за раннего округления в скрипте. Складывайте во внутренних единицах, округляйте один раз на выводе."}}]}</script>
+<!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460','ym');
+    ym(109103460,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(109103460,'hit',location.href);
+    // Второй счётчик — в аккаунте аналитики портфеля (kpi1t). Первый заведён в другом
+    // Яндекс-аккаунте, поэтому Вебмастер не давал привязать его к сайту, а данные не
+    // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
+    ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(111661242,'hit',location.href);
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav">
+      <a href="services.html">Услуги</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ym(109103460,'reachGoal','telegram_click')">Telegram</a>
+  </header>
+  <main class="article-page section">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a> · <a href="blog.html">Блог</a> · <span>Automation</span>
+    </nav>
+    <article class="article-full">
+    <div class="meta"><span>Automation</span><span>01 сентября 2026</span><span>1316 слов</span></div>
+    <h1>Dynamo и числа: AsDouble, футы и почему размеры не сходятся</h1>
+    <p class="lead">AsDouble возвращает футы, AsValueString — строку по настройкам проекта. Разбираем внутренние единицы Revit, UnitTypeId, округление и выгрузку размеров в мм.</p>
+    <img class="article-cover" src="bim-case-2.webp" alt="Dynamo и числа: AsDouble, футы и почему размеры не сходятся" onerror="this.src='bim-model-1.webp'" />
+    <p>В модели дверь шириной 3000. Скрипт выводит 9.842519685039369. Ошибки нет, всё честно: Revit хранит длины в футах, а 3000 / 304.8 как раз и есть 9.8425.</p>
+    <p>На этом месте застревает каждый, кто впервые открыл узел Python Script и дёрнул <code>AsDouble()</code>. Дальше начинается интереснее: округление, накопление погрешности, запятая вместо точки в русской локали и спецификация, где объём отличается от правильного в 35 раз. Разберём по порядку, с кодом.</p>
+    <h2>Что Revit хранит внутри</h2>
+    <p>Отображение на экране и хранение в базе — разные вещи. Настройки единиц проекта (вкладка «Управление» → «Единицы проекта») меняют только показ. Внутри всегда одно и то же:</p>
+    <ul><li>длины — в десятичных футах;</li><li>площади — в квадратных футах;</li><li>объёмы — в кубических футах;</li><li>углы — в радианах;</li><li>координаты точек — в футах от внутреннего начала координат.</li></ul>
+    <p>Коэффициенты, которые стоит держать в голове: <strong>304.8</strong> мм в футе, <strong>0.09290304</strong> м² в квадратном футе, <strong>0.028316846</strong> м³ в кубическом.</p>
+    <p>Отсюда классика жанра. Забыли пересчитать объём — цифры в ведомости бетона отличаются в 35 раз. Умножили длину на 304.8 дважды — получили километры вместо метров. И самое обидное: записали в параметр 3000, имея в виду миллиметры, а Revit прочитал 3000 футов и построил элемент длиной 914 метров.</p>
+    <h2>AsDouble, AsValueString, AsString: чем отличаются</h2>
+    <p>Три метода параметра, которые путают чаще всего.</p>
+    <p><code>AsDouble()</code> возвращает число во внутренних единицах. Для длины — футы. Работает только если у параметра StorageType = Double, иначе вернёт мусор или ноль.</p>
+    <p><code>AsValueString()</code> возвращает <strong>строку</strong> ровно в том виде, в каком значение показано в интерфейсе: «3000» или «3000,0 мм», в зависимости от настроек единиц проекта. Удобно для отчёта, опасно для вычислений.</p>
+    <p><code>AsString()</code> для числового параметра вернёт <code>None</code>. Он для текстовых. Отсюда любимая ошибка новичка: <code>AttributeError: 'NoneType' object has no attribute 'strip'</code>.</p>
+    <p>Правильный порядок — сначала спросить тип хранения, потом читать:</p>
+    <pre><code class="language-python">from Autodesk.Revit.DB import StorageType
+
+def prochitat(p):
+    if p is None or not p.HasValue:
+        return None
+    st = p.StorageType
+    if st == StorageType.Double:
+        return p.AsDouble()          # футы, радианы, кубофуты
+    if st == StorageType.Integer:
+        return p.AsInteger()         # в том числе Да/Нет: 1 и 0
+    if st == StorageType.String:
+        return p.AsString()
+    if st == StorageType.ElementId:
+        return p.AsElementId()
+    return None</code></pre>
+    <p>Пять строк проверки экономят вечер отладки на разнородной выборке, где у одного семейства параметр есть, а у другого нет.</p>
+    <h2>Конвертация: UnitUtils и UnitTypeId</h2>
+    <p>С Revit 2021 единицы описываются через ForgeTypeId, и рабочая пара выглядит так:</p>
+    <pre><code class="language-python">from Autodesk.Revit.DB import UnitUtils, UnitTypeId
+
+futy = param.AsDouble()
+mm = UnitUtils.ConvertFromInternalUnits(futy, UnitTypeId.Millimeters)
+
+# обратно, когда пишем в модель
+param.Set(UnitUtils.ConvertToInternalUnits(3000.0, UnitTypeId.Millimeters))</code></pre>
+    <p>Полезные значения: <code>UnitTypeId.Millimeters</code>, <code>Meters</code>, <code>SquareMeters</code>, <code>CubicMeters</code>, <code>Degrees</code>, <code>Kilograms</code>.</p>
+    <p>Старый код на <code>DisplayUnitType.DUT_MILLIMETERS</code> писался под Revit 2020 и раньше. В 2021 он помечен устаревшим, в 2022 из API убран, и скрипт падает с <code>AttributeError: 'DisplayUnitType' object has no attribute ...</code> или сообщением о неподдерживаемом типе. Если тащите библиотеку скриптов из старых версий, это первое, что придётся переписать.</p>
+    <p>Почему не просто делить на 304.8? Для длин разницы нет. Для площадей, объёмов и всего, что связано с массой и температурой, коэффициенты нетривиальны, и <code>UnitUtils</code> избавляет от их поиска. Плюс код читается: <code>ConvertFromInternalUnits(v, UnitTypeId.CubicMeters)</code> понятнее, чем <code>v * 0.028316846</code>.</p>
+    <p>Отдельная деталь — общие параметры типа «Число» (Number). У них нет единиц вообще, значение хранится как есть. Конвертировать их нельзя, иначе коэффициент армирования 0.85 превратится в 259.</p>
+    <h2>Почему в ноде 3000, а в питоне 9.84</h2>
+    <p>Дело в том, что штатные узлы Dynamo уже конвертируют значения. <code>Element.GetParameterValueByName</code> отдаёт число в единицах проекта, а вызов API внутри Python Script — во внутренних. Один и тот же параметр, два разных числа, и оба правильные.</p>
+    <p>Практический вывод: не смешивайте источники в одном графе. Либо всё читается узлами и дальше идёт как есть, либо всё читается через API и конвертируется на выходе. Гибрид даёт ошибку в 304.8 раза, которую замечают уже в напечатанной ведомости.</p>
+    <p>То же касается геометрии. Координаты точек, полученных из API, живут в футах, и складывать их с координатами из Dynamo-узлов без пересчёта нельзя.</p>
+    <p>Как устроен сам граф и куда вставлять питон, разбирал раньше: <a href="dynamo-pervyy-skript.html">первый скрипт в Dynamo</a>.</p>
+    <h2>Округление и накопление ошибки</h2>
+    <p>Правило одно: <strong>считать в футах, округлять только на выводе</strong>.</p>
+    <p>Соблазн округлить сразу понятен — числа страшные. Цена ошибки видна на простом примере. Берём 500 участков воздуховода, каждый по 1.2345 фута:</p>
+    <pre><code class="language-python">dliny = [1.2345] * 500
+
+# плохо: округлили каждый кусок в мм, потом сложили
+a = sum(round(UnitUtils.ConvertFromInternalUnits(d, UnitTypeId.Millimeters))
+        for d in dliny)
+
+# правильно: сложили в футах, конвертировали один раз, округлили в конце
+b = round(UnitUtils.ConvertFromInternalUnits(sum(dliny), UnitTypeId.Millimeters), 1)</code></pre>
+    <p>Разница на пятистах элементах набегает в несколько сантиметров, на тысячах — в десятки. В ведомости длин это выглядит как расхождение с моделью, которое невозможно объяснить заказчику.</p>
+    <p>Второе следствие — сравнение. Два числа с плавающей точкой никогда не сравнивают знаком равенства:</p>
+    <pre><code class="language-python"># так нельзя
+if dlina_a == dlina_b:
+    ...
+
+# так можно: допуск 0,5 мм, переведённый в футы
+DOPUSK = 0.5 / 304.8
+if abs(dlina_a - dlina_b) &lt; DOPUSK:
+    ...</code></pre>
+    <p>У самого Revit есть встроенный порог: <code>doc.Application.ShortCurveTolerance</code> — примерно 1/256 фута, около 0.8 мм. Короче этого линию он просто не создаст, и попытка кончится исключением.</p>
+    <h2>Локаль: запятая, которая ломает всё</h2>
+    <p>Самый неочевидный баг в русском Revit. <code>AsValueString()</code> на длине вернёт что-то вроде <code>3 000,00</code>, где разделитель дробной части — запятая, а разделитель тысяч — неразрывный пробел (<code>\xa0</code>).</p>
+    <pre><code class="language-python">s = param.AsValueString()          # &#x27;3 000,00&#x27;
+float(s)                           # ValueError: could not convert string to float</code></pre>
+    <p>Чинится в одну строку, но знать про это надо заранее:</p>
+    <pre><code class="language-python">def v_chislo(s):
+    if not s:
+        return None
+    s = s.replace(&#x27;\xa0&#x27;, &#x27;&#x27;).replace(&#x27; &#x27;, &#x27;&#x27;).replace(&#x27;,&#x27;, &#x27;.&#x27;)
+    s = &#x27;&#x27;.join(c for c in s if c.isdigit() or c in &#x27;.-&#x27;)
+    return float(s) if s else None</code></pre>
+    <p>Отсюда общее правило обмена: <code>AsValueString</code> годится для того, что человек прочитает глазами. Для расчётов, выгрузок и сверок берётся <code>AsDouble</code> с явной конвертацией. Настройки единиц у соседнего файла могут отличаться, и тогда одна и та же выгрузка в понедельник даст миллиметры, а в среду сантиметры.</p>
+    <p>Обратная операция — <code>SetValueString("3000")</code> — разбирает строку по настройкам проекта. Удобно, когда значение пришло от пользователя из диалога, а не из расчёта.</p>
+    <h2>Выгрузка в спецификацию</h2>
+    <p>Собирая данные для Excel, конвертируйте на последнем шаге и сразу задавайте точность вывода.</p>
+    <pre><code class="language-python">stroki = []
+for e in UnwrapElement(IN[0]):
+    p_dl = e.LookupParameter(&quot;Длина&quot;)
+    p_ob = e.LookupParameter(&quot;Объем&quot;)
+    dlina_mm = UnitUtils.ConvertFromInternalUnits(p_dl.AsDouble(), UnitTypeId.Millimeters) if p_dl else 0
+    obem_m3 = UnitUtils.ConvertFromInternalUnits(p_ob.AsDouble(), UnitTypeId.CubicMeters) if p_ob else 0
+    stroki.append([
+        e.Id.IntegerValue,
+        round(dlina_mm, 1),      # мм с одним знаком
+        round(obem_m3, 3),       # м³ с тремя
+    ])
+OUT = stroki</code></pre>
+    <p>Точность в 0.1 мм и 0.001 м³ покрывает практически любую форму. Больше знаков — таблица становится нечитаемой, меньше — итоги перестают сходиться с моделью.</p>
+    <p>Как довести такую выгрузку до готовой формы заказчика, расписано в статье про <a href="revit-specifikacii-v-excel.html">спецификации Revit в Excel</a>.</p>
+    <h2>Проверка себя за минуту</h2>
+    <p>Прежде чем гнать скрипт по всей модели, возьмите один элемент с известным размером. Стену длиной ровно 6000 мм, круглый воздуховод диаметром 200, плиту толщиной 200. Выведите по нему все три величины рядом: сырое значение из <code>AsDouble</code>, результат конвертации и строку из <code>AsValueString</code>.</p>
+    <p>Дальше сверяете глазами. Сырое 19.685 и конвертированное 6000 при показанных «6000» — цепочка собрана правильно. Конвертированное 19.685 означает, что конвертацию где-то потеряли по дороге. Конвертированное 1828800 — что применили её дважды.</p>
+    <p>Тридцать секунд на такой контрольный элемент перед каждой новой выгрузкой стоят дешевле, чем разбирательство с ведомостью, которую уже отправили заказчику. У нас это вписано в шаблон графа отдельным узлом Watch, который никогда не удаляется: слева контрольный элемент, справа три числа.</p>
+    <p>Второй способ контроля — сверка итога со спецификацией самого Revit. Соберите ту же величину штатной спецификацией с включённой строкой итогов и сравните с выводом скрипта. Расхождение в третьем знаке нормально, расхождение в первом означает либо единицы, либо разный состав выборки: спецификация могла отфильтровать элементы, которых ваш скрипт не отсеял.</p>
+    <h2>Где это не поможет</h2>
+    <p>Конвертация не чинит неправильно заданный тип параметра. Если общий параметр создан как «Текст», а туда записывают размеры, никакой UnitUtils не спасёт: там строка, и в ней рано или поздно окажется «3000 (уточнить)».</p>
+    <p>Не поможет и там, где параметр вычисляемый. Формула в семействе считается по своим правилам, и запись в результат просто не пройдёт: параметр будет помечен как read-only, а <code>Set()</code> выбросит исключение о попытке изменить неизменяемое значение.</p>
+    <p>Углы отдельная песня. Радианы конвертируются штатно, но поворот 90° внутри семейства и поворот экземпляра в проекте — разные величины, и путать их UnitUtils не мешает.</p>
+    <p>И последнее: единицы не гарантируют правильность данных. Скрипт честно переведёт в миллиметры высоту установки розетки, которую инженер вбил наугад. Проверка смысла — отдельная работа, и её удобно ставить рядом с автоматизацией: автоматизация проверки моделей.</p>
+    <h2>Короткие ответы</h2>
+    <p><strong>Почему AsDouble возвращает 9.84 вместо 3000?</strong> Потому что внутренние единицы Revit — футы. 3000 мм / 304.8 = 9.8425. Конвертируйте через <code>UnitUtils.ConvertFromInternalUnits</code>.</p>
+    <p><strong>Чем AsValueString отличается от AsDouble?</strong> Первый отдаёт строку в единицах проекта и годится для показа человеку, второй — число во внутренних единицах и годится для расчётов.</p>
+    <p><strong>Как узнать, в каких единицах показан параметр?</strong> <code>doc.GetUnits().GetFormatOptions(SpecTypeId.Length).GetUnitTypeId()</code> вернёт текущую настройку длины для документа.</p>
+    <p><strong>Работает ли старый код с DisplayUnitType?</strong> В Revit 2020 и раньше да, начиная с 2022 нет. Заменяется на <code>UnitTypeId</code> без изменения остальной логики.</p>
+    <p><strong>Почему сумма длин не совпадает со спецификацией Revit?</strong> Чаще всего из-за раннего округления в скрипте. Складывайте во внутренних единицах, округляйте один раз на выводе.</p>
+    <h2>Что сделать прямо сейчас</h2>
+    <p>Откройте любой свой рабочий граф и найдите в нём число 304.8 или 3.28. Если оно встречается больше одного раза, там уже сидит будущая ошибка — вынесите конвертацию в одну функцию на выходе.</p>
+    <p>Нужен скрипт, который читает модель и отдаёт цифры в правильных единицах и в вашей форме, — напишите в <a href="https://t.me/bim_pulse_ufa">Telegram</a> или через <a href="contacts.html">контакты</a>. Разбор модели и оценка занимают день.</p>
+    <div class="article-cta">
+      <h3>Нужен похожий BIM/AI процесс?</h3>
+      <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
+      <a class="btn primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Telegram</a>
+      <a class="btn secondary" href="contacts.html">Оставить заявку</a>
+    </div>
+    <aside class="article-related">
+      <h3>Читайте дальше</h3>
+      <ul><li><a href="pyrevit-pervye-knopki.html">pyRevit: ставим и делаем свои кнопки за вечер</a></li><li><a href="dynamo-player-dlya-komandy.html">Dynamo Player: как отдать скрипт команде и не пожалеть</a></li><li><a href="dynamo-python-scenarios.html">Dynamo и Python: пять сценариев, которые экономят часы</a></li></ul>
+    </aside>
+    </article>
+  </main>
+  <footer class="footer">
+    <span>© BIM Pulse Ufa</span>
+    <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
+  </footer>
+</body>
+</html>

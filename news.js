@@ -1,6 +1,14 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "dynamo-chisla-i-edinicy",
+    "category": "Automation",
+    "date": "01 сентября 2026",
+    "title": "Dynamo и числа: AsDouble, футы и почему размеры не сходятся",
+    "excerpt": "AsDouble возвращает футы, AsValueString — строку по настройкам проекта. Разбираем внутренние единицы Revit, UnitTypeId, округление и выгрузку размеров в мм.",
+    "image": "bim-case-2.webp"
+  },
+  {
     "slug": "navisworks-matrica-kolliziy",
     "category": "Coordination",
     "date": "31 августа 2026",
