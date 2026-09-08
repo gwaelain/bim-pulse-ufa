@@ -23,6 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from md import frontmatter, md_to_html, md_to_text  # noqa: E402
+from gen_articles import page_title  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "content" / "services"
@@ -137,7 +138,7 @@ def page(s: dict, others: list[dict], live: set[str] | None = None) -> str:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{e(s['title'])} — {SITE}</title>
+  <title>{e(page_title(s["title"]))}</title>
   <meta name="description" content="{e(s['description'])}" />{kw_meta}
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="{url}" />

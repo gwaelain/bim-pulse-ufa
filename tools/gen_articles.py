@@ -46,6 +46,16 @@ COVERS = ["Bim.webp", "Bim1.webp", "Bim2.webp", "bim-model-1.webp",
           "bim-model-2.webp", "bim-case-1.webp", "bim-case-2.webp"]
 
 
+def page_title(headline: str, site: str = SITE, limit: int = 70) -> str:
+    """Заголовок вкладки: бренд добавляем, только если он влезает.
+
+    Поисковик обрезает title примерно на 70 знаках. Раньше суффикс « — BIM Pulse Ufa»
+    приклеивался всегда, и у длинных заголовков в выдаче отваливался конец фразы.
+    """
+    full = f"{headline} — {site}"
+    return full if len(full) <= limit else headline
+
+
 def ru_date(iso: str) -> str:
     d = datetime.strptime(iso, "%Y-%m-%d").date()
     return f"{d.day:02d} {RU_MONTHS[d.month - 1]} {d.year}"
@@ -171,7 +181,7 @@ def page(a: dict, arts: list[dict]) -> str:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{e(a['title'])} — {SITE}</title>
+  <title>{e(page_title(a["title"]))}</title>
   <meta name="description" content="{e(a['description'])}" />{kw_meta}
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="{url}" />
