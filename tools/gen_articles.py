@@ -246,6 +246,60 @@ def write_news_js(arts: list[dict]) -> None:
     (ROOT / "news.js").write_text(js, encoding="utf-8")
 
 
+def write_rss(arts: list[dict], limit: int = 20) -> None:
+    """Лента для Дзена и агрегаторов: rss.xml с полными текстами.
+
+    У Дзена нет открытого API для публикации — единственный способ автопостинга
+    это импорт канала из RSS. Он требует полный текст в content:encoded (анонса
+    мало: материал уйдёт в черновик), и берёт из ленты только последние записи,
+    поэтому старые статьи отсюда постепенно вымываются — это нормально.
+
+    Из тела выкидываем ссылки на соседние страницы сайта: в Дзене они ведут
+    наружу и режут показы, а сам текст без них не ломается.
+    """
+    fresh = sorted(arts, key=lambda a: a["publish_at"], reverse=True)[:limit]
+    items = []
+    for a in fresh:
+        body = md_to_html(a["_body"])
+        # относительные ссылки в RSS не работают — разворачиваем в абсолютные
+        body = re.sub(r'href="(?!https?:|mailto:|#)([^"]+)"', rf'href="{DOMAIN}/\1"', body)
+        body = re.sub(r'src="(?!https?:)([^"]+)"', rf'src="{DOMAIN}/\1"', body)
+        pub = datetime.strptime(a["publish_at"], "%Y-%m-%d").strftime("%a, %d %b %Y 09:00:00 +0500")
+        url = f"{DOMAIN}/{a['slug']}.html"
+        items.append(f"""    <item>
+      <title>{esc(a['title'])}</title>
+      <link>{url}</link>
+      <guid isPermaLink="true">{url}</guid>
+      <pubDate>{pub}</pubDate>
+      <author>bimaip@yandex.ru ({SITE})</author>
+      <category>{esc(a['category'])}</category>
+      <description>{esc(a['description'])}</description>
+      <enclosure url="{DOMAIN}/{a['image']}" type="image/webp" length="0"/>
+      <content:encoded><![CDATA[{body}]]></content:encoded>
+    </item>""")
+
+    now = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0500")
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{SITE}</title>
+    <link>{DOMAIN}/</link>
+    <atom:link href="{DOMAIN}/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>BIM, Revit и Dynamo без воды: как из модели получить смету, график и закуп.</description>
+    <language>ru</language>
+    <lastBuildDate>{now}</lastBuildDate>
+{chr(10).join(items)}
+  </channel>
+</rss>
+"""
+    (ROOT / "rss.xml").write_text(xml, encoding="utf-8")
+
+
+def esc(s: str) -> str:
+    return html.escape(s, quote=False)
+
+
 def update_blog_html(arts: list[dict]) -> None:
     """Статический список статей в blog.html — чтобы его видел робот без JS."""
     f = ROOT / "blog.html"
@@ -347,6 +401,7 @@ def main() -> None:
         seen_file.write_text(json.dumps(sorted(seen), ensure_ascii=False, indent=1), encoding="utf-8")
 
     write_news_js(live)
+    write_rss(live)
     update_blog_html(live)
     update_index_html(live)
     update_sitemap(live, services)
