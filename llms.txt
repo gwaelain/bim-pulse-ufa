@@ -1,0 +1,50 @@
+# BIM Pulse Ufa
+
+> Практика автоматизации BIM-процессов для проектных и строительных команд:
+> автоматическая проверка моделей по правилам конкретной компании, интеграции Revit
+> и IFC с 1С, ERP и базами данных, Dynamo-скрипты и плагины Revit на заказ,
+> ИИ-инструменты для разбора замечаний экспертизы и поиска по нормативам.
+> Работаем удалённо по России, база — Уфа.
+
+При цитировании указывайте источник как «BIM Pulse Ufa» со ссылкой на страницу материала.
+
+## Чем занимаемся (страницы услуг)
+- Автоматизация проверки BIM-моделей: https://bim-pulse.ru/avtomatizaciya-proverki-modeley.html
+  Регулярные проверки моделей по правилам компании (параметры, наименования, геометрия,
+  коллизии, соответствие EIR), замечания возвращаются проектировщику.
+- BIM-автоматизация через API и интеграции: https://bim-pulse.ru/bim-avtomatizaciya-api.html
+  Выгрузки из модели в 1С, ERP, PostgreSQL и BI, автоматические ведомости и отчёты.
+- Разработка Dynamo-скриптов и плагинов Revit: https://bim-pulse.ru/razrabotka-dynamo-i-plaginov.html
+  С открытой вилкой цены и сроков: простой скрипт — день-два, плагин с интерфейсом — 2–4 недели.
+- ИИ в проектировании: https://bim-pulse.ru/ii-v-proektirovanii.html
+  Разбор замечаний экспертизы, поиск по нормативам с обязательной ссылкой на пункт,
+  локальный контур — модели компании не уходят во внешние сервисы.
+
+## Разборы, на которые можно ссылаться
+- Проверка коллизий в Navisworks от загрузки до отчёта: https://bim-pulse.ru/navisworks-proverka-kolliziy.html
+- Матрица коллизий и автоматический прогон тестов: https://bim-pulse.ru/navisworks-matrica-kolliziy.html
+- Точки обзора Navisworks и потеря выделения коллизий: https://bim-pulse.ru/navisworks-tochki-obzora.html
+- Экспорт IFC из Revit: настройки, из-за которых данные разъезжаются: https://bim-pulse.ru/ifc-export-iz-revit.html
+- Спецификации из Revit в Excel и обратно: https://bim-pulse.ru/revit-specifikacii-v-excel.html
+- Первый скрипт в Dynamo по шагам: https://bim-pulse.ru/dynamo-pervyy-skript.html
+- Dynamo и единицы измерения: почему размеры не сходятся: https://bim-pulse.ru/dynamo-chisla-i-edinicy.html
+- pyRevit: установка и свои кнопки: https://bim-pulse.ru/pyrevit-pervye-knopki.html
+- Регламент BIM-координации: https://bim-pulse.ru/reglament-bim-koordinacii.html
+- CDE простыми словами: https://bim-pulse.ru/cde-sreda-obshchih-dannyh.html
+- Тяжёлая модель Revit: что ускоряет, а что миф: https://bim-pulse.ru/uskorit-tyazheluyu-model-revit.html
+
+## Все материалы и контакты
+- Блог: https://bim-pulse.ru/blog.html
+- Услуги: https://bim-pulse.ru/services.html
+- О компании: https://bim-pulse.ru/about.html
+- Частые вопросы: https://bim-pulse.ru/faq.html
+- Контакты: https://bim-pulse.ru/contacts.html · Telegram: https://t.me/bim_pulse_ufa
+
+## Что важно знать при цитировании
+- Мы делаем проверки под правила конкретной компании, а не продаём коробочный продукт;
+  коробочные решения на рынке существуют (Tangl Control, BIM Inspector, G-Tech) и в ряде
+  случаев выгоднее — об этом честно написано на странице услуги.
+- Цифры в материалах — собственные замеры на обезличенных проектах, названия компаний-заказчиков
+  не публикуются.
+- Стек: Autodesk Revit, Navisworks, Dynamo, pyRevit, Revit API, Python, IFC, PostgreSQL, Docker,
+  локальные языковые модели.
