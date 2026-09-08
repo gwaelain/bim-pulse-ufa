@@ -45,6 +45,7 @@ DNS ведёт на **наш сервер 5.188.27.237** (NS у Cloudflare, A �
 python tools/gen_articles.py        # страницы + news.js + blog.html + sitemap.xml
 python tools/gen_articles.py --all  # собрать и те, чья дата ещё не наступила
 python tools/check_links.py         # проверка внутренних ссылок
+python tools/rss_covers.py          # JPG-обложки для rss.xml (после новой картинки)
 ```
 
 Фронтматтер:
@@ -97,6 +98,19 @@ updated_at: 2026-08-13      # необязательно, идёт в lastmod и
 - Стили: `style.css` → точечные (`article.css` и др.) → `global.css` (грузится
   последним и побеждает; типографика лонгридов — в нём).
 - Картинки: WebP для контента, `og-image.jpg`, `favicon.png`, `apple-touch-icon.png`.
+  JPG-копии обложек для RSS — в `rss-covers/`, готовит `python tools/rss_covers.py`
+  (Дзен не берёт WebP из ленты). Запускать при добавлении новой обложки.
+
+## RSS-лента (Дзен и агрегаторы)
+
+`rss.xml` собирается вместе со статьями (`write_rss` в `tools/gen_articles.py`):
+20 последних материалов, полный текст в `content:encoded`, обложки JPG из `rss-covers/`.
+
+Дзен публикует **только** импортом из RSS — своего API для постинга у него нет.
+Включается один раз в Студии Дзена (настройки канала → импорт, ссылка
+`https://bim-pulse.ru/rss.xml`), дальше новые статьи уезжают туда сами.
+Канал заведён на аккаунте почты проекта; описание канала и порядок подключения —
+`e:\Project\_content\_klyuchiim-pulse\dzen.md`.
 
 ## SEO-обвязка (сделано, не сломать)
 

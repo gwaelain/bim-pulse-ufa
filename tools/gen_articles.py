@@ -254,8 +254,9 @@ def write_rss(arts: list[dict], limit: int = 20) -> None:
     мало: материал уйдёт в черновик), и берёт из ленты только последние записи,
     поэтому старые статьи отсюда постепенно вымываются — это нормально.
 
-    Из тела выкидываем ссылки на соседние страницы сайта: в Дзене они ведут
-    наружу и режут показы, а сам текст без них не ломается.
+    Обложки в ленте отдаём JPG (rss-covers/), хотя на сайте они WebP: Дзен и часть
+    агрегаторов WebP из enclosure не берут и оставляют запись без картинки.
+    Файлы готовит tools/rss_covers.py.
     """
     fresh = sorted(arts, key=lambda a: a["publish_at"], reverse=True)[:limit]
     items = []
@@ -274,7 +275,7 @@ def write_rss(arts: list[dict], limit: int = 20) -> None:
       <author>bimaip@yandex.ru ({SITE})</author>
       <category>{esc(a['category'])}</category>
       <description>{esc(a['description'])}</description>
-      <enclosure url="{DOMAIN}/{a['image']}" type="image/webp" length="0"/>
+      <enclosure url="{DOMAIN}/rss-covers/{Path(a['image']).stem}.jpg" type="image/jpeg" length="0"/>
       <content:encoded><![CDATA[{body}]]></content:encoded>
     </item>""")
 
