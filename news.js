@@ -1,14 +1,6 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
-    "slug": "kto-avtomatiziruet-bim-v-rossii",
-    "category": "Data",
-    "date": "09 сентября 2026",
-    "title": "Кто в России автоматизирует BIM: карта рынка 2026",
-    "excerpt": "Обзор рынка BIM-автоматизации в России на сентябрь 2026: коробочные сервисы проверки моделей, студии разработки под Revit API, моделирование как услуга.",
-    "image": "bim-case-1.webp"
-  },
-  {
     "slug": "dynamo-chisla-i-edinicy",
     "category": "Automation",
     "date": "01 сентября 2026",
