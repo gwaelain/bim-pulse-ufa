@@ -34,7 +34,7 @@ DNS ведёт на **наш сервер 5.188.27.237** (NS у Cloudflare, A �
 **Как выкатывать:** правишь исходники → коммит → `git push`. Через 10 минут сервер подхватит сам.
 
 **Руками не редактировать** (перезапишется при сборке): `<slug>.html`, `news.js`,
-`sitemap.xml`, `tools/published.json`, блоки между `<!-- articles:auto -->`,
+`sitemap.xml`, `rss.xml`, `tools/published.json`, блоки между `<!-- articles:auto -->`,
 `<!-- services:auto -->`, `<!-- latest:auto -->`.
 
 ## Статьи: единственный источник — markdown
@@ -110,7 +110,7 @@ updated_at: 2026-08-13      # необязательно, идёт в lastmod и
 Включается один раз в Студии Дзена (настройки канала → импорт, ссылка
 `https://bim-pulse.ru/rss.xml`), дальше новые статьи уезжают туда сами.
 Канал заведён на аккаунте почты проекта; описание канала и порядок подключения —
-`e:\Project\_content\_klyuchiim-pulse\dzen.md`.
+`e:\Project\_content\_klyuchi\bim-pulse\dzen.md`.
 
 ## SEO-обвязка (сделано, не сломать)
 
