@@ -131,7 +131,7 @@ function renderArticle() {
       <h3>Нужен похожий BIM/AI процесс?</h3>
       <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
       <a class="btn primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Telegram</a>
-      <a class="btn secondary" href="mailto:im@laingawe.ru">Email</a>
+      <a class="btn secondary" href="mailto:bimaip@yandex.ru">Email</a>
     </div>
   `;
 }
@@ -196,7 +196,7 @@ function initLeadForm() {
     if (btn) { btn.disabled = true; btn.textContent = "Отправляем…"; }
 
     try {
-      const res = await fetch("https://formsubmit.co/ajax/im@laingawe.ru", {
+      const res = await fetch("https://formsubmit.co/ajax/bimaip@yandex.ru", {
         method: "POST",
         headers: { "Accept": "application/json" },
         body: new FormData(form)

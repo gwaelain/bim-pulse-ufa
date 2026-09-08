@@ -90,7 +90,7 @@ updated_at: 2026-08-13      # необязательно, идёт в lastmod и
 
 - Страницы, которые правятся руками: `index`, `services`, `cases`, `about`, `blog`,
   `faq`, `contacts`, плюс лендинги `ai-in-bim`, `revit-automation`, `dynamo-scripts`,
-  `bim-coordination`. `404.html`, `article.html` (legacy-рендер по `?slug=`).
+  `bim-coordination`, `404.html`.
 - Партиалы `tools/partials/` — `header.html`, `footer.html`, `metrika.html`.
   Правишь один → `python tools/apply_shell.py` разносит по страницам,
   затем `python tools/gen_articles.py` (статьи берут партиалы при сборке).
@@ -104,7 +104,7 @@ updated_at: 2026-08-13      # необязательно, идёт в lastmod и
   (аккаунт аналитики портфеля, `infra\scripts\yandex-webmaster.ps1`), sitemap отправлен.
 - Google Search Console: подтверждение файлом `googlebd1c94cea8b05eef.html` в корне,
   скрипт `infra\gsc\verify_file.py`.
-- Яндекс.Метрика 109103460 — в партиале `tools/partials/metrika.html`.
+- Яндекс.Метрика 111661242 (плюс старый 109103460) — в партиале `tools/partials/metrika.html`.
 - IndexNow: ключ-файл `5ce63dcf399ad423cb6f435df02501d4.txt` в корне + `tools/indexnow.py`.
 - В каждой статье: JSON-LD `Article` + `BreadcrumbList`, canonical, OG, хлебные крошки,
   блок «Читайте дальше» (перелинковка по категории).
