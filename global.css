@@ -371,3 +371,20 @@ body::before {
 .service-detail h3 a:hover { color: var(--accent, #76b7ff); }
 .service-detail p { color: rgba(255,255,255,.74); line-height: 1.65; margin: 0 0 14px; }
 .service-detail .text-link { color: var(--accent, #76b7ff); text-decoration: none; font-weight: 600; }
+
+/* Тизер теста на главной. Отдельная рамка, чтобы блок читался как приглашение,
+   а не как ещё один абзац текста между секциями. */
+.quiz-teaser {
+  border: 1px solid rgba(118, 183, 255, 0.28);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(118, 183, 255, 0.12), transparent 55%),
+    rgba(255, 255, 255, 0.04);
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.quiz-teaser .lead {
+  max-width: 720px;
+  margin-bottom: 24px;
+}

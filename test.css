@@ -1,0 +1,472 @@
+/* Тест «BIM на 100%». Свои стили держим отдельно от style.css:
+   страница одна, а правил много — незачем таскать их на весь сайт. */
+
+.quiz-page {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 56px 20px 96px;
+}
+
+.quiz-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.quiz-head h1 {
+  font-size: clamp(28px, 4.6vw, 46px);
+  line-height: 1.12;
+  margin: 10px 0 14px;
+  letter-spacing: -0.02em;
+}
+
+.quiz-head p {
+  color: var(--soft);
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: 17px;
+}
+
+.quiz-intro {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.quiz-facts {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin: 0 0 26px;
+  padding: 0;
+  list-style: none;
+}
+
+.quiz-facts li {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.quiz-facts strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.quiz-facts span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.quiz-start-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.quiz-start-row .quiz-meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Прогресс */
+
+.quiz-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.quiz-progress-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+
+.quiz-progress-track span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), #a9d4ff);
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quiz-counter {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* Карточка вопроса */
+
+.quiz-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+[data-anim] {
+  animation: quiz-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes quiz-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.quiz-tag {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.quiz-question {
+  margin: 0 0 24px;
+  font-size: clamp(21px, 3vw, 28px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.quiz-option {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s, opacity 0.3s;
+}
+
+.quiz-option:hover {
+  transform: translateY(-3px);
+  border-color: rgba(118, 183, 255, 0.45);
+  background: rgba(118, 183, 255, 0.07);
+}
+
+.quiz-options.is-locked .quiz-option {
+  cursor: default;
+  transform: none;
+}
+
+.quiz-option.is-dim {
+  opacity: 0.38;
+}
+
+.quiz-option.is-picked {
+  opacity: 1;
+  border-color: var(--accent);
+  background: rgba(118, 183, 255, 0.12);
+  box-shadow: 0 0 0 1px rgba(118, 183, 255, 0.35);
+}
+
+.quiz-option-art {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.quiz-option-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.quiz-option-text strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.quiz-option-text span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.quiz-feedback {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  animation: quiz-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.quiz-feedback p {
+  margin: 0 0 18px;
+  color: var(--soft);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Результат */
+
+.quiz-score {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.quiz-score-num {
+  font-size: 62px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+
+.quiz-score-num i {
+  font-style: normal;
+  font-size: 26px;
+  margin-left: 2px;
+}
+
+.quiz-score-text h2 {
+  margin: 0 0 6px;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.2;
+}
+
+.quiz-score-text p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.quiz-scale {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.quiz-scale span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), #a9d4ff);
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quiz-result-text {
+  color: var(--soft);
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 0 0 24px;
+}
+
+.quiz-gaps {
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 26px;
+}
+
+.quiz-gaps h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+
+.quiz-gaps ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--soft);
+}
+
+.quiz-gaps li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.quiz-gaps p {
+  margin: 0;
+  color: var(--soft);
+  line-height: 1.5;
+}
+
+/* Форма */
+
+.quiz-cta {
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+
+.quiz-cta h3 {
+  margin: 0 0 8px;
+  font-size: clamp(19px, 2.6vw, 24px);
+}
+
+.quiz-cta > p {
+  margin: 0 0 22px;
+  color: var(--soft);
+  line-height: 1.55;
+}
+
+.quiz-field {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.quiz-field > span {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+
+.quiz-field > span i {
+  font-style: normal;
+  opacity: 0.7;
+}
+
+.quiz-field input,
+.quiz-field textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+.quiz-field input:focus,
+.quiz-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(118, 183, 255, 0.07);
+}
+
+.quiz-honey {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.quiz-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.quiz-sent h4 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.quiz-sent p {
+  margin: 0;
+  color: var(--soft);
+  line-height: 1.55;
+}
+
+.quiz-restart {
+  display: inline-block;
+  margin-top: 22px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Ниже теста — куда идти дальше */
+
+.quiz-after {
+  margin-top: 40px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.quiz-after a {
+  display: block;
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.quiz-after a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(118, 183, 255, 0.45);
+}
+
+.quiz-after strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.quiz-after span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .quiz-page { padding: 36px 16px 72px; }
+  .quiz-card,
+  .quiz-intro { padding: 22px; }
+  .quiz-options { grid-template-columns: 1fr; }
+  .quiz-score-num { font-size: 50px; }
+
+  /* На телефоне три варианта с большими картинками превращались в простыню на
+     два экрана — иллюстрацию уводим влево и оставляем размером с иконку. */
+  .quiz-option {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .quiz-option-art {
+    flex: 0 0 84px;
+    width: 84px;
+  }
+
+  .quiz-option-text strong { font-size: 15px; }
+  .quiz-option-text span { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-anim],
+  .quiz-option,
+  .quiz-scale span,
+  .quiz-progress-track span { animation: none; transition: none; }
+}

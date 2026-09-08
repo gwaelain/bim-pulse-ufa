@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Тест: используете ли вы BIM на все 100%</title>
+  <meta name="description" content="Четыре вопроса за минуту: считаете ли вы смету по модели, есть ли 4D-график, ловите ли отклонения через AR и собирается ли заявка на закуп сама.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://bim-pulse.ru/test.html">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Тест: используете ли вы BIM на все 100%">
+  <meta property="og:description" content="Минута, четыре вопроса — и честный ответ, где модель у вас работает, а где лежит красивой картинкой.">
+  <meta property="og:url" content="https://bim-pulse.ru/test.html">
+  <meta property="og:image" content="https://bim-pulse.ru/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="test.css">
+  <link rel="stylesheet" href="global.css">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Тест: используете ли вы BIM на все 100%","description":"Короткий тест на зрелость BIM: сметы, календарный график, стройконтроль и снабжение.","url":"https://bim-pulse.ru/test.html","inLanguage":"ru-RU","isPartOf":{"@type":"WebSite","name":"BIM Pulse Ufa","url":"https://bim-pulse.ru/"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://bim-pulse.ru/"},{"@type":"ListItem","position":2,"name":"Тест на зрелость BIM","item":"https://bim-pulse.ru/test.html"}]}
+  </script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460','ym');
+    ym(109103460,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(109103460,'hit',location.href);
+    // Второй счётчик — в аккаунте аналитики портфеля (kpi1t). Первый заведён в другом
+    // Яндекс-аккаунте, поэтому Вебмастер не давал привязать его к сайту, а данные не
+    // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
+    ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(111661242,'hit',location.href);
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav">
+      <a href="services.html">Услуги</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="test.html">Тест</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ym(109103460,'reachGoal','telegram_click')">Telegram</a>
+  </header>
+
+  <main class="quiz-page">
+    <div class="quiz-head">
+      <p class="eyebrow">Тест · 1 минута</p>
+      <h1>Вы используете BIM на все 100%?</h1>
+      <p>Модель можно крутить на совещаниях, а можно считать по ней смету, график, закуп
+        и проверять стройку. Четыре вопроса покажут, на каком вы шаге.</p>
+    </div>
+
+    <section id="quiz" class="quiz">
+      <div class="quiz-progress" data-progress hidden>
+        <div class="quiz-progress-track"><span data-bar></span></div>
+        <span class="quiz-counter" data-counter>Вопрос 1 из 4</span>
+      </div>
+
+      <div class="quiz-intro" data-intro>
+        <ul class="quiz-facts">
+          <li><strong>Сметы</strong><span>Объёмы считают по чертежам или они приходят из модели</span></li>
+          <li><strong>КСГ</strong><span>График живёт в Excel или привязан к элементам</span></li>
+          <li><strong>Стройконтроль</strong><span>Замечания в блокноте или сверка через AR</span></li>
+          <li><strong>Снабжение</strong><span>Заявка текстом или по библиотеке номенклатуры</span></li>
+        </ul>
+        <div class="quiz-start-row">
+          <button class="btn" type="button" data-start>Начать тест</button>
+          <span class="quiz-meta">4 вопроса · без регистрации · результат сразу на экране</span>
+        </div>
+      </div>
+
+      <div data-stage></div>
+    </section>
+
+    <div class="quiz-after">
+      <a href="avtomatizaciya-proverki-modeley.html">
+        <strong>Проверка моделей по правилам компании</strong>
+        <span>Чтобы данные, из которых считают смету, вообще можно было брать</span>
+      </a>
+      <a href="services.html">
+        <strong>Что мы делаем</strong>
+        <span>Автоматизация Revit и Dynamo, выгрузки, интеграции с 1С и снабжением</span>
+      </a>
+      <a href="blog.html">
+        <strong>Блог</strong>
+        <span>Разборы из практики: скрипты, координация, данные модели</span>
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>© BIM Pulse Ufa</span>
+    <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
+  </footer>
+
+  <!-- Иллюстрации вариантов. Держим их в разметке, а не в JS: так они кэшируются
+       вместе со страницей и остаются просто SVG, которые можно править руками. -->
+  <div hidden>
+    <template id="icon-smeta-0">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="24" y="18" width="150" height="104" rx="8" stroke="rgba(255,255,255,.28)"/>
+        <path d="M44 44h60M44 62h96M44 80h72M44 98h48" stroke="rgba(255,255,255,.25)" stroke-linecap="round"/>
+        <path d="M212 104l64-64" stroke="#76b7ff" stroke-width="2" stroke-linecap="round"/>
+        <path d="M204 112l10-4-6-6-4 10z" fill="#76b7ff"/>
+        <rect x="252" y="24" width="34" height="18" rx="4" transform="rotate(45 252 24)" stroke="rgba(255,255,255,.35)"/>
+        <path d="M196 40h48M196 56h32" stroke="rgba(255,255,255,.2)" stroke-linecap="round"/>
+      </svg>
+    </template>
+    <template id="icon-smeta-1">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 96V52l38-22 38 22v44l-38 22-38-22z" stroke="rgba(255,255,255,.3)"/>
+        <path d="M78 30v88M40 52l38 22 38-22" stroke="rgba(255,255,255,.18)"/>
+        <path d="M140 70h34" stroke="#76b7ff" stroke-width="2" stroke-dasharray="5 5"/>
+        <path d="M180 70l-10-5v10l10-5z" fill="#76b7ff"/>
+        <rect x="192" y="34" width="96" height="72" rx="8" stroke="rgba(255,255,255,.3)"/>
+        <path d="M192 54h96M192 74h96M192 94h96M226 34v72M258 34v72" stroke="rgba(255,255,255,.16)"/>
+      </svg>
+    </template>
+    <template id="icon-smeta-2">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M36 94V54l34-20 34 20v40l-34 20-34-20z" stroke="#76b7ff"/>
+        <path d="M70 34v80M36 54l34 20 34-20" stroke="rgba(118,183,255,.4)"/>
+        <path d="M120 58c26-16 56-16 78 0" stroke="#76b7ff" stroke-width="2" stroke-linecap="round"/>
+        <path d="M204 58l-12-6 2 11 10-5z" fill="#76b7ff"/>
+        <path d="M198 92c-26 16-56 16-78 0" stroke="rgba(118,183,255,.55)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/>
+        <path d="M114 92l12 6-2-11-10 5z" fill="rgba(118,183,255,.55)"/>
+        <rect x="212" y="36" width="76" height="68" rx="8" stroke="rgba(255,255,255,.3)"/>
+        <path d="M228 58h30M228 74h44M228 90h22" stroke="rgba(255,255,255,.22)" stroke-linecap="round"/>
+        <text x="264" y="62" fill="#76b7ff" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">₽</text>
+      </svg>
+    </template>
+
+    <template id="icon-ksg-0">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M36 96V56l32-18 32 18v40l-32 18-32-18z" stroke="rgba(255,255,255,.28)"/>
+        <path d="M68 38v76M36 56l32 18 32-18" stroke="rgba(255,255,255,.16)"/>
+        <path d="M126 24v92" stroke="rgba(255,255,255,.18)" stroke-dasharray="4 6"/>
+        <rect x="152" y="34" width="80" height="12" rx="6" fill="rgba(255,255,255,.22)"/>
+        <rect x="176" y="56" width="94" height="12" rx="6" fill="rgba(255,255,255,.16)"/>
+        <rect x="164" y="78" width="60" height="12" rx="6" fill="rgba(255,255,255,.16)"/>
+        <rect x="196" y="100" width="72" height="12" rx="6" fill="rgba(255,255,255,.12)"/>
+      </svg>
+    </template>
+    <template id="icon-ksg-1">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M34 96V56l32-18 32 18v40l-32 18-32-18z" stroke="rgba(255,255,255,.32)"/>
+        <path d="M66 38v76M34 56l32 18 32-18" stroke="rgba(255,255,255,.18)"/>
+        <path d="M100 62c22 0 30 -20 52 -20M100 86c22 0 30 20 52 20" stroke="#76b7ff" stroke-width="1.6" stroke-dasharray="4 5"/>
+        <rect x="158" y="34" width="90" height="12" rx="6" fill="rgba(118,183,255,.5)"/>
+        <rect x="176" y="56" width="86" height="12" rx="6" fill="rgba(255,255,255,.18)"/>
+        <rect x="158" y="78" width="64" height="12" rx="6" fill="rgba(255,255,255,.18)"/>
+        <rect x="190" y="100" width="76" height="12" rx="6" fill="rgba(118,183,255,.35)"/>
+      </svg>
+    </template>
+    <template id="icon-ksg-2">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 92V54l34-20 34 20v38l-34 20-34-20z" stroke="#76b7ff"/>
+        <path d="M30 54l34 20v38" stroke="rgba(118,183,255,.55)"/>
+        <path d="M64 34v40l34-20" stroke="rgba(118,183,255,.3)"/>
+        <path d="M64 74l34-20v38l-34 20z" fill="rgba(118,183,255,.16)"/>
+        <path d="M124 108h172" stroke="rgba(255,255,255,.25)"/>
+        <path d="M132 108v-8M172 108v-14M212 108v-22M252 108v-32M292 108v-44" stroke="rgba(255,255,255,.2)"/>
+        <path d="M132 100l40-6 40-8 40-10 40-12" stroke="#76b7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="212" cy="86" r="4" fill="#76b7ff"/>
+        <text x="124" y="126" fill="rgba(255,255,255,.4)" font-family="Inter, Arial, sans-serif" font-size="11">факт по дате</text>
+      </svg>
+    </template>
+
+    <template id="icon-kontrol-0">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="22" width="88" height="100" rx="8" stroke="rgba(255,255,255,.3)"/>
+        <path d="M62 48h44M62 66h56M62 84h34" stroke="rgba(255,255,255,.22)" stroke-linecap="round"/>
+        <path d="M40 40h88" stroke="rgba(255,255,255,.14)"/>
+        <rect x="176" y="28" width="64" height="94" rx="10" stroke="rgba(255,255,255,.3)"/>
+        <rect x="188" y="44" width="40" height="52" rx="4" fill="rgba(255,255,255,.08)"/>
+        <circle cx="208" cy="110" r="4" fill="rgba(255,255,255,.25)"/>
+        <path d="M262 52c8 6 8 30 0 36M278 40c14 12 14 46 0 58" stroke="rgba(255,255,255,.18)" stroke-linecap="round"/>
+      </svg>
+    </template>
+    <template id="icon-kontrol-1">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M70 104V50l52-28 52 28v54l-52 28-52-28z" stroke="rgba(255,255,255,.32)"/>
+        <path d="M122 22v110M70 50l52 28 52-28" stroke="rgba(255,255,255,.18)"/>
+        <circle cx="96" cy="64" r="9" fill="rgba(118,183,255,.85)"/>
+        <path d="M96 60v8" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="150" cy="96" r="9" fill="rgba(118,183,255,.55)"/>
+        <circle cx="140" cy="46" r="9" fill="rgba(118,183,255,.35)"/>
+        <rect x="206" y="38" width="82" height="64" rx="8" stroke="rgba(255,255,255,.28)"/>
+        <path d="M220 58h54M220 74h40M220 90h30" stroke="rgba(255,255,255,.2)" stroke-linecap="round"/>
+      </svg>
+    </template>
+    <template id="icon-kontrol-2">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M44 118V44l44-24 44 24v74" stroke="rgba(255,255,255,.22)"/>
+        <path d="M44 68h88M44 92h88M88 20v98" stroke="rgba(255,255,255,.14)"/>
+        <rect x="150" y="26" width="130" height="88" rx="10" stroke="#76b7ff" stroke-width="1.6"/>
+        <path d="M166 106V48l38-18 38 18v58" stroke="rgba(118,183,255,.85)"/>
+        <path d="M166 66h76M166 86h76M204 30v76" stroke="rgba(118,183,255,.4)"/>
+        <path d="M242 62l14-6-14-6" stroke="#76b7ff" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="204" cy="86" r="7" fill="rgba(118,183,255,.9)"/>
+        <text x="150" y="130" fill="rgba(118,183,255,.75)" font-family="Inter, Arial, sans-serif" font-size="11">модель поверх факта</text>
+      </svg>
+    </template>
+
+    <template id="icon-snab-0">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="52" y="20" width="96" height="104" rx="8" stroke="rgba(255,255,255,.3)"/>
+        <path d="M72 46h58M72 64h58M72 82h38M72 100h48" stroke="rgba(255,255,255,.24)" stroke-linecap="round"/>
+        <path d="M172 72h36" stroke="rgba(255,255,255,.3)" stroke-dasharray="4 5"/>
+        <path d="M214 72l-10-5v10l10-5z" fill="rgba(255,255,255,.35)"/>
+        <path d="M226 46h56l-8 40h-40l-8-40z" stroke="rgba(255,255,255,.3)"/>
+        <circle cx="240" cy="100" r="6" stroke="rgba(255,255,255,.3)"/>
+        <circle cx="268" cy="100" r="6" stroke="rgba(255,255,255,.3)"/>
+        <path d="M246 58l16 16M262 58l-16 16" stroke="rgba(255,255,255,.35)" stroke-linecap="round"/>
+      </svg>
+    </template>
+    <template id="icon-snab-1">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="30" y="34" width="94" height="72" rx="8" stroke="rgba(255,255,255,.3)"/>
+        <path d="M30 54h94M30 74h94M30 94h94M62 34v72M92 34v72" stroke="rgba(255,255,255,.16)"/>
+        <path d="M136 70h34" stroke="#76b7ff" stroke-dasharray="4 5"/>
+        <path d="M176 70l-10-5v10l10-5z" fill="#76b7ff"/>
+        <rect x="188" y="40" width="56" height="60" rx="6" stroke="rgba(255,255,255,.25)"/>
+        <path d="M198 58h36M198 74h24" stroke="rgba(255,255,255,.2)" stroke-linecap="round"/>
+        <path d="M256 52h40l-6 34h-28l-6-34z" stroke="rgba(118,183,255,.7)"/>
+        <circle cx="266" cy="98" r="5" stroke="rgba(118,183,255,.7)"/>
+        <circle cx="286" cy="98" r="5" stroke="rgba(118,183,255,.7)"/>
+      </svg>
+    </template>
+    <template id="icon-snab-2">
+      <svg viewBox="0 0 320 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 96V56l30-18 30 18v40l-30 18-30-18z" stroke="#76b7ff"/>
+        <path d="M58 38v76M28 56l30 18 30-18" stroke="rgba(118,183,255,.45)"/>
+        <rect x="116" y="30" width="80" height="82" rx="8" stroke="rgba(255,255,255,.3)"/>
+        <path d="M116 56h80M116 84h80" stroke="rgba(255,255,255,.2)"/>
+        <rect x="126" y="38" width="16" height="12" rx="2" fill="rgba(118,183,255,.55)"/>
+        <rect x="148" y="38" width="26" height="12" rx="2" fill="rgba(255,255,255,.18)"/>
+        <rect x="126" y="64" width="30" height="12" rx="2" fill="rgba(255,255,255,.18)"/>
+        <rect x="162" y="64" width="22" height="12" rx="2" fill="rgba(118,183,255,.4)"/>
+        <rect x="126" y="92" width="22" height="12" rx="2" fill="rgba(255,255,255,.14)"/>
+        <path d="M96 70h14M202 70h14" stroke="#76b7ff" stroke-width="2" stroke-linecap="round"/>
+        <path d="M222 70l-10-5v10l10-5z" fill="#76b7ff"/>
+        <path d="M232 48h56l-8 40h-40l-8-40z" stroke="#76b7ff"/>
+        <path d="M248 66l8 8 14-16" stroke="#76b7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="246" cy="102" r="5" stroke="rgba(118,183,255,.8)"/>
+        <circle cx="272" cy="102" r="5" stroke="rgba(118,183,255,.8)"/>
+      </svg>
+    </template>
+  </div>
+
+  <script src="test.js"></script>
+</body>
+</html>
