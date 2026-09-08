@@ -106,9 +106,12 @@ def strip_unpublished_links(body_html: str, live_slugs: set[str]) -> str:
         href, text = m.group(1), m.group(2)
         slug = href[:-5]
         if href.endswith(".html") and "/" not in href and slug not in live_slugs:
+            # страницы услуг тоже живые, но лежат не в content/articles — без них
+            # ссылки со статей на коммерческие страницы молча превращались в текст
+            service_slugs = {f.stem for f in (ROOT / "content" / "services").glob("*.md")}
             static = {"index", "blog", "services", "cases", "about", "faq", "contacts",
                       "404", "article", "ai-in-bim", "revit-automation", "dynamo-scripts",
-                      "bim-coordination"}
+                      "bim-coordination"} | service_slugs
             if slug not in static:
                 return text
         return m.group(0)
