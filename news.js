@@ -1,6 +1,14 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "2d-v-bim-perevod-chertezhey",
+    "category": "Data",
+    "date": "10 сентября 2026",
+    "title": "Перевод чертежей из 2D в BIM: как устроен процесс и из чего цена",
+    "excerpt": "Что происходит между вашей папкой DWG и готовой моделью: пять этапов, что влияет на срок и стоимость, какие сюрпризы вылезают на второй неделе и что писать в задании.",
+    "image": "bim-case-2.webp"
+  },
+  {
     "slug": "kto-avtomatiziruet-bim-v-rossii",
     "category": "Data",
     "date": "09 сентября 2026",
