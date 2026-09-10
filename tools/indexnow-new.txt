@@ -12,3 +12,4 @@ https://bim-pulse.ru/navisworks-proverka-kolliziy.html
 https://bim-pulse.ru/ifc-export-iz-revit.html
 https://bim-pulse.ru/dynamo-player-dlya-komandy.html
 https://bim-pulse.ru/dynamo-pervyy-skript.html
+https://bim-pulse.ru/upravlenie-bim-proektami.html
