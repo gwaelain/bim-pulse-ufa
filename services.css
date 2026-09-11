@@ -52,3 +52,12 @@
     font-size: 28px;
   }
 }
+
+/* Карточка ИИ-BIM-проектирования: главный акцент раздела, тянется на всю ширину сетки */
+.service-item.accent {
+  grid-column: 1 / -1;
+  border-color: rgba(118, 183, 255, 0.4);
+  background: radial-gradient(circle at 8% 0%, rgba(118, 183, 255, 0.14), transparent 55%), var(--panel);
+}
+.service-item.accent h2 { font-size: 26px; }
+.service-item.accent p { max-width: 760px; }

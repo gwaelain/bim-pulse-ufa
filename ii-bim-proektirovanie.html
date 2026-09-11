@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ИИ-BIM-проектирование: из чего оно состоит</title>
+  <meta name="description" content="Восемь составляющих ИИ-BIM-проектирования: от данных модели до цифрового двойника. Честно про то, что работает уже сегодня, что в пилотах и что пока мечта.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://bim-pulse.ru/ii-bim-proektirovanie.html">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ИИ-BIM-проектирование: из чего оно состоит">
+  <meta property="og:description" content="Карта из восьми составляющих и честная шкала: что работает сегодня, что в пилотах, что мечта.">
+  <meta property="og:url" content="https://bim-pulse.ru/ii-bim-proektirovanie.html">
+  <meta property="og:image" content="https://bim-pulse.ru/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="global.css">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"ИИ-BIM-проектирование: из чего оно состоит","url":"https://bim-pulse.ru/ii-bim-proektirovanie.html","inLanguage":"ru-RU","isPartOf":{"@type":"WebSite","name":"BIM Pulse Ufa","url":"https://bim-pulse.ru/"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://bim-pulse.ru/"},{"@type":"ListItem","position":2,"name":"Услуги","item":"https://bim-pulse.ru/services.html"},{"@type":"ListItem","position":3,"name":"ИИ-BIM-проектирование","item":"https://bim-pulse.ru/ii-bim-proektirovanie.html"}]}
+  </script>
+  <style>
+    .aibim-map { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .aibim-card { position: relative; padding: 26px 24px 22px; border-radius: 24px; border: 1px solid var(--line); background: var(--panel); }
+    .aibim-card > span { display: inline-block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .aibim-card h3 { margin: 0 0 10px; font-size: 20px; line-height: 1.25; }
+    .aibim-card p { margin: 0 0 14px; color: var(--soft); line-height: 1.5; font-size: 15px; }
+    .aibim-card .aibim-state { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+    .aibim-card .aibim-state i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .aibim-card .aibim-state i.now { background: #6fe3a0; }
+    .aibim-card .aibim-state i.pilot { background: var(--accent); }
+    .aibim-card .aibim-state i.dream { background: rgba(255,255,255,0.35); }
+    .aibim-card a { color: var(--accent); }
+    .aibim-scale { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .aibim-scale article { padding: 24px; border-radius: 24px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); }
+    .aibim-scale h3 { margin: 0 0 6px; font-size: 18px; }
+    .aibim-scale .hint { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+    .aibim-scale ul { margin: 0; padding-left: 18px; color: var(--soft); line-height: 1.55; }
+    .aibim-scale li { margin-bottom: 8px; }
+    .aibim-steps { counter-reset: st; display: grid; gap: 14px; }
+    .aibim-steps article { display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; padding: 20px 22px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); }
+    .aibim-steps article::before { counter-increment: st; content: counter(st, decimal-leading-zero); font-size: 26px; font-weight: 800; color: var(--accent); line-height: 1; }
+    .aibim-steps h3 { margin: 0 0 6px; font-size: 18px; }
+    .aibim-steps p { margin: 0; color: var(--soft); line-height: 1.5; }
+    .aibim-dream { border: 1px solid rgba(118,183,255,0.28); border-radius: 28px; padding: 36px; background: radial-gradient(circle at 10% 0%, rgba(118,183,255,0.12), transparent 55%), rgba(255,255,255,0.03); }
+    .aibim-dream p { color: var(--soft); line-height: 1.6; max-width: 760px; }
+    @media (max-width: 640px) { .aibim-dream { padding: 24px; } .aibim-steps article { grid-template-columns: 40px 1fr; } }
+  </style>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460','ym');
+    ym(109103460,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(109103460,'hit',location.href);
+    // Второй счётчик — в аккаунте аналитики портфеля (kpi1t). Первый заведён в другом
+    // Яндекс-аккаунте, поэтому Вебмастер не давал привязать его к сайту, а данные не
+    // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
+    ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(111661242,'hit',location.href);
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav">
+      <a href="services.html">Услуги</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="test.html">Тест</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ym(109103460,'reachGoal','telegram_click')">Telegram</a>
+  </header>
+
+  <main class="page">
+    <section class="section hero-section">
+      <p class="eyebrow">ИИ-BIM-проектирование</p>
+      <h1>Модель, которая проектирует вместе с вами</h1>
+      <p class="lead">
+        Под «ИИ в BIM» продают всё подряд: от кнопки «сгенерировать здание» до чат-бота
+        в углу экрана. Ниже карта из восьми составляющих и честная шкала: что из этого
+        работает уже сегодня, что в пилотах, а что пока мечта, к которой мы идём.
+      </p>
+      <a class="btn" href="test.html">Проверить, где вы сейчас</a>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Карта</p>
+      <h2>Из чего состоит ИИ-BIM-проектирование</h2>
+      <p class="lead" style="margin-bottom:28px">Восемь блоков. Каждый следующий опирается на предыдущие: без первого не работает ни один из остальных.</p>
+
+      <div class="aibim-map">
+        <article class="aibim-card">
+          <span>01 · фундамент</span>
+          <h3>Данные, которым можно верить</h3>
+          <p>Единый файл общих параметров, один классификатор, одна номенклатура на все отделы. Заполненные марки и материалы. Без этого любой ИИ будет уверенно обрабатывать мусор.</p>
+          <p class="aibim-state"><i class="now"></i>Работает сегодня. Это не ИИ, это дисциплина</p>
+          <p><a href="avtomatizaciya-proverki-modeley.html">Проверка моделей по правилам компании →</a></p>
+        </article>
+
+        <article class="aibim-card">
+          <span>02 · ассистент</span>
+          <h3>ИИ-помощник проектировщика внутри Revit</h3>
+          <p>Языковая модель пишет скрипты под Revit API, объясняет чужой код, собирает имена листов по шаблону, подсказывает по параметрам. Не заменяет инженера, убирает рутину.</p>
+          <p class="aibim-state"><i class="now"></i>Работает, если результат проверяет человек</p>
+          <p><a href="ai-in-bim-practice.html">Где LLM в BIM реально работают →</a></p>
+        </article>
+
+        <article class="aibim-card">
+          <span>03 · контроль</span>
+          <h3>Проверка модели и поиск аномалий</h3>
+          <p>Правила ловят известные ошибки: пустые параметры, дубли, чужие уровни. Поиск аномалий находит неизвестные: стена 380 среди четырёхсот стен по 400, масса в тоннах вместо килограммов.</p>
+          <p class="aibim-state"><i class="now"></i>Правила — сегодня. Аномалии — в пилотах</p>
+          <p><a href="bim-audit-checklist.html">Чек-лист аудита модели →</a></p>
+        </article>
+
+        <article class="aibim-card">
+          <span>04 · данные из чертежей</span>
+          <h3>Чертежи и сканы превращаются в модель</h3>
+          <p>OCR штампов и спецификаций, сравнение ревизий, полуавтоматическая разметка DWG. Ускоряет подготовку и сверку. Полная генерация модели из PDF остаётся обещанием.</p>
+          <p class="aibim-state"><i class="pilot"></i>Частично: подготовка и проверка да, моделирование пока человек</p>
+          <p><a href="perevod-2d-v-bim.html">Перевод 2D-чертежей в BIM →</a></p>
+        </article>
+
+        <article class="aibim-card">
+          <span>05 · связки</span>
+          <h3>Модель кормит смету, график и снабжение</h3>
+          <p>Объёмы уходят в смету по правилам подсчёта, работы привязаны к элементам в 4D, заявка на закуп собирается по кодам номенклатуры. ИИ здесь сопоставляет и классифицирует, а не считает.</p>
+          <p class="aibim-state"><i class="now"></i>Работает там, где закрыт блок 01</p>
+          <p><a href="bim-avtomatizaciya-api.html">BIM-автоматизация через API →</a></p>
+        </article>
+
+        <article class="aibim-card">
+          <span>06 · варианты</span>
+          <h3>Генерация решений по правилам</h3>
+          <p>Компоновка паркинга и склада, трассировка сетей, раскрой, подбор сечений: задачи с числовым критерием, где перебор честно обыгрывает человека. Планировка квартиры «чтобы удобно» сюда не входит.</p>
+          <p class="aibim-state"><i class="pilot"></i>В пилотах, на задачах с формальными правилами</p>
+          <p><a href="ai-bim-roadmap.html">Дорожная карта AI в проектной компании →</a></p>
+        </article>
+
+        <article class="aibim-card">
+          <span>07 · нормы</span>
+          <h3>Нормоконтроль и замечания экспертизы с ИИ</h3>
+          <p>Разбор 340 замечаний экспертизы за час вместо недели, проверка документации на типовые несоответствия. Ответственность и подпись остаются за человеком.</p>
+          <p class="aibim-state"><i class="pilot"></i>Замечания — сегодня. Проверка по СП — пилоты</p>
+          <p><a href="ai-review-comments.html">AI для замечаний экспертизы →</a></p>
+        </article>
+
+        <article class="aibim-card">
+          <span>08 · стройка</span>
+          <h3>Цифровой двойник и стройконтроль</h3>
+          <p>Замечания привязаны к элементам, факт сверяется с моделью через AR на площадке, отклонение ловится в день работ, а не при приёмке. Модель после стройки живёт в эксплуатации.</p>
+          <p class="aibim-state"><i class="dream"></i>Мечта, к которой идём. Первые шаги уже реальны</p>
+          <p><a href="upravlenie-bim-proektami.html">Управление BIM-проектами и задачами →</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Честная шкала</p>
+      <h2>Что работает, что в пилотах, что мечта</h2>
+      <div class="aibim-scale" style="margin-top:24px">
+        <article>
+          <h3>Работает сегодня</h3>
+          <p class="hint">Внедряем, считаем эффект в часах</p>
+          <ul>
+            <li>Порядок в данных: параметры, классификатор, номенклатура</li>
+            <li>Проверки модели по правилам перед каждой выдачей</li>
+            <li>Скрипты под Revit с помощью языковой модели</li>
+            <li>Объёмы из модели в смету и заявку на закуп</li>
+            <li>Разбор замечаний экспертизы</li>
+          </ul>
+        </article>
+        <article>
+          <h3>В пилотах</h3>
+          <p class="hint">Делаем на одном проекте, смотрим цифры</p>
+          <ul>
+            <li>Поиск аномалий в модели</li>
+            <li>Классификация элементов и сопоставление с номенклатурой</li>
+            <li>Генерация компоновок и трасс по правилам</li>
+            <li>Распознавание чертежей для подготовки моделирования</li>
+            <li>Проверка документации по нормам</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Мечта</h3>
+          <p class="hint">Куда всё это идёт, без обещания сроков</p>
+          <ul>
+            <li>Модель из чертежей без участия человека</li>
+            <li>Ассистент, который ведёт проект от задания до выдачи</li>
+            <li>Стройконтроль через AR по всему объекту</li>
+            <li>Цифровой двойник, живущий после сдачи</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="aibim-dream">
+        <p class="eyebrow">Помечтаем</p>
+        <h2>Как это выглядит, когда собрано целиком</h2>
+        <p>Проектировщик описывает задачу словами и получает не готовое здание, а варианты компоновки, которые уже проверены на нормы и посчитаны по стоимости. Выбирает один, дорабатывает руками, а модель за ним сама заполняет параметры, собирает спецификации и предупреждает, где данные не сходятся с соседним разделом.</p>
+        <p>Сметчик не ждёт выгрузки: смета живёт на тех же данных и пересчитывается вместе с моделью. Снабженец получает заявку по кодам, а не текстом. Прораб на площадке наводит планшет на стену и видит, что построено не по проекту, в день работ, а не через месяц.</p>
+        <p>Ничего из этого не требует чуда. Каждый шаг по отдельности уже делается. Разница между мечтой и реальностью только в том, сколько блоков собрано вместе и насколько данным в модели можно верить.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">С чего начать</p>
+      <h2>Порядок, который работает</h2>
+      <div class="aibim-steps" style="margin-top:24px">
+        <article>
+          <div>
+            <h3>Данные</h3>
+            <p>Один вечер на файл общих параметров, неделя на договорённости между отделами. Скучно, но без этого всё остальное разваливается.</p>
+          </div>
+        </article>
+        <article>
+          <div>
+            <h3>Рутина</h3>
+            <p>То, что делают каждую неделю руками: проверки перед выдачей, оформление листов, выгрузки. Здесь эффект виден сразу и оплачивает следующие шаги.</p>
+          </div>
+        </article>
+        <article>
+          <div>
+            <h3>Умные надстройки</h3>
+            <p>Аномалии, классификация, генерация вариантов. Работают только на чистых данных, поэтому идут третьими, а не первыми.</p>
+          </div>
+        </article>
+      </div>
+      <p style="margin-top:28px">
+        <a class="btn" href="test.html">Пройти тест зрелости BIM</a>
+        <a class="btn secondary" href="ii-v-proektirovanii.html">Услуга «ИИ в проектировании»</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© BIM Pulse Ufa</span>
+    <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Telegram</a>
+  </footer>
+  <link rel="stylesheet" href="chat.css">
+  <script src="chat.js" defer></script>
+</body>
+</html>
