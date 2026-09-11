@@ -230,7 +230,7 @@ window.NEWS = [
     "date": "07 мая 2026",
     "title": "PostgreSQL для BIM: зачем параметры держать вне Revit",
     "excerpt": "Excel ломается на третьем проекте: версии путаются, история теряется. Разбираем, что даёт база под выгрузки параметров, во что обходится и когда не нужна.",
-    "image": "Bim2.webp"
+    "image": "covers/postgresql-bim-data.webp"
   },
   {
     "slug": "docker-for-bim-services",

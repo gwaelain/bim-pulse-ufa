@@ -5,7 +5,7 @@ description: "Excel ломается на третьем проекте: вер�
 category: Data
 publish_at: 2026-05-07
 updated_at: 2026-08-13
-image: Bim2.webp
+image: covers/postgresql-bim-data.webp
 keywords: [как связать revit с postgresql, выгрузка данных из revit в excel, bim данные в базе данных, bim дашборд, автоматизация revit на заказ, контроль качества bim модели]
 ---
 
