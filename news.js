@@ -1,6 +1,14 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "priemka-bim-modeli-po-chertezham",
+    "category": "Coordination",
+    "date": "12 сентября 2026",
+    "title": "Как принимать BIM-модель, сделанную по вашим чертежам",
+    "excerpt": "Чек-лист приёмки: восемь проверок за час, которые отличают рабочую модель от красивой пустышки. Что смотреть в спецификациях, параметрах, координатах и отчёте о расхождениях.",
+    "image": "bim-model-2.webp"
+  },
+  {
     "slug": "2d-v-bim-perevod-chertezhey",
     "category": "Data",
     "date": "10 сентября 2026",

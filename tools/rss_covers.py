@@ -26,7 +26,7 @@ OUT = ROOT / "rss-covers"
 def main() -> None:
     OUT.mkdir(exist_ok=True)
     made = 0
-    for src in sorted(ROOT.glob("*.webp")):
+    for src in sorted(list(ROOT.glob("*.webp")) + list((ROOT / "covers").glob("*.webp"))):
         dst = OUT / f"{src.stem}.jpg"
         if dst.exists() and dst.stat().st_mtime >= src.stat().st_mtime:
             continue

@@ -190,7 +190,7 @@ def page(a: dict, arts: list[dict]) -> str:
   <meta property="og:title" content="{e(a['title'])}" />
   <meta property="og:description" content="{e(a['description'])}" />
   <meta property="og:url" content="{url}" />
-  <meta property="og:image" content="{DOMAIN}/og-image.jpg" />
+  <meta property="og:image" content="{DOMAIN}/rss-covers/{Path(a['image']).stem}.jpg" />
   <meta property="article:published_time" content="{iso}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{e(a['title'])}" />
