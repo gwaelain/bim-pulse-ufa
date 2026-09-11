@@ -183,6 +183,7 @@ function initLeadForm() {
   }
 
   if (!form) return;
+  form.dataset.openedAt = String(Date.now());
 
   form.addEventListener("submit", async (e) => {
     // honeypot заполнен → это бот, тихо игнорируем
@@ -195,13 +196,35 @@ function initLeadForm() {
     const original = btn ? btn.textContent : "";
     if (btn) { btn.disabled = true; btn.textContent = "Отправляем…"; }
 
+    // Основной канал — наш сервис: заявка в базу, в Telegram и на почту.
+    // FormSubmit остаётся запасным на случай, если сервис лежит.
+    const fd = new FormData(form);
+    const payload = {
+      source: "contacts",
+      name: fd.get("name") || "",
+      contact: fd.get("contact") || "",
+      message: fd.get("message") || "",
+      _honey: fd.get("_honey") || "",
+      opened_at: form.dataset.openedAt ? Number(form.dataset.openedAt) : null
+    };
     try {
-      const res = await fetch("https://formsubmit.co/ajax/bimaip@yandex.ru", {
-        method: "POST",
-        headers: { "Accept": "application/json" },
-        body: new FormData(form)
-      });
-      if (!res.ok) throw new Error("bad status " + res.status);
+      let ok = false;
+      try {
+        const r1 = await fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        ok = r1.ok && (await r1.json()).ok === true;
+      } catch (e1) { ok = false; }
+      if (!ok) {
+        const res = await fetch("https://formsubmit.co/ajax/bimaip@yandex.ru", {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: fd
+        });
+        if (!res.ok) throw new Error("bad status " + res.status);
+      }
       if (typeof ym === "function") ym(109103460, "reachGoal", "lead_form_submit");
       form.hidden = true;
       if (success) success.hidden = false;

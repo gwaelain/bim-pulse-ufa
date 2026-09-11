@@ -318,6 +318,7 @@
 
   function bindForm(form) {
     if (!form) return;
+    form.dataset.openedAt = String(Date.now());
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const note = form.querySelector('[data-form-note]');
@@ -330,12 +331,33 @@
       new FormData(form).forEach((value, key) => { payload[key] = value; });
 
       try {
-        const res = await fetch('https://formsubmit.co/ajax/bimaip@yandex.ru', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error('bad status');
+        // основной канал — наш сервис (база + Telegram + почта), FormSubmit запасной
+        let ok = false;
+        try {
+          const r1 = await fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              source: 'test',
+              name: payload.name || '',
+              contact: payload.contact || '',
+              message: payload.task || '',
+              result: payload.result || '',
+              gaps: payload.probely || '',
+              _honey: payload._honey || '',
+              opened_at: form.dataset.openedAt ? Number(form.dataset.openedAt) : null,
+            }),
+          });
+          ok = r1.ok && (await r1.json()).ok === true;
+        } catch (e1) { ok = false; }
+        if (!ok) {
+          const res = await fetch('https://formsubmit.co/ajax/bimaip@yandex.ru', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error('bad status');
+        }
         goal('quiz_lead');
         form.innerHTML = `
           <div class="quiz-sent">

@@ -1,0 +1,22 @@
+# Сервис заявок и консультанта bim-pulse.ru. Живёт в общей сети web рядом с Caddy,
+# наружу порт не открывает: доступ только через reverse_proxy по /api/*.
+services:
+  bim-pulse-bot:
+    build: .
+    container_name: bim-pulse-bot
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - bimpulse_data:/app/data
+    networks: [web]
+    mem_limit: 512m
+    logging:
+      driver: json-file
+      options: { max-size: "5m", max-file: "3" }
+
+volumes:
+  bimpulse_data:
+
+networks:
+  web:
+    external: true
