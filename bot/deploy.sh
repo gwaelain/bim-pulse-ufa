@@ -44,8 +44,7 @@ block = """bim-pulse.ru {
 """
 import re
 # якорь с началом строки: первое вхождение подстроки попадало в «www.bim-pulse.ru {»
-s2, n = re.subn(r"(?m)^bim-pulse\.ru \{
-", block, s, count=1)
+s2, n = re.subn(r"(?m)^bim-pulse\.ru \{\n", block, s, count=1)
 assert n == 1, "блок bim-pulse.ru не найден"
 open(p, "w", encoding="utf-8").write(s2)
 print("Caddyfile: добавлен handle /api/*")
