@@ -42,8 +42,11 @@ block = """bim-pulse.ru {
 \t\treverse_proxy bim-pulse-bot:8000
 \t}
 """
-s2 = s.replace("bim-pulse.ru {\n", block, 1)
-assert s2 != s, "блок bim-pulse.ru не найден"
+import re
+# якорь с началом строки: первое вхождение подстроки попадало в «www.bim-pulse.ru {»
+s2, n = re.subn(r"(?m)^bim-pulse\.ru \{
+", block, s, count=1)
+assert n == 1, "блок bim-pulse.ru не найден"
 open(p, "w", encoding="utf-8").write(s2)
 print("Caddyfile: добавлен handle /api/*")
 PY
