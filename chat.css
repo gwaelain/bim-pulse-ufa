@@ -30,6 +30,9 @@
 .bchat-fab svg { color: var(--accent, #76b7ff); }
 .bchat-fab.is-open span { display: none; }
 
+/* display:flex на классе перебивает браузерное [hidden]{display:none} — возвращаем явно */
+.bchat-win[hidden] { display: none; }
+
 .bchat-win {
   position: absolute;
   right: 0;
