@@ -122,6 +122,28 @@ updated_at: 2026-08-13      # необязательно, идёт в lastmod и
 Пополнять очередь — обычным коммитом: новый файл в `content/tg/` с фронтматтером
 `tip:` и текстом в HTML-разметке Telegram (`<b>`, ссылки). Порядок — по имени файла.
 
+## Заявки и чат-консультант (bot/)
+
+Сервис `bot/` — FastAPI + aiogram в одном контейнере `bim-pulse-bot` (общая сеть `web`,
+Caddy проксирует `bim-pulse.ru/api/*`). SQLite в volume `bimpulse_data`.
+
+- `POST /api/lead` — заявки со всех форм: контакты, тест, форма аудита на friendlyai.ru
+  (CORS разрешён). Заявка пишется в базу, уходит админам в Telegram и письмом на
+  `bimaip@yandex.ru`. FormSubmit в формах остался запасным каналом.
+- `POST /api/chat`, `GET /api/chat/history` — консультант на DeepSeek (`bot/app/prompt.py`).
+  История приватна: токен сессии в localStorage, сервер отдаёт переписку только по нему.
+  Контакт, оставленный в диалоге, становится заявкой вместе с последними репликами.
+- Личка @bimpulsebot — тот же консультант. Админ = тот, кто написал `/start` с username
+  из `ADMIN_USERNAMES`; `/leads` показывает последние заявки.
+- Защита от ботов без капчи (`bot/app/antibot.py`): honeypot, время заполнения формы,
+  проверка Origin, лимиты по IP и по сессии.
+- Виджет на всех страницах: `chat.js` + `chat.css`, подключены через партиал footer.
+  Цели Метрики: `chat_open`, `chat_message`.
+
+Деплой: `bash /opt/drip/bim-pulse-ufa/bot/deploy.sh` на сервере (идемпотентно, Caddy только
+после validate). `.env` заливается скриптом `infra\scripts\postavit-bimpulse-bot.ps1` из сейфа.
+Логи: `docker logs bim-pulse-bot`. `bot/` исключён из rsync статики — наружу не торчит.
+
 ## SEO-обвязка (сделано, не сломать)
 
 - Яндекс.Вебмастер: хост подтверждён мета-тегом `yandex-verification` в `index.html`
