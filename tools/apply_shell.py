@@ -26,7 +26,7 @@ def process(p: Path) -> bool:
 
 def main():
     for p in sorted(ROOT.glob("*.html")):
-        if p.name.startswith(("yandex_", "google")):
+        if p.name.startswith(("yandex_", "google", "zen_")):
             continue
         nh, nf, nm = process(p)
         print(f"  {p.name}: header={nh} footer={nf} metrika={nm}")

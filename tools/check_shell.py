@@ -21,7 +21,7 @@ PARTS = {
 def main():
     drift = []
     for html in sorted(ROOT.glob("*.html")):
-        if html.name.startswith(("yandex_", "google")):
+        if html.name.startswith(("yandex_", "google", "zen_")):
             continue
         text = html.read_text(encoding="utf-8")
         for name, (pat, expected) in PARTS.items():
