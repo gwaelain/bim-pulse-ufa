@@ -1,6 +1,14 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "ii-raspoznavanie-chertezhey",
+    "category": "AI",
+    "date": "14 сентября 2026",
+    "title": "ИИ и распознавание чертежей: что работает, а что пока демо",
+    "excerpt": "Честный разбор: где нейросети реально экономят время на чертежах, штампы, спецификации, поиск изменений между ревизиями, и почему «PDF на входе, модель на выходе» остаётся обещанием.",
+    "image": "Bim.webp"
+  },
+  {
     "slug": "priemka-bim-modeli-po-chertezham",
     "category": "Coordination",
     "date": "12 сентября 2026",
