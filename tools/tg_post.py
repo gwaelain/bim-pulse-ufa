@@ -76,11 +76,17 @@ def article_meta(slug: str) -> dict | None:
 
 def next_item(state: dict) -> tuple[str, str] | None:
     """Что постим следующим: (ключ для состояния, готовый текст)."""
-    sent = set(state.get("sent", []))
+    sent_list = state.get("sent", [])
+    sent = set(sent_list)
 
-    # 1. свежая статья, о которой ещё не говорили
-    pub_file = ROOT / "tools" / "published.json"
-    if pub_file.exists():
+    # два анонса подряд не шлём: если прошлым был анонс статьи, сейчас очередь заметки
+    # (после починки published.json в хвосте оказалось сразу 11 непроанонсированных статей)
+    last_was_article = bool(sent_list) and sent_list[-1].startswith("art:")
+
+    def next_article() -> tuple[str, str] | None:
+        pub_file = ROOT / "tools" / "published.json"
+        if not pub_file.exists():
+            return None
         for slug in json.loads(pub_file.read_text(encoding="utf-8")):
             if slug.startswith("service:") or f"art:{slug}" in sent:
                 continue
@@ -91,6 +97,13 @@ def next_item(state: dict) -> tuple[str, str] | None:
                     f"{meta.get('description', '')}\n\n"
                     f"{DOMAIN}/{slug}.html")
             return f"art:{slug}", text
+        return None
+
+    # 1. свежая статья, о которой ещё не говорили
+    if not last_was_article:
+        item = next_article()
+        if item:
+            return item
 
     # 2. очередная заметка
     if QUEUE.exists():
@@ -101,7 +114,8 @@ def next_item(state: dict) -> tuple[str, str] | None:
             meta, body = frontmatter(f.read_text(encoding="utf-8"))
             return key, body.strip()
 
-    return None
+    # 3. заметки кончились — тогда анонсы статей можно и подряд
+    return next_article()
 
 
 def send(text: str) -> dict:
