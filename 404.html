@@ -22,6 +22,12 @@
     // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
     ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
     ym(111661242,'hit',location.href);
+    // Цели шлём в оба счётчика: доступ к отчётам есть только у второго
+    window.ymGoal = function (name) {
+      [109103460, 111661242].forEach(function (id) {
+        try { ym(id, 'reachGoal', name); } catch (e) { /* блокировщик — не беда */ }
+      });
+    };
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
@@ -42,7 +48,7 @@
       <a href="faq.html">FAQ</a>
       <a href="contacts.html">Контакты</a>
     </nav>
-    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ym(109103460,'reachGoal','telegram_click')">Telegram</a>
+    <a class="nav-cta" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener" onclick="ymGoal('telegram_click')">Telegram</a>
   </header>
 
   <main class="section" style="text-align:center; min-height:52vh; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:18px;">

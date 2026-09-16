@@ -8,11 +8,8 @@
   const quiz = document.getElementById('quiz');
   if (!quiz) return;
 
-  const YM_IDS = [109103460, 111661242];
   const goal = (name) => {
-    YM_IDS.forEach((id) => {
-      try { window.ym && window.ym(id, 'reachGoal', name); } catch (e) { /* блокировщик — не беда */ }
-    });
+    try { window.ymGoal && window.ymGoal(name); } catch (e) { /* блокировщик — не беда */ }
   };
 
   const QUESTIONS = [

@@ -225,7 +225,7 @@ function initLeadForm() {
         });
         if (!res.ok) throw new Error("bad status " + res.status);
       }
-      if (typeof ym === "function") ym(109103460, "reachGoal", "lead_form_submit");
+      if (typeof ymGoal === "function") ymGoal('lead_form_submit');
       form.hidden = true;
       if (success) success.hidden = false;
     } catch (err) {

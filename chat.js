@@ -88,7 +88,7 @@
     fab.classList.add('is-open');
     loadHistory();
     setTimeout(function () { input.focus(); }, 50);
-    try { window.ym && window.ym(111661242, 'reachGoal', 'chat_open'); } catch (e) {}
+    try { window.ymGoal && window.ymGoal('chat_open'); } catch (e) {}
   }
   function close() {
     win.hidden = true;
@@ -134,7 +134,7 @@
           try { localStorage.setItem(KEY, session); } catch (err) {}
         }
         add('assistant', d.reply || 'Не понял, переформулируйте, пожалуйста.');
-        try { window.ym && window.ym(111661242, 'reachGoal', 'chat_message'); } catch (err) {}
+        try { window.ymGoal && window.ymGoal('chat_message'); } catch (err) {}
       })
       .catch(function () {
         typing(false);

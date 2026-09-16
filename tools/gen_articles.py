@@ -279,7 +279,10 @@ def write_rss(arts: list[dict], limit: int = 20) -> None:
       <content:encoded><![CDATA[{body}]]></content:encoded>
     </item>""")
 
-    now = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0500")
+    # lastBuildDate = дата свежей статьи, а не момент сборки: иначе каждый прогон cron
+    # (раз в 10 минут) менял rss.xml и рождал пустой коммит «drip: публикация…»
+    newest = max((a["publish_at"] for a in arts[:limit]), default=date.today().isoformat())
+    now = datetime.strptime(newest, "%Y-%m-%d").strftime("%a, %d %b %Y 09:00:00 +0500")
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"
      xmlns:atom="http://www.w3.org/2005/Atom">
@@ -384,9 +387,12 @@ def main() -> None:
         name = f"{a['slug']}.html"
         if a["slug"] not in seen:
             fresh.append(f"{DOMAIN}/{name}")
+            # пополняем сам набор, а не только файл: ниже он пишется ещё раз (после услуг),
+            # и без этого новые статьи из published.json выпадали — каждый прогон снова
+            # считал их «новыми», пинговал IndexNow и не давал tg_post их анонсировать
+            seen.add(a["slug"])
         (ROOT / name).write_text(page(a, live), encoding="utf-8")
-    seen_file.write_text(json.dumps(sorted(seen | {a["slug"] for a in live}),
-                                    ensure_ascii=False, indent=1), encoding="utf-8")
+    seen_file.write_text(json.dumps(sorted(seen), ensure_ascii=False, indent=1), encoding="utf-8")
 
     # страницы услуг собираются тем же прогоном — иначе о них забудут при деплое
     import gen_services
