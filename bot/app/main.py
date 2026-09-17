@@ -20,6 +20,8 @@ from . import antibot, chat, config, db, notify, mail, tg
 from .prompt import WELCOME_WEB
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+# httpx на INFO печатает URL запроса целиком — с токеном бота внутри. В логах ему не место.
+logging.getLogger("httpx").setLevel(logging.WARNING)
 log = logging.getLogger("api")
 
 
