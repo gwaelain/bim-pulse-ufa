@@ -173,7 +173,7 @@ def page(s: dict, others: list[dict], live: set[str] | None = None) -> str:
     <div class="article-cta">
       <h3>Обсудим вашу задачу?</h3>
       <p>Опишите, что нужно автоматизировать или проверить — вернёмся с оценкой по объёму и срокам, без «вилки в потолок».</p>
-      <a class="btn primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Написать в Telegram</a>
+      <a class="btn primary" href="https://t.me/bimpulsebot?start=service" target="_blank" rel="noreferrer" onclick="ymGoal('telegram_click')">Написать в Telegram</a>
       <a class="btn secondary" href="contacts.html">Оставить заявку</a>
     </div>
     <aside class="article-related">

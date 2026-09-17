@@ -105,4 +105,4 @@ publish_at: 2026-08-14
 
 Опишите одну пару систем, между которыми сейчас ходит Excel. Этого хватит, чтобы прикинуть объём работ и сказать, решается задача за три дня или за месяц.
 
-Напишите в [Telegram](https://t.me/bim_pulse_ufa) или через [страницу контактов](contacts.html). Смотрите также: [автоматизация проверки моделей](avtomatizaciya-proverki-modeley.html), [Dynamo-скрипты и плагины на заказ](razrabotka-dynamo-i-plaginov.html), [ИИ в проектировании](ii-v-proektirovanii.html).
+Напишите в [Telegram](https://t.me/bimpulsebot?start=article) или через [страницу контактов](contacts.html). Смотрите также: [автоматизация проверки моделей](avtomatizaciya-proverki-modeley.html), [Dynamo-скрипты и плагины на заказ](razrabotka-dynamo-i-plaginov.html), [ИИ в проектировании](ii-v-proektirovanii.html).

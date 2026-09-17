@@ -221,7 +221,7 @@ def page(a: dict, arts: list[dict]) -> str:
     <div class="article-cta">
       <h3>Нужен похожий BIM/AI процесс?</h3>
       <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
-      <a class="btn primary" href="https://t.me/bim_pulse_ufa" target="_blank" rel="noreferrer">Telegram</a>
+      <a class="btn primary" href="https://t.me/bimpulsebot?start=article" target="_blank" rel="noreferrer" onclick="ymGoal('telegram_click')">Написать в Telegram</a>
       <a class="btn secondary" href="contacts.html">Оставить заявку</a>
     </div>
     <aside class="article-related">

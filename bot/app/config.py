@@ -22,6 +22,9 @@ SMTP_PORT = int(os.environ.get("SMTP_PORT", "465"))
 SMTP_USER = os.environ.get("SMTP_USER", "")
 SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD", "")
 LEAD_EMAIL_TO = os.environ.get("LEAD_EMAIL_TO", SMTP_USER)
+IMAP_HOST = os.environ.get("IMAP_HOST", "imap.yandex.ru")
+IMAP_PORT = int(os.environ.get("IMAP_PORT", "993"))
+IMAP_POLL_SECONDS = int(os.environ.get("IMAP_POLL_SECONDS", "180"))  # 0 — не читать входящие
 
 DB_PATH = os.environ.get("DB_PATH", "/app/data/bimpulse.db")
 

@@ -14,7 +14,7 @@ async def converse(session_id: str, channel: str, text: str, site: str | None = 
     await db.touch_session(session_id, channel, site)
     if await db.messages_today(session_id) >= config.CHAT_MAX_PER_SESSION_DAY:
         return ("На сегодня лимит сообщений в чате исчерпан. Напишите нам напрямую: "
-                "Telegram @bim_pulse_ufa или bimaip@yandex.ru.")
+                "Telegram @bimpulsebot или bimaip@yandex.ru.")
 
     await db.add_message(session_id, "user", text)
 
@@ -35,6 +35,6 @@ async def converse(session_id: str, channel: str, text: str, site: str | None = 
         answer = await llm.reply(hist)
     except Exception:  # noqa: BLE001
         answer = ("Сейчас не могу ответить — что-то с подключением к модели. "
-                  "Напишите в Telegram @bim_pulse_ufa, там ответим руками.")
+                  "Напишите в Telegram @bimpulsebot, там ответим руками.")
     await db.add_message(session_id, "assistant", answer)
     return answer

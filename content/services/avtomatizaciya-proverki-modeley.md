@@ -100,4 +100,4 @@ publish_at: 2026-08-14
 
 Пришлите EIR или ваш BIM-стандарт и одну реальную модель. За несколько дней прогоним черновой набор и покажем, что нашлось, до всякого договора. Дальше решите сами: нужен вам такой контур или хватит коробочного продукта.
 
-Написать можно в [Telegram](https://t.me/bim_pulse_ufa) или через [форму на странице контактов](contacts.html). Рядом стоят [автоматизация через API и интеграции](bim-avtomatizaciya-api.html), [разработка Dynamo-скриптов и плагинов](razrabotka-dynamo-i-plaginov.html) и [ИИ в проектировании](ii-v-proektirovanii.html).
+Написать можно в [Telegram](https://t.me/bimpulsebot?start=article) или через [форму на странице контактов](contacts.html). Рядом стоят [автоматизация через API и интеграции](bim-avtomatizaciya-api.html), [разработка Dynamo-скриптов и плагинов](razrabotka-dynamo-i-plaginov.html) и [ИИ в проектировании](ii-v-proektirovanii.html).

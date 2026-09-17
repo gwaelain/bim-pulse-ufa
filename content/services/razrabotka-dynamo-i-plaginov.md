@@ -101,4 +101,4 @@ publish_at: 2026-08-14
 
 Опишите одну задачу, которая съедает больше всего времени. Пары абзацев и скриншота хватит, чтобы назвать срок и вилку цены в тот же день.
 
-Пишите в [Telegram](https://t.me/bim_pulse_ufa) или через [форму на странице контактов](contacts.html). Если задача шире одного скрипта, посмотрите [автоматизацию проверки моделей](avtomatizaciya-proverki-modeley.html) и [интеграции через API](bim-avtomatizaciya-api.html).
+Пишите в [Telegram](https://t.me/bimpulsebot?start=article) или через [форму на странице контактов](contacts.html). Если задача шире одного скрипта, посмотрите [автоматизацию проверки моделей](avtomatizaciya-proverki-modeley.html) и [интеграции через API](bim-avtomatizaciya-api.html).

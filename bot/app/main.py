@@ -16,7 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from . import antibot, chat, config, db, notify, tg
+from . import antibot, chat, config, db, notify, mail, tg
 from .prompt import WELCOME_WEB
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
@@ -26,9 +26,10 @@ log = logging.getLogger("api")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await db.init()
-    task = asyncio.create_task(tg.run())
+    tasks = [asyncio.create_task(tg.run()), asyncio.create_task(mail.run())]
     yield
-    task.cancel()
+    for t in tasks:
+        t.cancel()
 
 
 app = FastAPI(title="BIM Pulse leads & chat", lifespan=lifespan, docs_url=None, redoc_url=None)

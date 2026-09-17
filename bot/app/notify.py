@@ -26,6 +26,7 @@ SOURCE_RU = {
     "audit": "форма AI-аудита (friendlyai.ru)",
     "chat": "чат на сайте",
     "telegram": "Telegram-бот",
+    "email": "письмо на почту проекта",
 }
 
 
