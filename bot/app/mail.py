@@ -67,15 +67,21 @@ def _fetch_unseen() -> list[dict]:
             sender = _decode(msg.get("From"))
             subject = _decode(msg.get("Subject"))
             addr = (re.search(r"[\w.+-]+@[\w.-]+", sender) or [None])[0] if sender else None
-            out.append({"from": sender, "addr": addr or "", "subject": subject,
+            # массовые рассылки (реклама Яндекса, дайджесты) всегда несут List-Unsubscribe
+            # или Precedence: bulk — живые письма от людей нет
+            bulk = bool(msg.get("List-Unsubscribe")) or                 (msg.get("Precedence", "") or "").lower() in ("bulk", "list", "junk")
+            out.append({"from": sender, "addr": addr or "", "subject": subject, "bulk": bulk,
                         "text": _body(msg)[:3000], "date": _decode(msg.get("Date"))})
             im.store(uid, "+FLAGS", "\\Seen")
     return out
 
 
 def _ours(item: dict) -> bool:
-    """Наше же уведомление о заявке или письмо от самих себя."""
+    """Наше же уведомление, письмо от самих себя или массовая рассылка — админам не нужно."""
     if item["addr"].lower() == config.SMTP_USER.lower():
+        return True
+    if item.get("bulk"):
+        log.info("рассылка пропущена: %s / %s", item["addr"], item["subject"][:60])
         return True
     return item["subject"].startswith("Заявка №")
 
