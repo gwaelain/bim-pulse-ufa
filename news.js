@@ -1,6 +1,14 @@
 // Файл генерируется: python3 tools/gen_articles.py. Руками не править.
 window.NEWS = [
   {
+    "slug": "llm-pishet-skripty-revit",
+    "category": "AI",
+    "date": "18 сентября 2026",
+    "title": "Как заставить LLM писать скрипты для Revit и Dynamo",
+    "excerpt": "Практика: языковая модель пишет код под Revit API за минуты, но уверенно выдумывает методы. Разбираем, что она делает хорошо, где врёт и как проверять результат, не сломав модель.",
+    "image": "Bim2.webp"
+  },
+  {
     "slug": "generativnoe-proektirovanie",
     "category": "AI",
     "date": "16 сентября 2026",

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Как заставить LLM писать скрипты для Revit и Dynamo — BIM Pulse Ufa</title>
+  <meta name="description" content="Практика: языковая модель пишет код под Revit API за минуты, но уверенно выдумывает методы. Разбираем, что она делает хорошо, где врёт и как проверять результат, не сломав модель." />
+  <meta name="keywords" content="llm для revit api, нейросеть пишет скрипт dynamo, chatgpt revit api, генерация кода pyrevit, автоматизация revit с ии, python скрипт для revit нейросеть" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bim-pulse.ru/llm-pishet-skripty-revit.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="BIM Pulse Ufa" />
+  <meta property="og:title" content="Как заставить LLM писать скрипты для Revit и Dynamo" />
+  <meta property="og:description" content="Практика: языковая модель пишет код под Revit API за минуты, но уверенно выдумывает методы. Разбираем, что она делает хорошо, где врёт и как проверять результат, не сломав модель." />
+  <meta property="og:url" content="https://bim-pulse.ru/llm-pishet-skripty-revit.html" />
+  <meta property="og:image" content="https://bim-pulse.ru/rss-covers/Bim2.jpg" />
+  <meta property="article:published_time" content="2026-09-18" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Как заставить LLM писать скрипты для Revit и Dynamo" />
+  <meta name="twitter:description" content="Практика: языковая модель пишет код под Revit API за минуты, но уверенно выдумывает методы. Разбираем, что она делает хорошо, где врёт и как проверять результат, не сломав модель." />
+  <meta name="twitter:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="article.css" />
+  <link rel="stylesheet" href="global.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Как заставить LLM писать скрипты для Revit и Dynamo", "description": "Практика: языковая модель пишет код под Revit API за минуты, но уверенно выдумывает методы. Разбираем, что она делает хорошо, где врёт и как проверять результат, не сломав модель.", "image": "https://bim-pulse.ru/Bim2.webp", "datePublished": "2026-09-18", "dateModified": "2026-09-18", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/llm-pishet-skripty-revit.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Как заставить LLM писать скрипты для Revit и Dynamo", "item": "https://bim-pulse.ru/llm-pishet-skripty-revit.html"}]}</script>
+<!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460','ym');
+    ym(109103460,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(109103460,'hit',location.href);
+    // Второй счётчик — в аккаунте аналитики портфеля (kpi1t). Первый заведён в другом
+    // Яндекс-аккаунте, поэтому Вебмастер не давал привязать его к сайту, а данные не
+    // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
+    ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(111661242,'hit',location.href);
+    // Цели шлём в оба счётчика: доступ к отчётам есть только у второго
+    window.ymGoal = function (name) {
+      [109103460, 111661242].forEach(function (id) {
+        try { ym(id, 'reachGoal', name); } catch (e) { /* блокировщик — не беда */ }
+      });
+    };
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav">
+      <a href="services.html">Услуги</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="test.html">Тест</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <a class="nav-cta" href="https://t.me/bimpulsebot?start=header" target="_blank" rel="noopener" onclick="ymGoal('telegram_click')">Написать</a>
+  </header>
+  <main class="article-page section">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a> · <a href="blog.html">Блог</a> · <span>AI</span>
+    </nav>
+    <article class="article-full">
+    <div class="meta"><span>AI</span><span>18 сентября 2026</span><span>850 слов</span></div>
+    <h1>Как заставить LLM писать скрипты для Revit и Dynamo</h1>
+    <p class="lead">Практика: языковая модель пишет код под Revit API за минуты, но уверенно выдумывает методы. Разбираем, что она делает хорошо, где врёт и как проверять результат, не сломав модель.</p>
+    <img class="article-cover" src="Bim2.webp" alt="Как заставить LLM писать скрипты для Revit и Dynamo" onerror="this.src='bim-model-1.webp'" />
+    <p>Просишь модель: «напиши скрипт, который переименует все листы по шаблону». Через двадцать секунд приходит аккуратный код на Python с комментариями, обработкой ошибок и красивой структурой. Запускаешь в pyRevit, получаешь ошибку: метода, который она вызвала, в Revit API не существует.</p>
+    <p>Это не повод бросать. Просто нужно понимать, что языковая модель делает хорошо, а что не делает совсем. За полгода использования у нас сложился набор правил, который экономит часы, а не создаёт новые.</p>
+    <h2>Что модель делает хорошо</h2>
+    <p><strong>Каркас скрипта.</strong> Импорты, транзакция, сбор элементов через FilteredElementCollector, вывод результата. Эта часть повторяется в каждом скрипте, и модель её знает.</p>
+    <p><strong>Логику обработки данных.</strong> Отфильтровать, сгруппировать, посчитать, отсортировать, собрать словарь. Обычный Python, где Revit ни при чём. Здесь ошибок практически нет.</p>
+    <p><strong>Регулярные выражения и парсинг строк.</strong> Разобрать марку вида «КЖ-1.3-205» на составляющие, собрать имя листа по шаблону, вытащить число из текста. Задача, на которой человек тратит полчаса и три опечатки.</p>
+    <p><strong>Объяснение чужого кода.</strong> Прислали скрипт от предыдущего подрядчика, никто не понимает, что он делает. Модель разбирает построчно, и это честно экономит день.</p>
+    <p><strong>Перевод между API.</strong> Есть рабочий код на C# из плагина, нужен аналог на Python для Dynamo. Структурно задача механическая, модель справляется.</p>
+    <h2>Где она врёт</h2>
+    <p>Главная проблема одна: <strong>модель не знает точную сигнатуру методов Revit API вашей версии</strong> и на месте пробела уверенно придумывает правдоподобное.</p>
+    <p>Типичные выдумки, которые встречаются раз через раз:</p>
+    <ul><li>метод, которого нет вовсе, но название звучит логично: <code>element.SetParameterValue("Марка", "КЖ-1")</code>;</li><li>перепутанные версии: код для Revit 2019 в проекте на 2024, где перечисления единиц измерения переехали в <code>UnitTypeId</code>;</li><li>забытая транзакция: код меняет модель без <code>Transaction</code>, и Revit отвечает исключением;</li><li>неверный порядок аргументов там, где их четыре и три из них похожи;</li><li>обращение к параметру по русскому имени, когда в проекте он называется иначе.</li></ul>
+    <p>Отдельная категория это единицы измерения. Модель бодро складывает миллиметры с внутренними футами Revit, потому что в коде это просто числа. Ошибка тихая: скрипт отработает, а размеры в модели уедут. Про это у нас есть отдельный разбор про <a href="dynamo-chisla-i-edinicy.html">числа и единицы в Dynamo</a>, там же и цена вопроса.</p>
+    <h2>Как просить, чтобы получалось</h2>
+    <p>Разница между «получил мусор» и «получил рабочий код» почти целиком в постановке.</p>
+    <p><strong>Указывайте версию.</strong> «Revit 2024, pyRevit, IronPython 3» в первой строке запроса убирает половину ошибок с несовместимостью.</p>
+    <p><strong>Давайте образец рабочего кода.</strong> Свой скрипт, который точно работает в вашей среде, приложенный к запросу, задаёт модели стиль и правильные вызовы. Это сильнее любых объяснений: она подстраивается под пример.</p>
+    <p><strong>Просите минимальную версию.</strong> «Без обработки ошибок, без логирования, только суть». Короткий код проще проверить. Красивую обвязку добавите потом, когда логика подтвердится.</p>
+    <p><strong>Требуйте вывод, а не действие.</strong> Первая версия скрипта должна не менять модель, а печатать, что бы она изменила: список элементов, старое значение, новое значение. Смотрите на список, и только потом разрешаете запись.</p>
+    <p><strong>Спрашивайте про допущения.</strong> Прямой вопрос «какие места здесь могут не работать в моей версии» заставляет модель самой указать на слабые точки. Она их обычно знает, просто не говорит, пока не спросят.</p>
+    <h2>Порядок проверки, который спасает модель</h2>
+    <p>Правило простое: <strong>скрипт от языковой модели не запускается на рабочем файле</strong>. Никогда, даже если выглядит очевидным.</p>
+    <p>Порядок такой. Сначала копия проекта или тестовая модель с десятком элементов. Дальше запуск в режиме вывода без записи: смотрим, что скрипт собрался менять, и сверяем глазами хотя бы пять позиций. Потом запуск на копии с записью, проверка результата в спецификации. И только затем рабочий файл, обязательно с синхронизацией до запуска, чтобы откат стоил один клик.</p>
+    <p>Звучит долго, занимает пятнадцать минут. Восстановление модели после скрипта, который переименовал шесть тысяч элементов по неправильному шаблону, занимает день.</p>
+    <h2>Что это даёт по времени</h2>
+    <p>Честные цифры из практики.</p>
+    <p>Простой скрипт, который раньше писали час: теперь пятнадцать минут вместе с проверкой. Скрипт средней сложности с обходом связанных файлов и сбором данных: был день, стало три-четыре часа. Разбор чужого кода: был день, стал час.</p>
+    <p>При этом задачи, где нужна тонкая работа с API (свои классы, обработка событий, расширения интерфейса), почти не ускорились. Там модель помогает как справочник, но пишет всё равно человек.</p>
+    <p>Средняя экономия по нашим задачам вышла процентов сорок. Не десятикратно, как обещают в роликах, но заметно.</p>
+    <h2>Кому это подходит</h2>
+    <p>Здесь важная оговорка.</p>
+    <p>Языковая модель ускоряет того, кто <strong>может проверить результат</strong>. Если вы читаете код и понимаете, что делает FilteredElementCollector, вы получите готовый скрипт за минуты вместо часа.</p>
+    <p>Если код читать не умеете, вы получите красивый текст, который непонятно почему не работает, и потратите на разбирательство больше, чем на изучение основ. Начинать в таком случае надо не с промптов, а с <a href="dynamo-pervyy-skript.html">первого скрипта в Dynamo</a> и понимания, как вообще устроен доступ к элементам.</p>
+    <p>Отдельный случай: скрипты нужны регулярно и всей командой. Тогда разумнее не раздавать всем доступ к чату, а собрать проверенную библиотеку скриптов с кнопками, чтобы люди пользовались готовым, а не генерировали каждый своё. Про то, как это устроено у нас, есть страница <a href="dynamo-scripts.html">разработки Dynamo-скриптов и плагинов</a>.</p>
+    <h2>Короткий чек-лист</h2>
+    <p>Перед тем как просить код:</p>
+    <ol><li>Назовите версию Revit и среду запуска.</li><li>Приложите образец своего рабочего скрипта.</li><li>Попросите сначала версию «только вывод, без записи».</li><li>Проверьте пять позиций из вывода глазами.</li><li>Запускайте на копии, потом на рабочем файле после синхронизации.</li></ol>
+    <p>Пункт четвёртый пропускают чаще всего. Именно он ловит выдуманные методы и уехавшие единицы до того, как они попадут в модель.</p>
+    <div class="article-cta">
+      <h3>Нужен похожий BIM/AI процесс?</h3>
+      <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
+      <a class="btn primary" href="https://t.me/bimpulsebot?start=article" target="_blank" rel="noreferrer" onclick="ymGoal('telegram_click')">Написать в Telegram</a>
+      <a class="btn secondary" href="contacts.html">Оставить заявку</a>
+    </div>
+    <aside class="article-related">
+      <h3>Читайте дальше</h3>
+      <ul><li><a href="generativnoe-proektirovanie.html">Генеративное проектирование: где взлетает, а где остаётся демо</a></li><li><a href="ii-raspoznavanie-chertezhey.html">ИИ и распознавание чертежей: что работает, а что пока демо</a></li><li><a href="ai-review-comments.html">AI для замечаний экспертизы: что ускоряется на самом деле</a></li></ul>
+    </aside>
+    </article>
+  </main>
+  <footer class="footer">
+    <span>© BIM Pulse Ufa</span>
+    <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Канал в Telegram</a>
+    <link rel="stylesheet" href="chat.css">
+    <script src="chat.js" defer></script>
+  </footer>
+</body>
+</html>
