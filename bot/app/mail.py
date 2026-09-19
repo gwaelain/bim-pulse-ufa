@@ -69,7 +69,8 @@ def _fetch_unseen() -> list[dict]:
             addr = (re.search(r"[\w.+-]+@[\w.-]+", sender) or [None])[0] if sender else None
             # массовые рассылки (реклама Яндекса, дайджесты) всегда несут List-Unsubscribe
             # или Precedence: bulk — живые письма от людей нет
-            bulk = bool(msg.get("List-Unsubscribe")) or                 (msg.get("Precedence", "") or "").lower() in ("bulk", "list", "junk")
+            precedence = (msg.get("Precedence", "") or "").lower()
+            bulk = bool(msg.get("List-Unsubscribe")) or precedence in ("bulk", "list", "junk")
             out.append({"from": sender, "addr": addr or "", "subject": subject, "bulk": bulk,
                         "text": _body(msg)[:3000], "date": _decode(msg.get("Date"))})
             im.store(uid, "+FLAGS", "\\Seen")
