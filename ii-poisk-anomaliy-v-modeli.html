@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ИИ ищет в модели то, чего не находят правила — BIM Pulse Ufa</title>
+  <meta name="description" content="Правила ловят известные ошибки, а модель разваливается от неизвестных. Разбираем поиск аномалий: статистические выбросы, странные сочетания параметров и что с этим делать проектировщику." />
+  <meta name="keywords" content="поиск аномалий в bim модели, контроль качества модели ии, проверка модели машинное обучение, аудит bim модели автоматический, выбросы в данных модели, нестандартные элементы revit" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bim-pulse.ru/ii-poisk-anomaliy-v-modeli.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="BIM Pulse Ufa" />
+  <meta property="og:title" content="ИИ ищет в модели то, чего не находят правила" />
+  <meta property="og:description" content="Правила ловят известные ошибки, а модель разваливается от неизвестных. Разбираем поиск аномалий: статистические выбросы, странные сочетания параметров и что с этим делать проектировщику." />
+  <meta property="og:url" content="https://bim-pulse.ru/ii-poisk-anomaliy-v-modeli.html" />
+  <meta property="og:image" content="https://bim-pulse.ru/rss-covers/bim-model-2.jpg" />
+  <meta property="article:published_time" content="2026-09-22" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ИИ ищет в модели то, чего не находят правила" />
+  <meta name="twitter:description" content="Правила ловят известные ошибки, а модель разваливается от неизвестных. Разбираем поиск аномалий: статистические выбросы, странные сочетания параметров и что с этим делать проектировщику." />
+  <meta name="twitter:image" content="https://bim-pulse.ru/og-image.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="article.css" />
+  <link rel="stylesheet" href="global.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ИИ ищет в модели то, чего не находят правила", "description": "Правила ловят известные ошибки, а модель разваливается от неизвестных. Разбираем поиск аномалий: статистические выбросы, странные сочетания параметров и что с этим делать проектировщику.", "image": "https://bim-pulse.ru/bim-model-2.webp", "datePublished": "2026-09-22", "dateModified": "2026-09-22", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/ii-poisk-anomaliy-v-modeli.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "ИИ ищет в модели то, чего не находят правила", "item": "https://bim-pulse.ru/ii-poisk-anomaliy-v-modeli.html"}]}</script>
+<!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0];
+    k.async=1;k.src=r;a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109103460','ym');
+    ym(109103460,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(109103460,'hit',location.href);
+    // Второй счётчик — в аккаунте аналитики портфеля (kpi1t). Первый заведён в другом
+    // Яндекс-аккаунте, поэтому Вебмастер не давал привязать его к сайту, а данные не
+    // попадали в наш ежедневный отчёт. Оба считают параллельно и друг другу не мешают.
+    ym(111661242,'init',{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    ym(111661242,'hit',location.href);
+    // Цели шлём в оба счётчика: доступ к отчётам есть только у второго
+    window.ymGoal = function (name) {
+      [109103460, 111661242].forEach(function (id) {
+        try { ym(id, 'reachGoal', name); } catch (e) { /* блокировщик — не беда */ }
+      });
+    };
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109103460" style="position:absolute;left:-9999px;" alt="" /><img src="https://mc.yandex.ru/watch/111661242" style="position:absolute;left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="BIM Pulse Ufa">
+      <img src="logo.png" alt="BIM Pulse Ufa" />
+      <span>BIM Pulse Ufa</span>
+    </a>
+    <nav class="nav">
+      <a href="services.html">Услуги</a>
+      <a href="cases.html">Кейсы</a>
+      <a href="test.html">Тест</a>
+      <a href="about.html">О нас</a>
+      <a href="blog.html">Блог</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+    <a class="nav-cta" href="https://t.me/bimpulsebot?start=header" target="_blank" rel="noopener" onclick="ymGoal('telegram_click')">Написать</a>
+  </header>
+  <main class="article-page section">
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a> · <a href="blog.html">Блог</a> · <span>AI</span>
+    </nav>
+    <article class="article-full">
+    <div class="meta"><span>AI</span><span>22 сентября 2026</span><span>732 слов</span></div>
+    <h1>ИИ ищет в модели то, чего не находят правила</h1>
+    <p class="lead">Правила ловят известные ошибки, а модель разваливается от неизвестных. Разбираем поиск аномалий: статистические выбросы, странные сочетания параметров и что с этим делать проектировщику.</p>
+    <img class="article-cover" src="bim-model-2.webp" alt="ИИ ищет в модели то, чего не находят правила" onerror="this.src='bim-model-1.webp'" />
+    <p>Проверки по правилам работают отлично, пока вы знаете, что искать. Пустой параметр, элемент не на своём уровне, дубль марки. Всё это описывается условием и ловится скриптом за минуту.</p>
+    <p>Проблема в другом. Самые дорогие ошибки обычно не входят в список правил, потому что никто не догадался их туда внести. Стена толщиной 380 вместо 400 в одном месте из четырёхсот. Оборудование с массой 1200 кг там, где у соседних позиций 120. Дверь, которая по параметрам открывается в сторону лестничной клетки.</p>
+    <p>Правило на такое не напишешь: заранее не знаешь, что именно пойдёт не так. Зато можно искать не нарушения, а странности.</p>
+    <h2>В чём разница</h2>
+    <p>Правило говорит: «параметр Марка не должен быть пустым». Оно проверяет соответствие условию.</p>
+    <p>Поиск аномалий говорит другое: «вот эти двенадцать элементов не похожи на остальные три тысячи такого же типа». Он не знает, ошибка это или осознанное решение. Он показывает, куда посмотреть.</p>
+    <p>Такой подход не заменяет правила, а дополняет их. Правила отсекают известные ошибки. Аномалии подсвечивают неизвестные.</p>
+    <h2>Что реально ищется</h2>
+    <p><strong>Числовые выбросы.</strong> Берём все элементы одного типа и смотрим на распределение параметров: толщина, высота, объём, масса, площадь. Значения, выпадающие из общей картины, попадают в отчёт.</p>
+    <p>Простая математика, никакого обучения не требуется. На реальных моделях эта проверка стабильно вылавливает опечатки: 2500 вместо 250, метры вместо миллиметров, лишний ноль.</p>
+    <p><strong>Редкие сочетания параметров.</strong> Если девяносто восемь процентов дверей с шириной 900 имеют определённый тип, а две штуки другой, это стоит посмотреть. Может быть, там особый случай. Может быть, копировали не тот элемент.</p>
+    <p><strong>Расхождения между этажами.</strong> В типовом здании этажи похожи. Скрипт сравнивает состав элементов по этажам и показывает, где на одном что-то есть, а на соседнем нет. Классическая находка: забытый пожарный кран на одном этаже из двенадцати.</p>
+    <p><strong>Странности в именах.</strong> Элементы, чьи имена не подходят ни под один принятый в проекте шаблон. Здесь достаточно кластеризации по строкам: девять групп с понятной структурой и десятая с мусором.</p>
+    <p><strong>Геометрические странности.</strong> Элементы нулевого или почти нулевого объёма, дубли в одной точке, элементы, торчащие далеко за габариты здания. Такое появляется от неудачного копирования и не ловится ни одним правилом качества.</p>
+    <h2>Нужны ли для этого нейросети</h2>
+    <p>Честно: чаще всего нет.</p>
+    <p>Восемьдесят процентов пользы дают обычная статистика и группировка. Средние значения, отклонения, частоты сочетаний, сравнение групп между собой. Это считается в том же Dynamo или скриптом на Python по выгруженным данным.</p>
+    <p>Языковая модель полезна на другом шаге: когда нужно объяснить находку человеку. «Элемент 5482: толщина 380 при том, что у остальных 412 стен этого типа она 400; вероятно, ручное изменение экземпляра» читается лучше, чем строка с числами. На больших отчётах это экономит время того, кто разбирает.</p>
+    <p>Ещё она полезна, когда данные текстовые: описания, примечания, наименования. Там статистика бессильна, а модель видит, что одна позиция описана в другом стиле или относится к другой системе.</p>
+    <h2>Что делать с результатом</h2>
+    <p>Главная опасность такого отчёта в том, что он превращается в шум. Если система выдаёт четыреста «странностей» на модель, их никто не будет смотреть.</p>
+    <p>Поэтому три правила.</p>
+    <p>Первое: ограничивать выдачу. Двадцать самых сильных отклонений, а не всё подряд. Остальное доступно по запросу, но не лезет в глаза.</p>
+    <p>Второе: сортировать по цене ошибки. Аномалия в несущей конструкции важнее аномалии в расстановке мебели. Приоритет задаётся один раз, вручную, по категориям.</p>
+    <p>Третье: помечать проверенное. Если проектировщик посмотрел и сказал «так и должно быть», элемент не должен всплывать в следующем отчёте. Без этого механизма люди перестают открывать отчёт через неделю.</p>
+    <h2>Пример с цифрами</h2>
+    <p>Модель жилого дома, 34 тысячи элементов. Правила проверки качества прошли чисто: параметры заполнены, уровни корректны, дублей нет.</p>
+    <p>Поиск аномалий дал 63 замечания после фильтрации. Из них:</p>
+    <ul><li>8 оказались реальными ошибками (толщины, отметки, один элемент с массой в тоннах вместо килограммов);</li><li>21 штука оказалась осознанными исключениями, их пометили и больше не показывали;</li><li>34 были шумом от особенностей моделирования, после чего правило подсветки подкрутили.</li></ul>
+    <p>Восемь ошибок из тридцати четырёх тысяч элементов звучит скромно. Но одна из них была в спецификации оборудования, и по ней ушла бы заявка на закупку не того типоразмера. Такая находка окупает настройку целиком.</p>
+    <h2>С чего начать</h2>
+    <p>Не с закупки платформы. Начните с выгрузки: возьмите спецификацию по одной категории и посмотрите на распределение числовых параметров в обычной таблице. Выбросы видны глазами.</p>
+    <p>Дальше это переносится в скрипт, который гоняется перед каждой выдачей. Как устроены такие регулярные проверки, разбирали на странице <a href="avtomatizaciya-proverki-modeley.html">автоматизации проверки моделей</a>, а про то, где вообще языковые модели дают эффект в BIM, есть <a href="ai-in-bim-practice.html">честная карта задач</a>.</p>
+    <p>И помните про порядок: сначала правила для известных ошибок, потом аномалии для неизвестных. Наоборот не работает: в модели без базовой дисциплины любой поиск странностей утонет в мусоре.</p>
+    <div class="article-cta">
+      <h3>Нужен похожий BIM/AI процесс?</h3>
+      <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
+      <a class="btn primary" href="https://t.me/bimpulsebot?start=article" target="_blank" rel="noreferrer" onclick="ymGoal('telegram_click')">Написать в Telegram</a>
+      <a class="btn secondary" href="contacts.html">Оставить заявку</a>
+    </div>
+    <aside class="article-related">
+      <h3>Читайте дальше</h3>
+      <ul><li><a href="ii-zapolnenie-parametrov-modeli.html">ИИ заполняет параметры модели: классификация и сопоставление</a></li><li><a href="llm-pishet-skripty-revit.html">Как заставить LLM писать скрипты для Revit и Dynamo</a></li><li><a href="generativnoe-proektirovanie.html">Генеративное проектирование: где взлетает, а где остаётся демо</a></li></ul>
+    </aside>
+    </article>
+  </main>
+  <footer class="footer">
+    <span>© BIM Pulse Ufa</span>
+    <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Канал в Telegram</a>
+    <link rel="stylesheet" href="chat.css">
+    <script src="chat.js" defer></script>
+  </footer>
+</body>
+</html>
