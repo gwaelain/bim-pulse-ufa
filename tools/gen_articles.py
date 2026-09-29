@@ -136,11 +136,58 @@ def related(art: dict, arts: list[dict], k: int = 3) -> list[dict]:
     return (same + rest)[:k]
 
 
+# Какая услуга стоит за темой статьи. Данные Вебмастера 30.09.2026: люди приходят
+# по «как выгрузить спецификацию», «перевод dwg в bim», «проверка коллизий» — то есть
+# ровно по тому, что мы делаем на заказ. Общий CTA «нужен похожий процесс?» это не говорил.
+SERVICE_CTA = [
+    (r"specifikac|excel|dynamo|pyrevit|skript|plagin|parametr",
+     ("Настроим это под ваши шаблоны",
+      "Пишем Dynamo-скрипты и плагины Revit под задачи отдела: выгрузка спецификаций, "
+      "заполнение параметров, нумерация, отчёты. Пришлите пример файла — скажем, что автоматизируется.",
+      "razrabotka-dynamo-i-plaginov.html", "Заказать скрипт")),
+    (r"kolliz|navisworks|proverk|priemk|audit|reglament",
+     ("Проверку моделей можно не делать руками",
+      "Настраиваем автоматическую проверку по стандарту вашей компании: параметры, имена, "
+      "геометрия, коллизии по адресным правилам. Отчёт уходит проектировщику до выдачи.",
+      "avtomatizaciya-proverki-modeley.html", "Заказать проверку")),
+    (r"2d|dwg|chertezh|perevod",
+     ("Переведём ваши чертежи в модель",
+      "DWG, PDF и сканы — в BIM-модель с заполненными параметрами и отчётом о расхождениях "
+      "в исходниках. Пришлите папку с чертежами: оценим объём, срок и стоимость.",
+      "perevod-2d-v-bim.html", "Оценить перевод чертежей")),
+    (r"ifc|postgresql|dannye|api|docker|cde|sreda",
+     ("Свяжем модель с вашими системами",
+      "Выгрузка объёмов и данных модели в 1С, смету и снабжение, обмен по IFC, база на PostgreSQL. "
+      "Без Excel посередине и ручного переноса.",
+      "bim-avtomatizaciya-api.html", "Обсудить интеграцию")),
+    (r"^ii-|llm|generativ|^ai-|raspoznavan|anomal",
+     ("ИИ в вашем проектировании: что реально сработает",
+      "Разбираем задачу и говорим честно, где языковая модель даёт результат сегодня, "
+      "а где остаётся демо. Пилот делаем на ваших данных, а не на презентации.",
+      "ii-v-proektirovanii.html", "Обсудить пилот")),
+    (r"upravlen|dashboard|koordinac|vnedren|roadmap|menedzh",
+     ("Соберём управление проектом на данных модели",
+      "Задачи с привязкой к элементам, статусы разделов по фактическим данным, "
+      "контроль сроков и отчёты руководителю — из модели, а не из устных совещаний.",
+      "upravlenie-bim-proektami.html", "Обсудить внедрение")),
+]
+
+
+def service_cta(slug: str) -> tuple[str, str, str, str]:
+    for pattern, block in SERVICE_CTA:
+        if re.search(pattern, slug):
+            return block
+    return ("Нужен похожий BIM/AI процесс?",
+            "Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.",
+            "services.html", "Посмотреть услуги")
+
+
 def page(a: dict, arts: list[dict]) -> str:
     e = html.escape
     url = f"{DOMAIN}/{a['slug']}.html"
     iso = a["publish_at"]
     body = strip_unpublished_links(md_to_html(a["_body"]), {x["slug"] for x in arts})
+    cta_head, cta_text, cta_link, cta_btn = service_cta(a["slug"])
     kws = a.get("keywords") or []
 
     jsonld = {
@@ -219,10 +266,10 @@ def page(a: dict, arts: list[dict]) -> str:
     <img class="article-cover" src="{e(a['image'])}" alt="{e(a['title'])}" onerror="this.src='bim-model-1.webp'" />
     {body}
     <div class="article-cta">
-      <h3>Нужен похожий BIM/AI процесс?</h3>
-      <p>Напишите в Telegram или на email — разберём задачу и предложим архитектуру решения.</p>
-      <a class="btn primary" href="https://t.me/bimpulsebot?start=article" target="_blank" rel="noreferrer" onclick="ymGoal('telegram_click')">Написать в Telegram</a>
-      <a class="btn secondary" href="contacts.html">Оставить заявку</a>
+      <h3>{e(cta_head)}</h3>
+      <p>{e(cta_text)}</p>
+      <a class="btn primary" href="{cta_link}">{e(cta_btn)}</a>
+      <a class="btn secondary" href="https://t.me/bimpulsebot?start=article" target="_blank" rel="noreferrer" onclick="ymGoal('telegram_click')">Написать в Telegram</a>
     </div>
     <aside class="article-related">
       <h3>Читайте дальше</h3>
