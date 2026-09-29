@@ -140,12 +140,12 @@ def related(art: dict, arts: list[dict], k: int = 3) -> list[dict]:
 # по «как выгрузить спецификацию», «перевод dwg в bim», «проверка коллизий» — то есть
 # ровно по тому, что мы делаем на заказ. Общий CTA «нужен похожий процесс?» это не говорил.
 SERVICE_CTA = [
-    (r"specifikac|excel|dynamo|pyrevit|skript|plagin|parametr",
+    (r"specifikac|excel|dynamo|pyrevit|skript|plagin|parametr|templates|shablon|uskorit|tyazhel",
      ("Настроим это под ваши шаблоны",
       "Пишем Dynamo-скрипты и плагины Revit под задачи отдела: выгрузка спецификаций, "
       "заполнение параметров, нумерация, отчёты. Пришлите пример файла — скажем, что автоматизируется.",
       "razrabotka-dynamo-i-plaginov.html", "Заказать скрипт")),
-    (r"kolliz|navisworks|proverk|priemk|audit|reglament",
+    (r"kolliz|navisworks|proverk|priemk|audit|reglament|clash",
      ("Проверку моделей можно не делать руками",
       "Настраиваем автоматическую проверку по стандарту вашей компании: параметры, имена, "
       "геометрия, коллизии по адресным правилам. Отчёт уходит проектировщику до выдачи.",
@@ -165,7 +165,7 @@ SERVICE_CTA = [
       "Разбираем задачу и говорим честно, где языковая модель даёт результат сегодня, "
       "а где остаётся демо. Пилот делаем на ваших данных, а не на презентации.",
       "ii-v-proektirovanii.html", "Обсудить пилот")),
-    (r"upravlen|dashboard|koordinac|vnedren|roadmap|menedzh",
+    (r"upravlen|dashboard|koordinac|coordination|vnedren|implementation|roadmap|menedzh|avtomatiziruet",
      ("Соберём управление проектом на данных модели",
       "Задачи с привязкой к элементам, статусы разделов по фактическим данным, "
       "контроль сроков и отчёты руководителю — из модели, а не из устных совещаний.",
