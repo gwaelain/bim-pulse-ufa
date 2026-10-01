@@ -23,8 +23,11 @@ def frontmatter(raw: str) -> tuple[dict, str]:
     if not m:
         return {}, raw
     meta: dict = {}
-    for line in m.group(1).split("\n"):
-        line = line.rstrip()
+    head = m.group(1).split("\n")
+    i = 0
+    while i < len(head):
+        line = head[i].rstrip()
+        i += 1
         if not line.strip() or line.lstrip().startswith("#"):
             continue
         km = re.match(r"^([A-Za-z_][\w-]*)\s*:\s*(.*)$", line)
@@ -34,6 +37,14 @@ def frontmatter(raw: str) -> tuple[dict, str]:
         if val.startswith("[") and val.endswith("]"):
             items = [v.strip().strip("\"'") for v in val[1:-1].split(",")]
             meta[key] = [v for v in items if v]
+        elif not val:
+            # Многострочный список: ключ без значения, ниже строки «  - пункт».
+            # Нужен блоку «Коротко»: в пунктах есть запятые, инлайн-список [a, b] их рвёт.
+            items = []
+            while i < len(head) and re.match(r"^\s+-\s+", head[i]):
+                items.append(re.sub(r"^\s+-\s+", "", head[i]).strip().strip("\"'"))
+                i += 1
+            meta[key] = items if items else ""
         else:
             meta[key] = val.strip("\"'")
     return meta, m.group(2)

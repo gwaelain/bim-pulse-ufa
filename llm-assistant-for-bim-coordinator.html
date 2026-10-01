@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="global.css" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "LLM-ассистент для BIM-координатора: что он берёт на себя", "description": "Координатор тратит половину недели на письма, протоколы и объяснения отчётов. Что из этого отдаётся ассистенту, что в него загрузить и сколько это стоит.", "image": "https://bim-pulse.ru/bim-model-2.webp", "datePublished": "2026-05-09", "dateModified": "2026-08-13", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/llm-assistant-for-bim-coordinator.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "LLM-ассистент для BIM-координатора: что он берёт на себя", "description": "Координатор тратит половину недели на письма, протоколы и объяснения отчётов. Что из этого отдаётся ассистенту, что в него загрузить и сколько это стоит.", "image": "https://bim-pulse.ru/bim-model-2.webp", "datePublished": "2026-05-09", "dateModified": "2026-08-13", "author": {"@id": "https://bim-pulse.ru/#org"}, "publisher": {"@id": "https://bim-pulse.ru/#org"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/llm-assistant-for-bim-coordinator.html"}, "inLanguage": "ru-RU"}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "LLM-ассистент для BIM-координатора: что он берёт на себя", "item": "https://bim-pulse.ru/llm-assistant-for-bim-coordinator.html"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Это заменит BIM-координатора?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Оно уберёт у него роль секретаря. Координатор нужен там, где надо принять решение и настоять на нём."}}, {"@type": "Question", "name": "Можно ли начать без базы данных?", "acceptedAnswer": {"@type": "Answer", "text": "Можно, на папке с документами и поиске по ним. Первые два месяца этого хватает, дальше упрётесь в версии и статусы."}}, {"@type": "Question", "name": "Какие данные нельзя загружать?", "acceptedAnswer": {"@type": "Answer", "text": "Всё, что закрыто договором с заказчиком, если ассистент работает через внешний API. Локальный запуск снимает ограничение."}}, {"@type": "Question", "name": "Сколько живёт база знаний без обновления?", "acceptedAnswer": {"@type": "Answer", "text": "Примерно квартал. Дальше протоколы устаревают, и ассистент начинает советовать решения, от которых уже отказались."}}, {"@type": "Question", "name": "Нужно ли учить команду?", "acceptedAnswer": {"@type": "Answer", "text": "Нужно, но недолго. Час на разбор десяти типовых запросов даёт больше, чем инструкция на двадцать страниц."}}]}</script>
 <!-- Yandex.Metrika counter -->
@@ -62,6 +62,7 @@
       <a href="test.html">Тест</a>
       <a href="about.html">О нас</a>
       <a href="blog.html">Блог</a>
+      <a href="slovar.html">Словарь</a>
       <a href="faq.html">FAQ</a>
       <a href="contacts.html">Контакты</a>
     </nav>
@@ -154,6 +155,9 @@ return otvet + &quot;\n\nИсточники: &quot; + &quot;, &quot;.join(f.doku
     <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Канал в Telegram</a>
     <link rel="stylesheet" href="chat.css">
     <script src="chat.js" defer></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","@id":"https://bim-pulse.ru/#org","name":"BIM Pulse Ufa","url":"https://bim-pulse.ru/","logo":{"@type":"ImageObject","url":"https://bim-pulse.ru/logo.png"},"description":"Автоматизация BIM-процессов: проверка моделей по правилам компании, Dynamo-скрипты и плагины Revit, интеграции с 1С и PostgreSQL, перевод чертежей в BIM, ИИ в проектировании.","areaServed":"RU","foundingLocation":{"@type":"Place","name":"Уфа, Россия"},"email":"bimaip@yandex.ru","sameAs":["https://t.me/bim_pulse_ufa","https://dzen.ru/bimpulse"],"knowsAbout":["BIM","Autodesk Revit","Autodesk Navisworks","Dynamo","pyRevit","IFC","Revit API","автоматизация проектирования"]}
+    </script>
   </footer>
 </body>
 </html>

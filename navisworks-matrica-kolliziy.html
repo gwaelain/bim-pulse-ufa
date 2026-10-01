@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="global.css" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Матрица коллизий в Navisworks: настроить один раз", "description": "Как превратить матрицу пересечений разделов в наборы поиска и тесты Clash Detective: допуски по типам конфликтов, батч-прогон тестов и шаблон NWF.", "image": "https://bim-pulse.ru/Bim2.webp", "datePublished": "2026-08-31", "dateModified": "2026-08-31", "author": {"@type": "Organization", "name": "BIM Pulse Ufa", "url": "https://bim-pulse.ru/about.html"}, "publisher": {"@type": "Organization", "name": "BIM Pulse Ufa", "logo": {"@type": "ImageObject", "url": "https://bim-pulse.ru/logo.png"}}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/navisworks-matrica-kolliziy.html"}, "inLanguage": "ru-RU"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Матрица коллизий в Navisworks: настроить один раз", "description": "Как превратить матрицу пересечений разделов в наборы поиска и тесты Clash Detective: допуски по типам конфликтов, батч-прогон тестов и шаблон NWF.", "image": "https://bim-pulse.ru/Bim2.webp", "datePublished": "2026-08-31", "dateModified": "2026-08-31", "author": {"@id": "https://bim-pulse.ru/#org"}, "publisher": {"@id": "https://bim-pulse.ru/#org"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://bim-pulse.ru/navisworks-matrica-kolliziy.html"}, "inLanguage": "ru-RU", "about": {"@type": "SoftwareApplication", "name": "Autodesk Navisworks", "applicationCategory": "DesignApplication", "url": "https://www.autodesk.com/products/navisworks/"}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://bim-pulse.ru/blog.html"}, {"@type": "ListItem", "position": 3, "name": "Матрица коллизий в Navisworks: настроить один раз", "item": "https://bim-pulse.ru/navisworks-matrica-kolliziy.html"}]}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Сколько тестов нормально для жилого дома?", "acceptedAnswer": {"@type": "Answer", "text": "Пятнадцать-двадцать. Меньше восьми — скорее всего, забыли пары. Больше двадцати пяти — прогон не влезает в рабочий день, и часть тестов начинают пропускать."}}, {"@type": "Question", "name": "Можно ли обойтись одним тестом «всё против всего»?", "acceptedAnswer": {"@type": "Answer", "text": "Технически да, практически нет. Результаты невозможно распределить по ответственным, а допуск придётся ставить один на все случаи."}}, {"@type": "Question", "name": "Кто утверждает матрицу?", "acceptedAnswer": {"@type": "Answer", "text": "BIM-координатор пишет, ГИП утверждает, разделы расписываются, что видели. Без последнего пункта на первом же спорном пересечении начнётся «мы так не договаривались»."}}, {"@type": "Question", "name": "Как быть с мягкими коллизиями?", "acceptedAnswer": {"@type": "Answer", "text": "Тест типа Clearance с нужным зазором и отдельный статус. Смешивать их с Hard в одном тесте нельзя: приоритет разный, и сроки решения разные."}}, {"@type": "Question", "name": "Что делать, если один тест выдал 800 результатов?", "acceptedAnswer": {"@type": "Answer", "text": "Смотреть первые двадцать позиций. Одинаковые — виноват не проект, а системная ошибка: сдвинутый уровень, задвоенная связь, кривой набор."}}]}</script>
 <!-- Yandex.Metrika counter -->
@@ -62,6 +62,7 @@
       <a href="test.html">Тест</a>
       <a href="about.html">О нас</a>
       <a href="blog.html">Блог</a>
+      <a href="slovar.html">Словарь</a>
       <a href="faq.html">FAQ</a>
       <a href="contacts.html">Контакты</a>
     </nav>
@@ -76,6 +77,10 @@
     <h1>Матрица коллизий в Navisworks: настроить один раз</h1>
     <p class="lead">Как превратить матрицу пересечений разделов в наборы поиска и тесты Clash Detective: допуски по типам конфликтов, батч-прогон тестов и шаблон NWF.</p>
     <img class="article-cover" src="Bim2.webp" alt="Матрица коллизий в Navisworks: настроить один раз" onerror="this.src='bim-model-1.webp'" />
+    <aside class="kratko" aria-label="Коротко">
+      <h2>Коротко</h2>
+      <ul><li>Сам Navisworks по матрице ничего не ищет: её настраивают один раз за проект, дальше проверка сводится к кнопке Update All.</li><li>Матрица — это таблица «кто с кем проверяется» и с каким допуском, а не картинка для альбома BIM-стандарта.</li><li>Допуски берутся из физики монтажа: толщина изоляции, зона обслуживания, монтажный зазор, а не «на глаз».</li><li>Каждая клетка матрицы превращается в отдельный тест Clash Detective на основе наборов поиска.</li><li>Настройку можно перенести на следующий проект, если наборы заданы правилами, а не ручным выделением.</li></ul>
+    </aside>
     <p>Вопрос от инженера в личку: «Как настроить Navisworks, чтобы он сам искал коллизии по матрице?» Ответ короткий и скучный: сам он ничего не ищет, но настраивается один раз за проект, а дальше вся проверка сводится к одной кнопке Update All и получасу разбора.</p>
     <p>Матрица при этом не украшение для альбома BIM-стандарта, а прямой источник настроек. Каждая заполненная клетка превращается в тест Clash Detective. Ниже — как пройти путь от таблицы в Excel до набора тестов, который переживёт три объекта подряд.</p>
     <h2>Что такое матрица пересечений</h2>
@@ -148,6 +153,9 @@
     <a href="https://t.me/bim_pulse_ufa" target="_blank" rel="noopener">Канал в Telegram</a>
     <link rel="stylesheet" href="chat.css">
     <script src="chat.js" defer></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","@id":"https://bim-pulse.ru/#org","name":"BIM Pulse Ufa","url":"https://bim-pulse.ru/","logo":{"@type":"ImageObject","url":"https://bim-pulse.ru/logo.png"},"description":"Автоматизация BIM-процессов: проверка моделей по правилам компании, Dynamo-скрипты и плагины Revit, интеграции с 1С и PostgreSQL, перевод чертежей в BIM, ИИ в проектировании.","areaServed":"RU","foundingLocation":{"@type":"Place","name":"Уфа, Россия"},"email":"bimaip@yandex.ru","sameAs":["https://t.me/bim_pulse_ufa","https://dzen.ru/bimpulse"],"knowsAbout":["BIM","Autodesk Revit","Autodesk Navisworks","Dynamo","pyRevit","IFC","Revit API","автоматизация проектирования"]}
+    </script>
   </footer>
 </body>
 </html>

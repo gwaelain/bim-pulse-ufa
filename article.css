@@ -249,3 +249,25 @@
     margin-top:28px;
   }
 }
+
+/* Блок «Коротко» — выжимка-ответ под заголовком. Нейросети цитируют первые 80–120 слов
+   страницы: если ответа там нет, в ответ ИИ-поиска уходит конкурент. */
+.article-full .kratko {
+  margin: 28px 0 32px;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.article-full .kratko h2 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.article-full .kratko ul { margin: 0; padding-left: 20px; }
+.article-full .kratko li { margin-bottom: 8px; line-height: 1.55; color: var(--soft); }
+.article-full .kratko li:last-child { margin-bottom: 0; }
+@media (max-width: 640px) { .article-full .kratko { padding: 18px 20px; } }

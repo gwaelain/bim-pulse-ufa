@@ -136,6 +136,35 @@ def related(art: dict, arts: list[dict], k: int = 3) -> list[dict]:
     return (same + rest)[:k]
 
 
+ORG_ID = f"{DOMAIN}/#org"
+
+# О каком ПО речь: ИИ-поиск охотнее связывает материал с известной сущностью,
+# чем со свободным текстом. Берём только то, что реально разбирается в статье.
+SOFTWARE = [
+    (r"navisworks", "Autodesk Navisworks", "https://www.autodesk.com/products/navisworks/"),
+    (r"pyrevit", "pyRevit", "https://github.com/pyrevitlabs/pyRevit"),
+    (r"dynamo", "Dynamo BIM", "https://dynamobim.org/"),
+    (r"revit|specifikac|ifc-export|parametr|shablon|uskorit", "Autodesk Revit", "https://www.autodesk.com/products/revit/"),
+    (r"postgresql", "PostgreSQL", "https://www.postgresql.org/"),
+    (r"docker", "Docker", "https://www.docker.com/"),
+]
+
+
+def article_about(slug: str, title: str) -> dict | None:
+    hay = f"{slug} {title}".lower()
+    for pattern, name, url in SOFTWARE:
+        if re.search(pattern, hay):
+            return {"@type": "SoftwareApplication", "name": name,
+                    "applicationCategory": "DesignApplication", "url": url}
+    return None
+
+
+def _inline_md(text: str) -> str:
+    """Короткая инлайн-разметка для пунктов «Коротко» (жирный, код, ссылки)."""
+    from md import _inline
+    return _inline(text)
+
+
 # Какая услуга стоит за темой статьи. Данные Вебмастера 30.09.2026: люди приходят
 # по «как выгрузить спецификацию», «перевод dwg в bim», «проверка коллизий» — то есть
 # ровно по тому, что мы делаем на заказ. Общий CTA «нужен похожий процесс?» это не говорил.
@@ -188,6 +217,12 @@ def page(a: dict, arts: list[dict]) -> str:
     iso = a["publish_at"]
     body = strip_unpublished_links(md_to_html(a["_body"]), {x["slug"] for x in arts})
     cta_head, cta_text, cta_link, cta_btn = service_cta(a["slug"])
+    kratko = a.get("kratko") or []
+    kratko_html = ""
+    if kratko:
+        items = "".join(f"<li>{_inline_md(x)}</li>" for x in kratko)
+        kratko_html = ('    <aside class="kratko" aria-label="Коротко">\n'
+                       f'      <h2>Коротко</h2>\n      <ul>{items}</ul>\n    </aside>\n')
     kws = a.get("keywords") or []
 
     jsonld = {
@@ -198,12 +233,14 @@ def page(a: dict, arts: list[dict]) -> str:
         "image": f"{DOMAIN}/{a['image']}",
         "datePublished": iso,
         "dateModified": a.get("updated_at", iso),
-        "author": {"@type": "Organization", "name": SITE, "url": f"{DOMAIN}/about.html"},
-        "publisher": {"@type": "Organization", "name": SITE,
-                      "logo": {"@type": "ImageObject", "url": f"{DOMAIN}/logo.png"}},
+        "author": {"@id": ORG_ID},
+        "publisher": {"@id": ORG_ID},
         "mainEntityOfPage": {"@type": "WebPage", "@id": url},
         "inLanguage": "ru-RU",
     }
+    about = article_about(a["slug"], a["title"])
+    if about:
+        jsonld["about"] = about
     crumbs = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -264,7 +301,7 @@ def page(a: dict, arts: list[dict]) -> str:
     <h1>{e(a['title'])}</h1>
     <p class="lead">{e(a['description'])}</p>
     <img class="article-cover" src="{e(a['image'])}" alt="{e(a['title'])}" onerror="this.src='bim-model-1.webp'" />
-    {body}
+{kratko_html}    {body}
     <div class="article-cta">
       <h3>{e(cta_head)}</h3>
       <p>{e(cta_text)}</p>
@@ -418,6 +455,36 @@ def update_sitemap(arts: list[dict], services: list[dict] | None = None) -> None
     sm.write_text(txt, encoding="utf-8")
 
 
+
+def write_llms(arts: list[dict], services: list[dict]) -> None:
+    """llms.txt — карта сайта для нейросетей. Генерируем, иначе список статей устаревает:
+    руками он отстал на 20+ материалов, пока его никто не вспоминал."""
+    head = (ROOT / "tools" / "llms_head.txt").read_text(encoding="utf-8").rstrip()
+    tail = (ROOT / "tools" / "llms_tail.txt").read_text(encoding="utf-8").rstrip()
+    out = [head, "", "## Чем занимаемся (страницы услуг)"]
+    for sv in services:
+        out.append(f"- {sv['title']}: {DOMAIN}/{sv['slug']}.html")
+        if sv.get("description"):
+            out.append(f"  {sv['description']}")
+    out += ["", "## Разборы из практики (статьи блога)"]
+    for a in sorted(arts, key=lambda x: x["publish_at"], reverse=True):
+        out.append(f"- {a['title']}: {DOMAIN}/{a['slug']}.html")
+        if a.get("kratko"):
+            out.append("  " + " ".join(a["kratko"])[:300])
+        elif a.get("description"):
+            out.append(f"  {a['description']}")
+    out += ["", "## Разделы и контакты",
+            f"- Блог: {DOMAIN}/blog.html",
+            f"- Услуги: {DOMAIN}/services.html",
+            f"- Кейсы: {DOMAIN}/cases.html",
+            f"- Словарь BIM-терминов: {DOMAIN}/slovar.html",
+            f"- О проекте: {DOMAIN}/about.html",
+            f"- Частые вопросы: {DOMAIN}/faq.html",
+            f"- Тест «BIM на 100%»: {DOMAIN}/test.html",
+            f"- Контакты: {DOMAIN}/contacts.html · Telegram-бот: https://t.me/bimpulsebot",
+            "", tail, ""]
+    (ROOT / "llms.txt").write_text("\n".join(out), encoding="utf-8")
+
 def main() -> None:
     show_all = "--all" in sys.argv
     today = date.today().isoformat()
@@ -454,6 +521,9 @@ def main() -> None:
                 seen.add(s["slug"])
         seen_file.write_text(json.dumps(sorted(seen), ensure_ascii=False, indent=1), encoding="utf-8")
 
+    import gen_slovar
+    gen_slovar.main()
+    write_llms(live, services if services else [])
     write_news_js(live)
     write_rss(live)
     update_blog_html(live)
