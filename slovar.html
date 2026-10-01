@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="global.css">
 
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "Словарь BIM-терминов", "url": "https://bim-pulse.ru/slovar.html", "description": "Короткие определения терминов BIM: LOD, CDE, IFC, коллизии, сводная модель, общие параметры, матрица коллизий и другие.", "inLanguage": "ru-RU", "publisher": {"@id": "https://bim-pulse.ru/#org"}, "hasDefinedTerm": [{"@type": "DefinedTerm", "name": "BIM", "description": "Способ работы, при котором здание описано не чертежами, а моделью с данными: у каждого элемента есть геометрия и свойства (марка, материал, объём). Из этих данных потом считают смету, график и закуп.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#bim"}, {"@type": "DefinedTerm", "name": "LOD", "description": "Уровень проработки элемента модели: насколько точна геометрия и насколько заполнены данные. LOD 200 — обобщённый объект, LOD 350 — с узлами и привязками. Это договорённость в задании, а не свойство файла.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#lod"}, {"@type": "DefinedTerm", "name": "LOI", "description": "Уровень информационной наполненности: какие параметры обязаны быть заполнены у элемента. Часто путают с LOD: можно иметь подробную геометрию и пустые данные — для сметы это бесполезно.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#loi"}, {"@type": "DefinedTerm", "name": "CDE", "description": "Среда общих данных — единое место, где лежат актуальные версии моделей и документов, с правилами именования, статусами и историей. Не папка на диске, а процесс: кто, что и когда имеет право менять.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#cde"}, {"@type": "DefinedTerm", "name": "Сводная модель", "description": "Модель, собранная из файлов всех разделов (АР, КР, ОВ, ВК, ЭОМ) для совместной проверки. Разделы остаются отдельными файлами, в сводной они только связаны — по ней ищут коллизии и считают объёмы.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#сводная-модель"}, {"@type": "DefinedTerm", "name": "Коллизия", "description": "Конфликт между элементами разных разделов: пересечение воздуховода с балкой, недостаточный зазор для монтажа. Делятся на жёсткие (физическое пересечение) и мягкие (нарушение зазора или зоны обслуживания).", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#коллизия"}, {"@type": "DefinedTerm", "name": "IFC", "description": "Открытый формат обмена моделями между разными программами. Из Revit выгружается с настройками, и именно в них теряются данные: без нужных наборов свойств смежник получит геометрию без марок и материалов.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#ifc"}, {"@type": "DefinedTerm", "name": "Dynamo", "description": "Среда визуального программирования внутри Revit: алгоритм собирается из блоков, без написания кода. Решает массовые задачи — нумерация, заполнение параметров, выгрузка данных в Excel.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#dynamo"}, {"@type": "DefinedTerm", "name": "pyRevit", "description": "Бесплатное расширение для Revit, которое позволяет добавить свои кнопки на ленту и запускать Python-скрипты. Ставится за десять минут, компилировать и покупать ничего не нужно.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#pyrevit"}, {"@type": "DefinedTerm", "name": "Спецификация", "description": "Таблица в Revit, которая собирает данные элементов модели по заданным правилам. Считается автоматически и обновляется вместе с моделью — в отличие от таблицы, набранной руками.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#спецификация"}, {"@type": "DefinedTerm", "name": "Общие параметры", "description": "Параметры, которые живут в отдельном файле и одинаково опознаются во всех проектах и семействах. У каждого — свой GUID: два файла с одинаковыми именами параметров дают пустые столбцы в сводной модели.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#общие-параметры"}, {"@type": "DefinedTerm", "name": "Navisworks", "description": "Программа Autodesk для сборки сводной модели и поиска коллизий. Читает форматы разных САПР, работает с тяжёлыми моделями и даёт отчёты, по которым ведут согласование между разделами.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#navisworks"}, {"@type": "DefinedTerm", "name": "Матрица коллизий", "description": "Таблица «кто с кем проверяется»: какие разделы и системы сопоставляются между собой и с каким допуском. Без неё проверка «всё против всего» выдаёт тысячи строк, которые никто не читает.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#матрица-коллизий"}, {"@type": "DefinedTerm", "name": "Точка обзора", "description": "Сохранённое положение камеры в Navisworks вместе с настройками отображения. Используется, чтобы показать коллизию смежнику — но выделение элементов в ней сохраняется не всегда.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#точка-обзора"}, {"@type": "DefinedTerm", "name": "EIR", "description": "Требования заказчика к модели: что моделируем, с какой детализацией, какие параметры заполняем и в каком виде сдаём. Документ, по которому потом принимают работу.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#eir"}, {"@type": "DefinedTerm", "name": "BEP", "description": "Ответ исполнителя на EIR: как именно будет организована работа — структура файлов, регламент координации, сроки выдач, кто за что отвечает.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#bep"}, {"@type": "DefinedTerm", "name": "4D", "description": "Связка модели с календарным графиком: каждому элементу сопоставлен срок работ, и строительство можно просмотреть во времени. Расхождения графика и модели становятся видны до выхода на площадку.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#4d"}, {"@type": "DefinedTerm", "name": "Классификатор", "description": "Система кодов, по которой элементы модели сопоставляются со сметными расценками и номенклатурой снабжения. Без единого классификатора данные модели не доезжают до сметы без ручного переноса.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#классификатор"}, {"@type": "DefinedTerm", "name": "NWC и NWD", "description": "NWC — промежуточный файл выгрузки из Revit или другой САПР, NWD — собранная сводная модель одним файлом со всей геометрией. NWF хранит только ссылки на исходники и настройки.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#nwc-и-nwd"}, {"@type": "DefinedTerm", "name": "Revit API", "description": "Программный интерфейс Revit: позволяет писать плагины на C# или Python, которые делают с моделью то, чего нет в стандартных командах — свои проверки, выгрузки, массовые операции.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#revit-api"}]}
+  {"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "Словарь BIM-терминов", "url": "https://bim-pulse.ru/slovar.html", "description": "Короткие определения терминов BIM: LOD, CDE, IFC, коллизии, сводная модель, общие параметры, матрица коллизий и другие.", "inLanguage": "ru-RU", "publisher": {"@id": "https://bim-pulse.ru/#org"}, "hasDefinedTerm": [{"@type": "DefinedTerm", "name": "BIM", "description": "Здание описано не чертежами, а моделью. У каждого элемента есть геометрия и свойства: марка, материал, объём. По этим данным потом считают смету, график и закуп.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#bim"}, {"@type": "DefinedTerm", "name": "LOD", "description": "Насколько подробно проработан элемент. LOD 200 это обобщённый объект, LOD 350 уже с узлами и привязками. Важно помнить: LOD это договорённость в задании, а не свойство файла.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#lod"}, {"@type": "DefinedTerm", "name": "LOI", "description": "Какие параметры обязаны быть заполнены. Часто путают с LOD, а разница существенная: геометрия бывает подробной при пустых данных, и для сметы такая модель бесполезна.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#loi"}, {"@type": "DefinedTerm", "name": "CDE", "description": "Единое место, где лежат актуальные версии моделей и документов. С правилами именования, статусами и историей. Это не папка на диске, а процесс: кто, что и когда имеет право менять.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#cde"}, {"@type": "DefinedTerm", "name": "Сводная модель", "description": "Собрана из файлов всех разделов: АР, КР, ОВ, ВК, ЭОМ. Сами разделы остаются отдельными файлами, в сводной они только связаны. По ней ищут коллизии и считают объёмы.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#сводная-модель"}, {"@type": "DefinedTerm", "name": "Коллизия", "description": "Конфликт между элементами разных разделов. Воздуховод прошёл через балку, не осталось зазора для монтажа. Бывают жёсткие, когда элементы физически пересекаются, и мягкие, когда нарушена зона обслуживания.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#коллизия"}, {"@type": "DefinedTerm", "name": "IFC", "description": "Открытый формат обмена моделями между программами. Из Revit выгружается с настройками, и теряется всё именно в них: без нужных наборов свойств смежник получит голую геометрию, без марок и материалов.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#ifc"}, {"@type": "DefinedTerm", "name": "Dynamo", "description": "Визуальное программирование внутри Revit. Алгоритм собирается из блоков, код писать не нужно. Берёт на себя массовые задачи: нумерацию, заполнение параметров, выгрузку в Excel.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#dynamo"}, {"@type": "DefinedTerm", "name": "pyRevit", "description": "Бесплатное расширение для Revit. Добавляет свои кнопки на ленту и запускает Python-скрипты. Ставится за десять минут, компилировать и покупать ничего не надо.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#pyrevit"}, {"@type": "DefinedTerm", "name": "Спецификация", "description": "Таблица, которая собирает данные элементов по заданным правилам. Считается сама и обновляется вместе с моделью. В этом её отличие от таблицы, набранной руками в Excel.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#спецификация"}, {"@type": "DefinedTerm", "name": "Общие параметры", "description": "Живут в отдельном файле и одинаково опознаются во всех проектах. У каждого свой GUID. Отсюда классическая беда: два файла с одинаковыми именами параметров дают пустые столбцы в сводной модели.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#общие-параметры"}, {"@type": "DefinedTerm", "name": "Navisworks", "description": "Программа для сборки сводной модели и поиска коллизий. Читает форматы разных САПР и тянет тяжёлые модели. Отчёты из неё идут смежникам на согласование.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#navisworks"}, {"@type": "DefinedTerm", "name": "Матрица коллизий", "description": "Таблица «кто с кем проверяется» и с каким допуском. Без неё проверка идёт всё против всего и выдаёт тысячи строк, которые никто не читает.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#матрица-коллизий"}, {"@type": "DefinedTerm", "name": "Точка обзора", "description": "Сохранённое положение камеры вместе с настройками отображения. Нужна, чтобы показать коллизию смежнику. Подвох в том, что выделение элементов сохраняется в ней не всегда.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#точка-обзора"}, {"@type": "DefinedTerm", "name": "EIR", "description": "Требования заказчика к модели. Что моделируем, с какой детализацией, какие параметры заполняем, в каком виде сдаём. По этому документу потом принимают работу.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#eir"}, {"@type": "DefinedTerm", "name": "BEP", "description": "Ответ исполнителя на EIR. Как организована работа: структура файлов, регламент координации, сроки выдач, кто за что отвечает.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#bep"}, {"@type": "DefinedTerm", "name": "4D", "description": "Модель, связанная с календарным графиком. У каждого элемента свой срок, и стройку можно прокрутить во времени. Расхождения видны до выхода на площадку, а не после.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#4d"}, {"@type": "DefinedTerm", "name": "Классификатор", "description": "Система кодов, которая связывает элементы модели со сметными расценками и номенклатурой снабжения. Без неё данные до сметы не доедут, придётся переносить руками.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#классификатор"}, {"@type": "DefinedTerm", "name": "NWC и NWD", "description": "NWC это промежуточная выгрузка из Revit или другой САПР. NWD это собранная сводная модель одним файлом, со всей геометрией внутри. NWF хранит только ссылки на исходники и настройки.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#nwc-и-nwd"}, {"@type": "DefinedTerm", "name": "Revit API", "description": "Программный интерфейс Revit. Позволяет писать плагины на C# или Python и делать с моделью то, чего нет в стандартных командах: свои проверки, выгрузки, массовые операции.", "inDefinedTermSet": "https://bim-pulse.ru/slovar.html", "url": "https://bim-pulse.ru/slovar.html#revit-api"}]}
   </script>
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://bim-pulse.ru/"}, {"@type": "ListItem", "position": 2, "name": "Словарь BIM-терминов", "item": "https://bim-pulse.ru/slovar.html"}]}
@@ -120,121 +120,121 @@
       <div class="slovar-list">
       <article class="slovar-item" id="bim">
         <h2>BIM</h2>
-        <p>Способ работы, при котором здание описано не чертежами, а моделью с данными: у каждого элемента есть геометрия и свойства (марка, материал, объём). Из этих данных потом считают смету, график и закуп.</p>
+        <p>Здание описано не чертежами, а моделью. У каждого элемента есть геометрия и свойства: марка, материал, объём. По этим данным потом считают смету, график и закуп.</p>
         <p class="slovar-syn">Также говорят: Building Information Modeling, ТИМ, информационное моделирование</p>
         
       </article>
       <article class="slovar-item" id="lod">
         <h2>LOD</h2>
-        <p>Уровень проработки элемента модели: насколько точна геометрия и насколько заполнены данные. LOD 200 — обобщённый объект, LOD 350 — с узлами и привязками. Это договорённость в задании, а не свойство файла.</p>
+        <p>Насколько подробно проработан элемент. LOD 200 это обобщённый объект, LOD 350 уже с узлами и привязками. Важно помнить: LOD это договорённость в задании, а не свойство файла.</p>
         <p class="slovar-syn">Также говорят: уровень проработки, Level of Development</p>
         <p class="slovar-more"><a href="bim-implementation-start.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="loi">
         <h2>LOI</h2>
-        <p>Уровень информационной наполненности: какие параметры обязаны быть заполнены у элемента. Часто путают с LOD: можно иметь подробную геометрию и пустые данные — для сметы это бесполезно.</p>
+        <p>Какие параметры обязаны быть заполнены. Часто путают с LOD, а разница существенная: геометрия бывает подробной при пустых данных, и для сметы такая модель бесполезна.</p>
         <p class="slovar-syn">Также говорят: Level of Information, уровень информации</p>
         
       </article>
       <article class="slovar-item" id="cde">
         <h2>CDE</h2>
-        <p>Среда общих данных — единое место, где лежат актуальные версии моделей и документов, с правилами именования, статусами и историей. Не папка на диске, а процесс: кто, что и когда имеет право менять.</p>
+        <p>Единое место, где лежат актуальные версии моделей и документов. С правилами именования, статусами и историей. Это не папка на диске, а процесс: кто, что и когда имеет право менять.</p>
         <p class="slovar-syn">Также говорят: СОД, среда общих данных, Common Data Environment</p>
         <p class="slovar-more"><a href="cde-sreda-obshchih-dannyh.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="сводная-модель">
         <h2>Сводная модель</h2>
-        <p>Модель, собранная из файлов всех разделов (АР, КР, ОВ, ВК, ЭОМ) для совместной проверки. Разделы остаются отдельными файлами, в сводной они только связаны — по ней ищут коллизии и считают объёмы.</p>
+        <p>Собрана из файлов всех разделов: АР, КР, ОВ, ВК, ЭОМ. Сами разделы остаются отдельными файлами, в сводной они только связаны. По ней ищут коллизии и считают объёмы.</p>
         <p class="slovar-syn">Также говорят: федеративная модель, объединённая модель</p>
         <p class="slovar-more"><a href="coordination-federated-model.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="коллизия">
         <h2>Коллизия</h2>
-        <p>Конфликт между элементами разных разделов: пересечение воздуховода с балкой, недостаточный зазор для монтажа. Делятся на жёсткие (физическое пересечение) и мягкие (нарушение зазора или зоны обслуживания).</p>
+        <p>Конфликт между элементами разных разделов. Воздуховод прошёл через балку, не осталось зазора для монтажа. Бывают жёсткие, когда элементы физически пересекаются, и мягкие, когда нарушена зона обслуживания.</p>
         <p class="slovar-syn">Также говорят: clash, пересечение, столкновение</p>
         <p class="slovar-more"><a href="navisworks-proverka-kolliziy.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="ifc">
         <h2>IFC</h2>
-        <p>Открытый формат обмена моделями между разными программами. Из Revit выгружается с настройками, и именно в них теряются данные: без нужных наборов свойств смежник получит геометрию без марок и материалов.</p>
+        <p>Открытый формат обмена моделями между программами. Из Revit выгружается с настройками, и теряется всё именно в них: без нужных наборов свойств смежник получит голую геометрию, без марок и материалов.</p>
         <p class="slovar-syn">Также говорят: Industry Foundation Classes, обменный формат</p>
         <p class="slovar-more"><a href="ifc-export-iz-revit.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="dynamo">
         <h2>Dynamo</h2>
-        <p>Среда визуального программирования внутри Revit: алгоритм собирается из блоков, без написания кода. Решает массовые задачи — нумерация, заполнение параметров, выгрузка данных в Excel.</p>
+        <p>Визуальное программирование внутри Revit. Алгоритм собирается из блоков, код писать не нужно. Берёт на себя массовые задачи: нумерацию, заполнение параметров, выгрузку в Excel.</p>
         <p class="slovar-syn">Также говорят: Динамо, визуальное программирование</p>
         <p class="slovar-more"><a href="dynamo-pervyy-skript.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="pyrevit">
         <h2>pyRevit</h2>
-        <p>Бесплатное расширение для Revit, которое позволяет добавить свои кнопки на ленту и запускать Python-скрипты. Ставится за десять минут, компилировать и покупать ничего не нужно.</p>
+        <p>Бесплатное расширение для Revit. Добавляет свои кнопки на ленту и запускает Python-скрипты. Ставится за десять минут, компилировать и покупать ничего не надо.</p>
         <p class="slovar-syn">Также говорят: пайревит</p>
         <p class="slovar-more"><a href="pyrevit-pervye-knopki.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="спецификация">
         <h2>Спецификация</h2>
-        <p>Таблица в Revit, которая собирает данные элементов модели по заданным правилам. Считается автоматически и обновляется вместе с моделью — в отличие от таблицы, набранной руками.</p>
+        <p>Таблица, которая собирает данные элементов по заданным правилам. Считается сама и обновляется вместе с моделью. В этом её отличие от таблицы, набранной руками в Excel.</p>
         <p class="slovar-syn">Также говорят: ведомость, schedule, таблица</p>
         <p class="slovar-more"><a href="revit-specifikacii-v-excel.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="общие-параметры">
         <h2>Общие параметры</h2>
-        <p>Параметры, которые живут в отдельном файле и одинаково опознаются во всех проектах и семействах. У каждого — свой GUID: два файла с одинаковыми именами параметров дают пустые столбцы в сводной модели.</p>
+        <p>Живут в отдельном файле и одинаково опознаются во всех проектах. У каждого свой GUID. Отсюда классическая беда: два файла с одинаковыми именами параметров дают пустые столбцы в сводной модели.</p>
         <p class="slovar-syn">Также говорят: ФОП, файл общих параметров, shared parameters</p>
         <p class="slovar-more"><a href="revit-avtozapolnenie-parametrov.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="navisworks">
         <h2>Navisworks</h2>
-        <p>Программа Autodesk для сборки сводной модели и поиска коллизий. Читает форматы разных САПР, работает с тяжёлыми моделями и даёт отчёты, по которым ведут согласование между разделами.</p>
+        <p>Программа для сборки сводной модели и поиска коллизий. Читает форматы разных САПР и тянет тяжёлые модели. Отчёты из неё идут смежникам на согласование.</p>
         <p class="slovar-syn">Также говорят: Навис, Невис</p>
         <p class="slovar-more"><a href="navisworks-proverka-kolliziy.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="матрица-коллизий">
         <h2>Матрица коллизий</h2>
-        <p>Таблица «кто с кем проверяется»: какие разделы и системы сопоставляются между собой и с каким допуском. Без неё проверка «всё против всего» выдаёт тысячи строк, которые никто не читает.</p>
+        <p>Таблица «кто с кем проверяется» и с каким допуском. Без неё проверка идёт всё против всего и выдаёт тысячи строк, которые никто не читает.</p>
         <p class="slovar-syn">Также говорят: матрица проверок</p>
         <p class="slovar-more"><a href="navisworks-matrica-kolliziy.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="точка-обзора">
         <h2>Точка обзора</h2>
-        <p>Сохранённое положение камеры в Navisworks вместе с настройками отображения. Используется, чтобы показать коллизию смежнику — но выделение элементов в ней сохраняется не всегда.</p>
+        <p>Сохранённое положение камеры вместе с настройками отображения. Нужна, чтобы показать коллизию смежнику. Подвох в том, что выделение элементов сохраняется в ней не всегда.</p>
         <p class="slovar-syn">Также говорят: viewpoint, точка зрения</p>
         <p class="slovar-more"><a href="navisworks-tochki-obzora.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="eir">
         <h2>EIR</h2>
-        <p>Требования заказчика к модели: что моделируем, с какой детализацией, какие параметры заполняем и в каком виде сдаём. Документ, по которому потом принимают работу.</p>
+        <p>Требования заказчика к модели. Что моделируем, с какой детализацией, какие параметры заполняем, в каком виде сдаём. По этому документу потом принимают работу.</p>
         <p class="slovar-syn">Также говорят: информационные требования заказчика, Exchange Information Requirements</p>
         
       </article>
       <article class="slovar-item" id="bep">
         <h2>BEP</h2>
-        <p>Ответ исполнителя на EIR: как именно будет организована работа — структура файлов, регламент координации, сроки выдач, кто за что отвечает.</p>
+        <p>Ответ исполнителя на EIR. Как организована работа: структура файлов, регламент координации, сроки выдач, кто за что отвечает.</p>
         <p class="slovar-syn">Также говорят: план реализации BIM, BIM Execution Plan</p>
         <p class="slovar-more"><a href="reglament-bim-koordinacii.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="4d">
         <h2>4D</h2>
-        <p>Связка модели с календарным графиком: каждому элементу сопоставлен срок работ, и строительство можно просмотреть во времени. Расхождения графика и модели становятся видны до выхода на площадку.</p>
+        <p>Модель, связанная с календарным графиком. У каждого элемента свой срок, и стройку можно прокрутить во времени. Расхождения видны до выхода на площадку, а не после.</p>
         <p class="slovar-syn">Также говорят: календарное планирование по модели</p>
         <p class="slovar-more"><a href="bim-dashboard.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="классификатор">
         <h2>Классификатор</h2>
-        <p>Система кодов, по которой элементы модели сопоставляются со сметными расценками и номенклатурой снабжения. Без единого классификатора данные модели не доезжают до сметы без ручного переноса.</p>
+        <p>Система кодов, которая связывает элементы модели со сметными расценками и номенклатурой снабжения. Без неё данные до сметы не доедут, придётся переносить руками.</p>
         <p class="slovar-syn">Также говорят: кодификатор, классификация элементов</p>
         <p class="slovar-more"><a href="postgresql-bim-data.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="nwc-и-nwd">
         <h2>NWC и NWD</h2>
-        <p>NWC — промежуточный файл выгрузки из Revit или другой САПР, NWD — собранная сводная модель одним файлом со всей геометрией. NWF хранит только ссылки на исходники и настройки.</p>
+        <p>NWC это промежуточная выгрузка из Revit или другой САПР. NWD это собранная сводная модель одним файлом, со всей геометрией внутри. NWF хранит только ссылки на исходники и настройки.</p>
         <p class="slovar-syn">Также говорят: форматы Navisworks</p>
         <p class="slovar-more"><a href="navisworks-proverka-kolliziy.html">Разбор из практики →</a></p>
       </article>
       <article class="slovar-item" id="revit-api">
         <h2>Revit API</h2>
-        <p>Программный интерфейс Revit: позволяет писать плагины на C# или Python, которые делают с моделью то, чего нет в стандартных командах — свои проверки, выгрузки, массовые операции.</p>
+        <p>Программный интерфейс Revit. Позволяет писать плагины на C# или Python и делать с моделью то, чего нет в стандартных командах: свои проверки, выгрузки, массовые операции.</p>
         <p class="slovar-syn">Также говорят: программный интерфейс Revit</p>
         <p class="slovar-more"><a href="razrabotka-dynamo-i-plaginov.html">Разбор из практики →</a></p>
       </article>
