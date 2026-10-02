@@ -5,6 +5,11 @@ slug: dynamo-chisla-i-edinicy
 description: "AsDouble возвращает футы, AsValueString — строку по настройкам проекта. Разбираем внутренние единицы Revit, UnitTypeId, округление и выгрузку размеров в мм."
 category: Automation
 keywords: [dynamo asdouble, asvaluestring revit, внутренние единицы revit, футы в revit api, unittypeid revit, конвертация в миллиметры dynamo, revit api python единицы, выгрузка размеров из revit]
+kratko:
+  - Дверь шириной 3000, а скрипт выводит 9.842519685039369. Ошибки нет: Revit хранит длины в футах.
+  - AsDouble, AsValueString и AsString возвращают разное. Половина багов отсюда.
+  - Конвертировать нужно через UnitUtils и UnitTypeId, а не делением на 304.8 в уме.
+  - Локаль добавляет веселья: запятая вместо точки ломает запись молча.
 ---
 
 В модели дверь шириной 3000. Скрипт выводит 9.842519685039369. Ошибки нет, всё честно: Revit хранит длины в футах, а 3000 / 304.8 как раз и есть 9.8425.
