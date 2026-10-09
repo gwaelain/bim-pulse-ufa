@@ -97,9 +97,14 @@ async def poll_once() -> int:
         message = f"{it['subject']}\n\n{it['text']}".strip()
         lead_id = await db.add_lead(source="email", site="bimaip@yandex.ru", name=name,
                                     contact=it["addr"], message=message, extra={}, ip=None)
+        hvost = ""
+        if it.get("files"):
+            hvost += "\n\n📎 Вложения: " + "; ".join(it["files"][:6])
+        if it.get("rcpt", 0) > 5:
+            hvost += f"\n\n⚠️ Веерная рассылка: письмо ушло на {it['rcpt']} адресов, мы в копии."
         await notify.telegram(f"📧 Письмо №{lead_id} на почту проекта\n"
                               f"От: {it['from'][:120]}\nТема: {it['subject'][:200] or '—'}\n\n"
-                              f"{it['text'][:1500] or '(без текста)'}")
+                              f"{it['text'][:1200] or '(без текста)'}{hvost}")
         await db.mark_notified(lead_id)
         n += 1
     return n
